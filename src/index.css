@@ -242,3 +242,47 @@ body {
 .footer a {
   color: var(--ink-muted);
 }
+
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--rule);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.site-brand {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-link {
+  color: var(--ink-muted);
+  text-decoration: none;
+  margin-left: 24px;
+  font-size: 14px;
+}
+
+.nav-link.active {
+  color: var(--gold-soft);
+}
+
+.hero-home {
+  padding: 80px 0 40px;
+  max-width: 640px;
+}
+
+.cta-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  color: var(--gold-soft);
+  text-decoration: none;
+  font-size: 14px;
+}
