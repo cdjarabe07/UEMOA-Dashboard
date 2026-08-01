@@ -30,6 +30,13 @@ export default function Methodologie() {
           ces cas, le modèle naïf est utilisé et affiché comme tel, sans
           maquiller cette limite.
         </p>
+        <p>
+          Un simulateur "et si" (impact du prix du pétrole sur l'inflation) a été
+          testé avec un modèle SARIMAX, mais l'échantillon annuel disponible (moins
+          de 30 années) est trop court pour établir un lien statistiquement fiable.
+          Cette fonctionnalité n'est donc pas activée pour l'instant, plutôt que
+          d'afficher un résultat non prouvé.
+        </p>
 
         <h2>Fraîcheur des données</h2>
         <p>
