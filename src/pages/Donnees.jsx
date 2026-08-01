@@ -1,3 +1,5 @@
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import { useState } from "react";
 import {
   ResponsiveContainer,
@@ -47,6 +49,46 @@ function CustomTooltip({ active, payload, label, unite }) {
   );
 }
 
+function telechargerCSV(indicateur) {
+  const entetes = "period,value\n";
+  const lignes = indicateur.historique
+    .map((ligne) => `${ligne.period},${ligne.value}`)
+    .join("\n");
+  const contenu = entetes + lignes;
+
+  const blob = new Blob([contenu], { type: "text/csv;charset=utf-8;" });
+  const lien = document.createElement("a");
+  lien.href = URL.createObjectURL(blob);
+  lien.download = `${indicateur.id}.csv`;
+  lien.click();
+}
+
+function telechargerJSON(indicateur) {
+  const contenu = JSON.stringify(indicateur.historique, null, 2);
+  const blob = new Blob([contenu], { type: "application/json" });
+  const lien = document.createElement("a");
+  lien.href = URL.createObjectURL(blob);
+  lien.download = `${indicateur.id}.json`;
+  lien.click();
+}
+
+function telechargerPDF(indicateur) {
+  const doc = new jsPDF();
+
+  doc.setFontSize(14);
+  doc.text(indicateur.nom, 14, 16);
+  doc.setFontSize(10);
+  doc.text(`Source : BCEAO, via DBnomics`, 14, 22);
+
+  autoTable(doc, {
+    startY: 28,
+    head: [["Année", `Valeur (${indicateur.unite})`]],
+    body: indicateur.historique.map((ligne) => [ligne.period, ligne.value]),
+  });
+
+  doc.save(`${indicateur.id}.pdf`);
+}
+
 export default function Donnees() {
   const [actifId, setActifId] = useState(INDICATEURS[0].id);
   const indicateur = INDICATEURS.find((i) => i.id === actifId);
@@ -93,7 +135,11 @@ export default function Donnees() {
             </p>
           </div>
         </div>
-
+        <div className="export-buttons">
+          <button onClick={() => telechargerCSV(indicateur)}>Télécharger CSV</button>
+          <button onClick={() => telechargerJSON(indicateur)}>Télécharger JSON</button>
+          <button onClick={() => telechargerPDF(indicateur)}>Télécharger PDF</button>
+        </div>
         <div className="entry-body">
           <div className="chart-card">
             <ResponsiveContainer width="100%" height={260}>
