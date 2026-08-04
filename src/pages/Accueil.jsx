@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import FormulaireContact from "./Newsletter";
 
 function IconDocument() {
   return (
@@ -165,6 +166,12 @@ export default function Accueil() {
             </div>
           </section>
         </div>
+
+        <section className="newsletter-section">
+          <h2 className="section-title">Restez informé</h2>
+          <p>Abonnez-vous à notre lettre d'information pour recevoir les dernières analyses et publications.</p>
+          <FormulaireContact />
+        </section>
 
         <footer className="site-footer-strip">
           <p>

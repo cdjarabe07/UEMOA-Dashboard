@@ -1,3 +1,5 @@
+import CalendrierPublications from "./CalendrierPublications";
+
 export default function Methodologie() {
   return (
     <div className="page">
@@ -45,6 +47,8 @@ export default function Methodologie() {
           d'origine plutôt que masquée.
         </p>
       </section>
+
+      <CalendrierPublications />
     </div>
   );
 }
