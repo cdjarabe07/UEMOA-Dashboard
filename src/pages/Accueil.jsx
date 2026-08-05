@@ -100,20 +100,16 @@ export default function Accueil() {
         <div className="hero-full-inner">
           <p className="hero-eyebrow">BCEAO · UEMOA · Observatoire économique</p>
           <h1 className="hero-title">{t("titre_hero")}</h1>
-          <p className="hero-sub">
-            Des données fiables et des prévisions rigoureuses pour suivre
-            l'économie sénégalaise et ouest-africaine — inflation, taux de
-            change, PIB, et plus encore.
-          </p>
+          <p className="hero-sub">{t("sous_titre_hero")}</p>
           <Link to="/donnees" className="cta-button">
-            Explorer les données →
+            {t("cta_explorer")}
           </Link>
         </div>
       </section>
 
       <div className="page page--wide">
         <section className="contenus-section">
-          <h2 className="section-title section-title--nu">Explorer nos contenus</h2>
+          <h2 className="section-title section-title--nu">{t("titre_contenus")}</h2>
           <div className="contenus-grid">
             {CONTENUS.map((c, i) => (
               <div key={i} className="contenu-card">
@@ -125,9 +121,7 @@ export default function Accueil() {
               </div>
             ))}
           </div>
-          <p className="contenus-note">
-            Ces sections seront activées progressivement, une par une.
-          </p>
+          <p className="contenus-note">{t("note_contenus")}</p>
         </section>
 
         <div className="home-columns">
@@ -147,7 +141,7 @@ export default function Accueil() {
           </section>
 
           <section className="publications-section">
-            <h2 className="section-title">Dernières publications</h2>
+            <h2 className="section-title">{t("titre_publications")}</h2>
             <div className="publications-row">
               <div className="publications-grid">
                 {PUBLICATIONS.map((pub, i) => (
@@ -169,8 +163,8 @@ export default function Accueil() {
         </div>
 
         <section className="newsletter-section">
-          <h2 className="section-title">Restez informé</h2>
-          <p>Abonnez-vous à notre lettre d'information pour recevoir les dernières analyses et publications.</p>
+          <h2 className="section-title">{t("titre_newsletter")}</h2>
+          <p>{t("texte_newsletter")}</p>
           <FormulaireContact />
         </section>
 
