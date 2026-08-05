@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import FormulaireContact from "./Newsletter";
 
 function IconDocument() {
@@ -91,14 +92,14 @@ const PUBLICATIONS = [
 ];
 
 export default function Accueil() {
+  const { t } = useTranslation();
+
   return (
     <div className="page-full">
       <section className="hero-full">
         <div className="hero-full-inner">
           <p className="hero-eyebrow">BCEAO · UEMOA · Observatoire économique</p>
-          <h1 className="hero-title">
-            Comprendre l'économie pour construire l'avenir.
-          </h1>
+          <h1 className="hero-title">{t("titre_hero")}</h1>
           <p className="hero-sub">
             Des données fiables et des prévisions rigoureuses pour suivre
             l'économie sénégalaise et ouest-africaine — inflation, taux de
