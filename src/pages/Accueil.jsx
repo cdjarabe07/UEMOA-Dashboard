@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FormulaireContact from "./Newsletter";
-
+ 
 function IconDocument() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -75,25 +75,25 @@ function IconPedagogie() {
     </svg>
   );
 }
-
-const CONTENUS = [
-  { titre: "Tableau de bord mensuel", description: "Les chiffres importants du mois, en un coup d'œil.", Icone: IconTableauBord },
-  { titre: "Baromètre économique", description: "Ce qui s'améliore, ce qui se dégrade.", Icone: IconBarometre },
-  { titre: "Dossier spécial", description: "Analyses approfondies sur un sujet précis (ex : le cacao en Côte d'Ivoire).", Icone: IconDossier },
-  { titre: "Observatoire sectoriel", description: "Agriculture, mines, énergie, télécoms, transport, industrie, banque.", Icone: IconSecteur },
-  { titre: "Méthodologie", description: "Comment les indicateurs sont calculés.", Icone: IconMethodologie },
-  { titre: "Comprendre l'économie", description: "Qu'est-ce que le PIB ? Pourquoi l'inflation augmente ?", Icone: IconPedagogie },
+ 
+const CONTENUS_KEYS = [
+  { key: "tableau_bord", Icone: IconTableauBord },
+  { key: "barometre", Icone: IconBarometre },
+  { key: "dossier", Icone: IconDossier },
+  { key: "observatoire", Icone: IconSecteur },
+  { key: "methodologie", Icone: IconMethodologie },
+  { key: "comprendre", Icone: IconPedagogie },
 ];
-
+ 
 const PUBLICATIONS = [
   { categorie: "Note de conjoncture", titre: "Situation économique du Sénégal — Juillet 2026", date: "28 Juil. 2026", Icone: IconDocument, accent: "accent-gold" },
   { categorie: "Analyse thématique", titre: "Naïf vs SARIMA : quand le modèle simple gagne", date: "28 Juil. 2026", Icone: IconChart, accent: "accent-teal" },
   { categorie: "Focus secteur", titre: "Agriculture, industrie, services : qui tire la croissance ?", date: "29 Juil. 2026", Icone: IconSecteur, accent: "accent-gold" },
 ];
-
+ 
 export default function Accueil() {
   const { t } = useTranslation();
-
+ 
   return (
     <div className="page-full">
       <section className="hero-full">
@@ -106,40 +106,34 @@ export default function Accueil() {
           </Link>
         </div>
       </section>
-
+ 
       <div className="page page--wide">
         <section className="contenus-section">
           <h2 className="section-title section-title--nu">{t("titre_contenus")}</h2>
           <div className="contenus-grid">
-            {CONTENUS.map((c, i) => (
+            {CONTENUS_KEYS.map((c, i) => (
               <div key={i} className="contenu-card">
                 <span className="contenu-icon">
                   <c.Icone />
                 </span>
-                <h3 className="contenu-titre">{c.titre}</h3>
-                <p className="contenu-description">{c.description}</p>
+                <h3 className="contenu-titre">{t(`${c.key}_titre`)}</h3>
+                <p className="contenu-description">{t(`${c.key}_desc`)}</p>
               </div>
             ))}
           </div>
           <p className="contenus-note">{t("note_contenus")}</p>
         </section>
-
+ 
         <div className="home-columns">
           <section className="a-la-une">
-            <p className="section-label">À la une</p>
-            <h2 className="a-la-une-titre">
-              Croissance modérée en 2026, perspectives prudentes pour 2027
-            </h2>
-            <p className="a-la-une-texte">
-              L'économie sénégalaise montre une résilience face aux chocs
-              externes, portée par l'agriculture et les services, avec une
-              inflation en repli par rapport au pic de 2022-2023.
-            </p>
+            <p className="section-label">{t("a_la_une_label")}</p>
+            <h2 className="a-la-une-titre">{t("a_la_une_titre")}</h2>
+            <p className="a-la-une-texte">{t("a_la_une_texte")}</p>
             <Link to="/donnees" className="lire-analyse">
-              Lire l'analyse →
+              {t("lire_analyse")}
             </Link>
           </section>
-
+ 
           <section className="publications-section">
             <h2 className="section-title">{t("titre_publications")}</h2>
             <div className="publications-row">
@@ -161,18 +155,15 @@ export default function Accueil() {
             </div>
           </section>
         </div>
-
+ 
         <section className="newsletter-section">
           <h2 className="section-title">{t("titre_newsletter")}</h2>
           <p>{t("texte_newsletter")}</p>
           <FormulaireContact />
         </section>
-
+ 
         <footer className="site-footer-strip">
-          <p>
-            L'Observatoire Économique de l'UEMOA est une plateforme de suivi et
-            d'analyse des évolutions économiques dans l'espace UEMOA.
-          </p>
+          <p>{t("footer_texte")}</p>
         </footer>
       </div>
     </div>
