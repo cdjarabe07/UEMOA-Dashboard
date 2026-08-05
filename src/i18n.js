@@ -1,6 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-
+ 
 const resources = {
   fr: {
     translation: {
@@ -32,6 +32,30 @@ const resources = {
       a_la_une_texte: "L'économie sénégalaise montre une résilience face aux chocs externes, portée par l'agriculture et les services, avec une inflation en repli par rapport au pic de 2022-2023.",
       lire_analyse: "Lire l'analyse →",
       footer_texte: "L'Observatoire Économique de l'UEMOA est une plateforme de suivi et d'analyse des évolutions économiques dans l'espace UEMOA.",
+ 
+      donnees_hero_eyebrow: "BCEAO · UEMOA · Prévision macroéconomique",
+      donnees_hero_titre: "Trois indicateurs, trois verdicts sur ce qui se prévoit vraiment.",
+      donnees_hero_sub: "Inflation, taux de change et PIB du Sénégal, comparés entre un modèle naïf et le meilleur SARIMA trouvé par recherche systématique — sans maquiller les cas où le modèle simple gagne.",
+      prevision_label: "Prévision",
+      precision_mae: "Précision (MAE)",
+      precision_caption: "erreur moyenne sur validation glissante",
+      telecharger_csv: "Télécharger CSV",
+      telecharger_json: "Télécharger JSON",
+      telecharger_pdf: "Télécharger PDF",
+      donnees_footer_source: "Source : BCEAO, via DBnomics",
+      donnees_footer_github: "Pipeline complet sur GitHub",
+ 
+      methodo_eyebrow: "Méthodologie",
+      methodo_titre: "Comment sont calculées les prévisions.",
+      methodo_source_titre: "Source des données",
+      methodo_source_texte: "Toutes les séries proviennent de la BCEAO (Banque Centrale des États de l'Afrique de l'Ouest), via la plateforme DBnomics, qui agrège les données officielles des banques centrales et instituts statistiques.",
+      methodo_modele_titre: "Modèle de prévision",
+      methodo_modele_texte: "Pour chaque indicateur, un modèle SARIMA (Seasonal AutoRegressive Integrated Moving Average) est entraîné, avec recherche automatique du meilleur ordre (p, d, q) par comparaison d'erreur moyenne (MAE) sur validation glissante (walk-forward).",
+      methodo_limites_titre: "Limites",
+      methodo_limites_texte1: "Certains indicateurs (taux de change XOF/USD, balance commerciale) suivent une marche aléatoire : aucun modèle statistique ne fait mieux qu'une simple projection de la dernière valeur connue. Dans ces cas, le modèle naïf est utilisé et affiché comme tel, sans maquiller cette limite.",
+      methodo_limites_texte2: "Un simulateur \"et si\" (impact du prix du pétrole sur l'inflation) a été testé avec un modèle SARIMAX, mais l'échantillon annuel disponible (moins de 30 années) est trop court pour établir un lien statistiquement fiable. Cette fonctionnalité n'est donc pas activée pour l'instant, plutôt que d'afficher un résultat non prouvé.",
+      methodo_fraicheur_titre: "Fraîcheur des données",
+      methodo_fraicheur_texte: "Les réserves de change ne sont plus mises à jour depuis 2015 dans la base BCEAO consultée — cette donnée est affichée avec sa date d'origine plutôt que masquée.",
     },
   },
   en: {
@@ -64,10 +88,34 @@ const resources = {
       a_la_une_texte: "The Senegalese economy shows resilience against external shocks, driven by agriculture and services, with inflation easing from its 2022-2023 peak.",
       lire_analyse: "Read the analysis →",
       footer_texte: "The UEMOA Economic Observatory is a platform for monitoring and analyzing economic developments in the UEMOA region.",
+ 
+      donnees_hero_eyebrow: "BCEAO · UEMOA · Macroeconomic forecasting",
+      donnees_hero_titre: "Three indicators, three verdicts on what really gets forecast.",
+      donnees_hero_sub: "Senegal's inflation, exchange rate, and GDP, compared between a naive model and the best SARIMA found through systematic search — without hiding the cases where the simple model wins.",
+      prevision_label: "Forecast",
+      precision_mae: "Accuracy (MAE)",
+      precision_caption: "average error on rolling validation",
+      telecharger_csv: "Download CSV",
+      telecharger_json: "Download JSON",
+      telecharger_pdf: "Download PDF",
+      donnees_footer_source: "Source: BCEAO, via DBnomics",
+      donnees_footer_github: "Full pipeline on GitHub",
+ 
+      methodo_eyebrow: "Methodology",
+      methodo_titre: "How the forecasts are calculated.",
+      methodo_source_titre: "Data source",
+      methodo_source_texte: "All series come from the BCEAO (Central Bank of West African States), via the DBnomics platform, which aggregates official data from central banks and statistical institutes.",
+      methodo_modele_titre: "Forecasting model",
+      methodo_modele_texte: "For each indicator, a SARIMA (Seasonal AutoRegressive Integrated Moving Average) model is trained, with automatic search for the best order (p, d, q) by comparing mean error (MAE) on rolling validation (walk-forward).",
+      methodo_limites_titre: "Limitations",
+      methodo_limites_texte1: "Some indicators (XOF/USD exchange rate, trade balance) follow a random walk: no statistical model outperforms a simple projection of the last known value. In these cases, the naive model is used and shown as such, without hiding this limitation.",
+      methodo_limites_texte2: "A \"what if\" simulator (impact of oil prices on inflation) was tested with a SARIMAX model, but the available annual sample (fewer than 30 years) is too short to establish a statistically reliable link. This feature is therefore not enabled for now, rather than displaying an unproven result.",
+      methodo_fraicheur_titre: "Data freshness",
+      methodo_fraicheur_texte: "Foreign exchange reserves have not been updated since 2015 in the BCEAO database consulted — this data is displayed with its original date rather than hidden.",
     },
   },
 };
-
+ 
 i18n.use(initReactI18next).init({
   resources,
   lng: "fr",
