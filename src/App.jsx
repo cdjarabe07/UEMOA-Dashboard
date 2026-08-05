@@ -1,12 +1,33 @@
+import { useState } from "react";
 import { Routes, Route, Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Accueil from "./pages/Accueil.jsx";
 import Donnees from "./pages/Donnees.jsx";
 import Methodologie from "./pages/Methodologie";
-
-function NavBar() {
+ 
+function SelecteurLangue() {
   const { i18n } = useTranslation();
-
+  const [ouvert, setOuvert] = useState(false);
+ 
+  return (
+    <div className="lang-dropdown-wrapper">
+      <button className="lang-dropdown" onClick={() => setOuvert(!ouvert)}>
+        {i18n.language.toUpperCase()} ▾
+      </button>
+      {ouvert && (
+        <div className="lang-menu">
+          {i18n.language !== "fr" && (
+            <button onClick={() => { i18n.changeLanguage("fr"); setOuvert(false); }}>FR</button>
+          )}
+          {i18n.language !== "en" && (
+            <button onClick={() => { i18n.changeLanguage("en"); setOuvert(false); }}>EN</button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+function NavBar() {
   return (
     <header className="site-nav">
       <Link to="/" className="site-brand">
@@ -17,9 +38,9 @@ function NavBar() {
         <NavLink to="/donnees" className="nav-link">Données</NavLink>
         <NavLink to="/methodologie" className="nav-link">Méthodologie</NavLink>
       </nav>
-      <div className="lang-switcher">
-        <button onClick={() => i18n.changeLanguage("fr")}>FR</button>
-        <button onClick={() => i18n.changeLanguage("en")}>EN</button>
+      <div className="nav-right">
+        <SelecteurLangue />
+        <input type="text" className="search-bar" placeholder="Rechercher" />
       </div>
     </header>
   );
