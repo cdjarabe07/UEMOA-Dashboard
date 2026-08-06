@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import FormulaireContact from "./Newsletter";
+import { Database, TrendingUp, PieChart, SlidersHorizontal, LayoutDashboard, Gauge, FolderOpen, Grid3x3, Search, GraduationCap, FileText, ChevronRight } from "lucide-react";
+import CartePays from "./CartePays";
+import PrevisionsSimulations from "./PrevisionsSimulations";
+import VeillePublicationsAlertes from "./VeillePublicationsAlertes";
  
 function IconDocument() {
   return (
@@ -77,12 +82,12 @@ function IconPedagogie() {
 }
  
 const CONTENUS_KEYS = [
-  { key: "tableau_bord", Icone: IconTableauBord },
-  { key: "barometre", Icone: IconBarometre },
-  { key: "dossier", Icone: IconDossier },
-  { key: "observatoire", Icone: IconSecteur },
-  { key: "methodologie", Icone: IconMethodologie },
-  { key: "comprendre", Icone: IconPedagogie },
+  { key: "tableau_bord", Icone: LayoutDashboard },
+  { key: "barometre", Icone: Gauge },
+  { key: "dossier", Icone: FolderOpen },
+  { key: "observatoire", Icone: Grid3x3 },
+  { key: "methodologie", Icone: Search },
+  { key: "comprendre", Icone: GraduationCap },
 ];
  
 const PUBLICATIONS = [
@@ -92,6 +97,7 @@ const PUBLICATIONS = [
 ];
  
 export default function Accueil() {
+  const [featureActive, setFeatureActive] = useState("donnees");
   const { t } = useTranslation();
  
   return (
@@ -109,26 +115,26 @@ export default function Accueil() {
  
  <section className="features-strip">
   <div className="features-grid">
-    <div>
-      <div className="feature-icon-box" style={{background: "#e0e7ff"}}><IconTableauBord /></div>
+    <div className={`feature-card ${featureActive === "donnees" ? "active" : ""}`} onClick={() => setFeatureActive("donnees")}>
+      <div className="feature-icon-box" style={{background: "#e0e7ff", color: "#4338ca"}}><Database /></div>
       <h3 className="feature-titre">Données fiables</h3>
       <p className="feature-desc">Accédez à des données actualisées et harmonisées provenant de sources internationales reconnues.</p>
       <Link to="/donnees" className="feature-link">Explorer les données →</Link>
     </div>
-    <div>
-      <div className="feature-icon-box" style={{background: "#dcfce7"}}><IconBarometre /></div>
+    <div className={`feature-card ${featureActive === "analyses" ? "active" : ""}`} onClick={() => setFeatureActive("analyses")}>
+      <div className="feature-icon-box" style={{background: "#dcfce7", color: "#15803d"}}><TrendingUp /></div>
       <h3 className="feature-titre">Analyses approfondies</h3>
       <p className="feature-desc">Des analyses détaillées pour comprendre les tendances et leurs impacts.</p>
       <Link to="/donnees" className="feature-link">Consulter les analyses →</Link>
     </div>
-    <div>
-      <div className="feature-icon-box" style={{background: "#fef3c7"}}><IconChart /></div>
+    <div className={`feature-card ${featureActive === "perspectives" ? "active" : ""}`} onClick={() => setFeatureActive("perspectives")}>
+      <div className="feature-icon-box" style={{background: "#fef3c7", color: "#b45309"}}><PieChart /></div>
       <h3 className="feature-titre">Perspectives éclairées</h3>
       <p className="feature-desc">Des perspectives économiques et sectorielles pour anticiper les évolutions.</p>
       <Link to="/donnees" className="feature-link">Voir les perspectives →</Link>
     </div>
-    <div>
-      <div className="feature-icon-box" style={{background: "#f3e8ff"}}><IconPedagogie /></div>
+    <div className={`feature-card ${featureActive === "outils" ? "active" : ""}`} onClick={() => setFeatureActive("outils")}>
+      <div className="feature-icon-box" style={{background: "#f3e8ff", color: "#7e22ce"}}><SlidersHorizontal /></div>
       <h3 className="feature-titre">Outils interactifs</h3>
       <p className="feature-desc">Simulez des scénarios, comparez des pays et évaluez des risques en quelques clics.</p>
       <Link to="/donnees" className="feature-link">Découvrir les outils →</Link>
@@ -153,27 +159,70 @@ export default function Accueil() {
   <p className="contenus-note-light">{t("note_contenus")}</p>
 </section>
  
-        <section className="pubs-light-section">
-  <div className="pubs-light-header">
-    <h2 className="pubs-light-title">Dernières publications</h2>
-    <Link to="/donnees" className="pubs-light-voir-tout">Voir toutes les publications →</Link>
-  </div>
-  <div className="pubs-light-grid">
-    {PUBLICATIONS.map((pub, i) => (
-      <article key={i} className="pub-light-card">
-        <div className="pub-light-image"></div>
-        <div className="pub-light-body">
-          <p className="pub-light-categorie">{pub.categorie}</p>
-          <h3 className="pub-light-titre">{pub.titre}</h3>
-          <div className="pub-light-footer">
-            <span className="pub-light-date">{pub.date}</span>
-            <span className="pub-light-download">↓</span>
+        <section className="dynamic-content-section">
+  <div key={featureActive} className="dynamic-content-inner">
+    {featureActive === "donnees" && (
+      <>
+        <h2 className="dynamic-section-title">Dernières publications</h2>
+        <div className="pubs-light-grid">
+          {PUBLICATIONS.map((pub, i) => (
+            <article key={i} className="pub-light-card">
+              <div className="pub-light-image"></div>
+              <div className="pub-light-body">
+                <p className="pub-light-categorie">{pub.categorie}</p>
+                <h3 className="pub-light-titre">{pub.titre}</h3>
+                <div className="pub-light-footer">
+                  <span className="pub-light-date">{pub.date}</span>
+                  <span className="pub-light-download">↓</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </>
+    )}
+
+    {featureActive === "analyses" && (
+      <>
+        <h2 className="dynamic-section-title">Notes de conjoncture et analyses</h2>
+        <div className="analyses-list">
+          <div className="analyse-item">
+            <span>Situation économique du Sénégal — Juillet 2026</span>
+            <Link to="/donnees" className="feature-link">Lire →</Link>
+          </div>
+          <div className="analyse-item">
+            <span>Naïf vs SARIMA : quand le modèle simple gagne</span>
+            <Link to="/donnees" className="feature-link">Lire →</Link>
           </div>
         </div>
-      </article>
-    ))}
+      </>
+    )}
+
+    {featureActive === "perspectives" && (
+      <>
+        <h2 className="dynamic-section-title">Aperçu des prévisions macroéconomiques</h2>
+        <div className="previsions-list">
+          <div className="prevision-item"><span>PIB 2026</span><strong>21 920 Mds FCFA</strong></div>
+          <div className="prevision-item"><span>Inflation 2026</span><strong>2.89 %</strong></div>
+        </div>
+      </>
+    )}
+
+    {featureActive === "outils" && (
+      <div className="simulateur-card">
+        <h2 className="dynamic-section-title">Simulateur "Et si ?"</h2>
+        <p>Explorez l'impact de chocs externes (prix du pétrole, taux) sur les indicateurs macroéconomiques. Fonctionnalité en cours de fiabilisation — voir la méthodologie pour les détails.</p>
+        <Link to="/methodologie" className="cta-button">En savoir plus →</Link>
+      </div>
+    )}
   </div>
 </section>
+
+<CartePays />
+
+<PrevisionsSimulations />
+
+<VeillePublicationsAlertes />
 
 <section className="plateforme-section">
   <h2 className="plateforme-titre">Une plateforme au service de vos décisions</h2>
