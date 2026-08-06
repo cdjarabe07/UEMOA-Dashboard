@@ -235,10 +235,50 @@ export default function Accueil() {
   </div>
 </section>
  
-        <footer className="site-footer-strip">
-          <p>{t("footer_texte")}</p>
-        </footer>
-      </div>
+<section className="partenaires-strip">
+  <p className="partenaires-titre">Nos partenaires</p>
+  <div className="partenaires-logos">
+    <span className="partenaire-logo">BCEAO</span>
+    <span className="partenaire-logo">FMI</span>
+    <span className="partenaire-logo">BANQUE MONDIALE</span>
+    <span className="partenaire-logo">OCDE</span>
+    <span className="partenaire-logo">Union européenne</span>
+  </div>
+</section>
+</div>
+        <footer className="site-footer-full">
+  <div className="footer-columns">
+    <div className="footer-brand-col">
+      <h3>Observatoire Économique de l'UEMOA</h3>
+      <p>Une plateforme de référence pour le suivi, l'analyse et l'anticipation des évolutions économiques dans les 8 pays membres.</p>
+    </div>
+    <div className="footer-col">
+      <h4>Navigation</h4>
+      <Link to="/">Accueil</Link>
+      <Link to="/donnees">Données</Link>
+      <Link to="/methodologie">Méthodologie</Link>
+    </div>
+    <div className="footer-col">
+      <h4>Données</h4>
+      <Link to="/donnees">Indicateurs clés</Link>
+      <Link to="/donnees">Tableau de bord</Link>
+      <Link to="/donnees">Séries temporelles</Link>
+    </div>
+    <div className="footer-col">
+      <h4>Ressources</h4>
+      <Link to="/methodologie">Méthodologie</Link>
+      <Link to="/methodologie">Sources de données</Link>
+    </div>
+    <div className="footer-col">
+      <h4>Mentions</h4>
+      <Link to="/">Mentions légales</Link>
+      <Link to="/">Confidentialité</Link>
+    </div>
+  </div>
+  <div className="footer-bottom">
+    © 2026 Observatoire Économique de l'UEMOA. Tous droits réservés.
+  </div>
+</footer> 
     </div>
   );
 }
