@@ -1146,10 +1146,6 @@ body {
   border: 2px solid transparent;
 }
 
-.feature-card.active {
-  border-color: #1d4ed8;
-}
-
 .dynamic-content-section {
   max-width: 1100px;
   margin: 0 auto;
