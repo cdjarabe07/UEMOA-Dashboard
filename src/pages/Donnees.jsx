@@ -94,6 +94,10 @@ export default function Donnees() {
   const { t } = useTranslation();
   const [actifId, setActifId] = useState(INDICATEURS[0].id);
   const indicateur = INDICATEURS.find((i) => i.id === actifId);
+  // Prévisions issues de previsions.json (source de vérité unique).
+  // `|| []` : si l'indicateur n'en possède pas, on affiche "non disponible"
+  // au lieu de lever une erreur de lecture de propriété.
+  const previsions = indicateur?.previsions || [];
  
   return (
     <div className="page">
@@ -124,12 +128,30 @@ export default function Donnees() {
             <h2 className="entry-title">{indicateur.nom}</h2>
             <p className="entry-subtitle">{indicateur.sousTitre}</p>
           </div>
-          <div className="forecast-block">
-            <p className="forecast-label">{t("prevision_label")} {indicateur.prevision.annee}</p>
-            <p className="forecast-value">
-              {formatValeur(indicateur.prevision.valeur, indicateur.unite)}
-            </p>
-          </div>
+          {previsions.length > 0 ? (
+            previsions.map((prev) => (
+              <div key={prev.annee} className="forecast-block">
+                <p className="forecast-label">
+                  {t("prevision_label")} {prev.annee}
+                </p>
+                <p className="forecast-value">
+                  {formatValeur(prev.valeur_prevue, indicateur.unite)}
+                </p>
+                {prev.borne_basse != null && prev.borne_haute != null && (
+                  <p className="forecast-ic">
+                    {t("prevision_ic")} {formatValeur(prev.borne_basse, indicateur.unite)} –{" "}
+                    {formatValeur(prev.borne_haute, indicateur.unite)}
+                  </p>
+                )}
+              </div>
+            ))
+          ) : (
+            <div className="forecast-block">
+              <p className="forecast-label">{t("prevision_label")}</p>
+              <p className="forecast-value">—</p>
+              <p className="forecast-ic">{t("prevision_indisponible")}</p>
+            </div>
+          )}
         </div>
  
         <div className="export-buttons">

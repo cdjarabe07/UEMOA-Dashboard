@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-09-20T22:17:52Z",
+  "source": "data/processed",
+  "destination": "..\\uemoa-dashboard\\src\\data",
+  "files": {
+    "inflation_senegal.json": 27,
+    "pib_senegal.json": 65,
+    "taux_change_uemoa.json": 65,
+    "previsions.json": 12,
+    "comparaison_pays.json": 406
+  }
+}

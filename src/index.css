@@ -170,6 +170,13 @@ body {
   margin: 0;
 }
 
+.forecast-ic {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin: 4px 0 0;
+}
+
 /* ---------- Layout: chart + stamp ---------- */
 
 .entry-body {
@@ -1284,6 +1291,12 @@ body {
   font-style: italic;
 }
 
+.carte-pays-chart-caption {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 12px 0 0;
+}
+
 @media (max-width: 800px) {
   .carte-pays-layout {
     grid-template-columns: 1fr;
@@ -1367,6 +1380,41 @@ body {
   text-align: center;
   color: #1d4ed8 !important;
   border-color: #1d4ed8 !important;
+}
+
+.prev-sim-scenario-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 8px;
+}
+
+.prev-sim-detail {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.prev-sim-year-card {
+  flex: 1 1 220px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.prev-sim-year-card .forecast-value {
+  font-size: 24px;
+}
+
+.prev-sim-signal {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #b45309;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  padding: 10px 14px;
 }
 
 @media (max-width: 800px) {
@@ -1468,6 +1516,50 @@ body {
 .veille-card-date {
   font-size: 12px;
   color: #9ca3af;
+}
+
+.veille-meta {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 6px 0 0;
+}
+
+.veille-intro {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 10px 0 22px;
+}
+
+.veille-card-texte {
+  font-size: 12px;
+  color: #4b5563;
+  line-height: 1.5;
+  margin: 8px 0 10px;
+}
+
+.veille-card-lien {
+  font-size: 12px;
+  color: #1d4ed8;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.veille-card--source {
+  border-left-color: #0f766e;
+}
+
+.veille-card--source .veille-card-categorie {
+  color: #0f766e;
+}
+
+.veille-disclaimer {
+  margin-top: 24px;
+  font-size: 12px;
+  color: #6b7280;
+  font-style: italic;
 }
 
 @media (max-width: 800px) {

@@ -6,95 +6,73 @@ import {
   XAxis,
   Tooltip,
 } from "recharts";
+import { useTranslation } from "react-i18next";
+import comparaisonData from "../data/comparaison_pays.json";
 
 // NOTE : positions schématiques (pas un tracé géographique réel) —
 // disposées pour évoquer la géographie relative de l'UEMOA, pas une carte précise.
+
+// Seules la géométrie et la disponibilité restent déclarées ici.
+// Toutes les valeurs affichées proviennent de comparaison_pays.json (source de vérité).
 const PAYS = [
-  {
-    id: "senegal",
-    nom: "Sénégal",
-    x: 8,
-    y: 38,
-    disponible: true,
-    croissance: 4.1,
-    inflation: 2.9,
-    dette: 76.2,
-    pib: "21 920 Mds FCFA",
-    historique: [
-      { annee: "2022", value: 19100 },
-      { annee: "2023", value: 20050 },
-      { annee: "2024", value: 20870 },
-      { annee: "2025", value: 21400 },
-      { annee: "2026", value: 21920 },
-    ],
-  },
-  {
-    id: "mali",
-    nom: "Mali",
-    x: 32,
-    y: 22,
-    disponible: true,
-    croissance: 3.4,
-    inflation: 3.8,
-    dette: 52.1,
-    pib: "13 450 Mds FCFA",
-    historique: [
-      { annee: "2022", value: 11800 },
-      { annee: "2023", value: 12300 },
-      { annee: "2024", value: 12750 },
-      { annee: "2025", value: 13100 },
-      { annee: "2026", value: 13450 },
-    ],
-  },
-  {
-    id: "burkina",
-    nom: "Burkina Faso",
-    x: 42,
-    y: 40,
-    disponible: true,
-    croissance: 3.9,
-    inflation: 2.1,
-    dette: 58.7,
-    pib: "9 870 Mds FCFA",
-    historique: [
-      { annee: "2022", value: 8600 },
-      { annee: "2023", value: 9020 },
-      { annee: "2024", value: 9380 },
-      { annee: "2025", value: 9640 },
-      { annee: "2026", value: 9870 },
-    ],
-  },
-  {
-    id: "cote_ivoire",
-    nom: "Côte d'Ivoire",
-    x: 28,
-    y: 58,
-    disponible: true,
-    croissance: 6.2,
-    inflation: 3.1,
-    dette: 61.4,
-    pib: "44 300 Mds FCFA",
-    historique: [
-      { annee: "2022", value: 37800 },
-      { annee: "2023", value: 39900 },
-      { annee: "2024", value: 41600 },
-      { annee: "2025", value: 43000 },
-      { annee: "2026", value: 44300 },
-    ],
-  },
+  { id: "senegal", nom: "Sénégal", x: 8, y: 38, disponible: true },
+  { id: "mali", nom: "Mali", x: 32, y: 22, disponible: true },
+  { id: "burkina", nom: "Burkina Faso", x: 42, y: 40, disponible: true },
+  { id: "cote_ivoire", nom: "Côte d'Ivoire", x: 28, y: 58, disponible: true },
   { id: "guinee_bissau", nom: "Guinée-Bissau", x: 2, y: 52, disponible: false },
   { id: "benin", nom: "Bénin", x: 55, y: 55, disponible: false },
   { id: "togo", nom: "Togo", x: 50, y: 60, disponible: false },
   { id: "niger", nom: "Niger", x: 58, y: 25, disponible: false },
 ];
 
+// ---- Accès aux données réelles (comparaison_pays.json) ---------------------
+// On ignore les observations sans valeur (ex. inflation du Sénégal avant 1998).
+const serie = (nomPays, indicateur) =>
+  comparaisonData
+    .filter((r) => r.pays === nomPays && r.indicateur === indicateur && r.valeur != null)
+    .sort((a, b) => a.annee.localeCompare(b.annee));
+
+const derniereObservation = (s) => (s.length ? s[s.length - 1] : null);
+
+function formatMilliards(v) {
+  return `${v.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} Mds FCFA`;
+}
+
+function formatPct(v) {
+  return `${v.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} %`;
+}
+
 export default function CartePays() {
+  const { t } = useTranslation();
   const [paysActifId, setPaysActifId] = useState("senegal");
   const paysActif = PAYS.find((p) => p.id === paysActifId);
 
+  const pibSerie = paysActif.disponible ? serie(paysActif.nom, "pib") : [];
+  const inflSerie = paysActif.disponible ? serie(paysActif.nom, "inflation") : [];
+  const dernierPib = derniereObservation(pibSerie);
+  const derniereInfl = derniereObservation(inflSerie);
+
+  // Année de référence : période la plus récente disponible pour ce pays.
+  const anneeRef = [dernierPib, derniereInfl]
+    .filter((o) => o != null)
+    .map((o) => parseInt(o.annee.slice(0, 4), 10))
+    .reduce((max, a) => (a > max ? a : max), 0);
+
+  // Croissance du PIB calculée sur les deux dernières observations réelles.
+  const croissance =
+    pibSerie.length >= 2
+      ? ((pibSerie[pibSerie.length - 1].valeur - pibSerie[pibSerie.length - 2].valeur) /
+         pibSerie[pibSerie.length - 2].valeur) * 100
+      : null;
+
+  const historiquePib = pibSerie.map((r) => ({
+    annee: parseInt(r.annee.slice(0, 4), 10),
+    value: r.valeur,
+  }));
+
   return (
     <section className="carte-pays-section">
-      <h2 className="dynamic-section-title">Explorer les pays de l'UEMOA</h2>
+      <h2 className="dynamic-section-title">{t("comparer_titre")}</h2>
       <div className="carte-pays-layout">
         <div className="carte-pays-svg-wrapper">
           <svg viewBox="0 0 70 70" className="carte-pays-svg">
@@ -132,9 +110,7 @@ export default function CartePays() {
               </g>
             ))}
           </svg>
-          <p className="carte-pays-note">
-            Carte schématique — les 4 pays en gris seront ajoutés prochainement.
-          </p>
+          <p className="carte-pays-note">{t("comparer_note")}</p>
         </div>
 
         <div className="carte-pays-panel">
@@ -143,34 +119,45 @@ export default function CartePays() {
               <h3 className="carte-pays-panel-titre">{paysActif.nom}</h3>
               <div className="carte-pays-indicateurs">
                 <div className="carte-pays-indicateur">
-                  <span className="carte-pays-indicateur-label">Croissance</span>
-                  <span className="carte-pays-indicateur-valeur">{paysActif.croissance}%</span>
+                  <span className="carte-pays-indicateur-label">{t("comparer_annee")}</span>
+                  <span className="carte-pays-indicateur-valeur">
+                    {anneeRef ? anneeRef : t("comparer_nd")}
+                  </span>
                 </div>
                 <div className="carte-pays-indicateur">
-                  <span className="carte-pays-indicateur-label">Inflation</span>
-                  <span className="carte-pays-indicateur-valeur">{paysActif.inflation}%</span>
+                  <span className="carte-pays-indicateur-label">{t("comparer_pib")}</span>
+                  <span className="carte-pays-indicateur-valeur">
+                    {dernierPib ? formatMilliards(dernierPib.valeur) : t("comparer_nd")}
+                  </span>
                 </div>
                 <div className="carte-pays-indicateur">
-                  <span className="carte-pays-indicateur-label">Dette / PIB</span>
-                  <span className="carte-pays-indicateur-valeur">{paysActif.dette}%</span>
+                  <span className="carte-pays-indicateur-label">{t("comparer_inflation")}</span>
+                  <span className="carte-pays-indicateur-valeur">
+                    {derniereInfl ? formatPct(derniereInfl.valeur) : t("comparer_nd")}
+                  </span>
                 </div>
                 <div className="carte-pays-indicateur">
-                  <span className="carte-pays-indicateur-label">PIB</span>
-                  <span className="carte-pays-indicateur-valeur">{paysActif.pib}</span>
+                  <span className="carte-pays-indicateur-label">{t("comparer_croissance")}</span>
+                  <span className="carte-pays-indicateur-valeur">
+                    {croissance != null ? formatPct(croissance) : t("comparer_nd")}
+                  </span>
                 </div>
               </div>
-              <div className="carte-pays-graphique">
-                <ResponsiveContainer width="100%" height={120}>
-                  <LineChart data={paysActif.historique}>
-                    <XAxis dataKey="annee" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="value" stroke="#1d4ed8" strokeWidth={2} dot={false} />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
+              {historiquePib.length > 1 && (
+                <div className="carte-pays-graphique">
+                  <ResponsiveContainer width="100%" height={120}>
+                    <LineChart data={historiquePib}>
+                      <XAxis dataKey="annee" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="value" stroke="#1d4ed8" strokeWidth={2} dot={false} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                  <p className="carte-pays-chart-caption">{t("comparer_chart_caption")}</p>
+                </div>
+              )}
             </>
           ) : (
-            <p className="carte-pays-indisponible">Données à venir pour ce pays.</p>
+            <p className="carte-pays-indisponible">{t("comparer_indisponible")}</p>
           )}
         </div>
       </div>

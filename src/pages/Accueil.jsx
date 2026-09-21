@@ -6,6 +6,9 @@ import { Database, TrendingUp, PieChart, SlidersHorizontal, LayoutDashboard, Gau
 import CartePays from "./CartePays";
 import PrevisionsSimulations from "./PrevisionsSimulations";
 import VeillePublicationsAlertes from "./VeillePublicationsAlertes";
+import previsionsData from "../data/previsions.json";
+import metaData from "../data/meta.json";
+import comparaisonData from "../data/comparaison_pays.json";
  
 function IconDocument() {
   return (
@@ -90,15 +93,80 @@ const CONTENUS_KEYS = [
   { key: "comprendre", Icone: GraduationCap },
 ];
  
-const PUBLICATIONS = [
-  { categorie: "Note de conjoncture", titre: "Situation économique du Sénégal — Juillet 2026", date: "28 Juil. 2026", Icone: IconDocument, accent: "accent-gold" },
-  { categorie: "Analyse thématique", titre: "Naïf vs SARIMA : quand le modèle simple gagne", date: "28 Juil. 2026", Icone: IconChart, accent: "accent-teal" },
-  { categorie: "Focus secteur", titre: "Agriculture, industrie, services : qui tire la croissance ?", date: "29 Juil. 2026", Icone: IconSecteur, accent: "accent-gold" },
-];
+// ---------- Données réelles pour l'Accueil -------------------------------
+// (previsions.json, meta.json, comparaison_pays.json — source de vérité)
+const NOMS_ACCUEIL = {
+  pib: "PIB nominal",
+  inflation: "Inflation",
+  masse_monetaire: "Masse monétaire (M2)",
+};
+
+const fmtValeur = (v, unite) =>
+  unite === "%"
+    ? `${v.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} %`
+    : `${v.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} ${unite}`;
+
+const prevs2026 = (id) => previsionsData.find((p) => p.indicateur === id && p.annee === 2026);
+
+const NB_PREV = previsionsData
+  .map((p) => p.indicateur)
+  .filter((v, i, a) => a.indexOf(v) === i).length;
+
+const ANNEES_PREV = previsionsData.reduce(
+  (acc, p) => [Math.min(acc[0], p.annee), Math.max(acc[1], p.annee)],
+  [9999, 0]
+);
+
+const NB_PAYS = comparaisonData
+  .map((r) => r.pays)
+  .filter((v, i, a) => a.indexOf(v) === i).length;
+
+const DERNIERE_ANNEE = comparaisonData
+  .map((r) => parseInt(r.annee.slice(0, 4), 10))
+  .reduce((m, a) => Math.max(m, a), 0);
+
+const DATE_MAJ_ACCUEIL = (() => {
+  if (!metaData || typeof metaData.generated_at !== "string") return null;
+  const d = new Date(metaData.generated_at);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleString("fr-FR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+  });
+})();
  
 export default function Accueil() {
   const [featureActive, setFeatureActive] = useState("donnees");
   const { t } = useTranslation();
+
+  // Cartes de chiffres clés, construites à partir des vraies prévisions.
+  const cartesCles = [
+    {
+      categorie: t("accueil_cles_categorie"),
+      titre: "PIB nominal",
+      date: prevs2026("pib") ? fmtValeur(prevs2026("pib").valeur_prevue, "Mds FCFA") : t("comparer_nd"),
+      Icone: IconChart,
+      accent: "accent-gold",
+    },
+    {
+      categorie: t("accueil_cles_categorie"),
+      titre: "Inflation",
+      date: prevs2026("inflation") ? fmtValeur(prevs2026("inflation").valeur_prevue, "%") : t("comparer_nd"),
+      Icone: IconDocument,
+      accent: "accent-teal",
+    },
+    {
+      categorie: t("accueil_cles_categorie"),
+      titre: "Masse monétaire (M2)",
+      date: prevs2026("masse_monetaire") ? fmtValeur(prevs2026("masse_monetaire").valeur_prevue, "Mds FCFA") : t("comparer_nd"),
+      Icone: IconSecteur,
+      accent: "accent-gold",
+    },
+  ];
  
   return (
     <div className="page-full">
@@ -163,9 +231,9 @@ export default function Accueil() {
   <div key={featureActive} className="dynamic-content-inner">
     {featureActive === "donnees" && (
       <>
-        <h2 className="dynamic-section-title">Dernières publications</h2>
+        <h2 className="dynamic-section-title">{t("accueil_cles_titre")}</h2>
         <div className="pubs-light-grid">
-          {PUBLICATIONS.map((pub, i) => (
+          {cartesCles.map((pub, i) => (
             <article key={i} className="pub-light-card">
               <div className="pub-light-image"></div>
               <div className="pub-light-body">
@@ -184,15 +252,19 @@ export default function Accueil() {
 
     {featureActive === "analyses" && (
       <>
-        <h2 className="dynamic-section-title">Notes de conjoncture et analyses</h2>
+        <h2 className="dynamic-section-title">{t("accueil_analyses_titre")}</h2>
         <div className="analyses-list">
           <div className="analyse-item">
-            <span>Situation économique du Sénégal — Juillet 2026</span>
-            <Link to="/donnees" className="feature-link">Lire →</Link>
+            <span>{t("accueil_analyses_previsions", { nb: NB_PREV })}</span>
+            <Link to="/donnees" className="feature-link">{t("accueil_analyses_lire")}</Link>
           </div>
           <div className="analyse-item">
-            <span>Naïf vs SARIMA : quand le modèle simple gagne</span>
-            <Link to="/donnees" className="feature-link">Lire →</Link>
+            <span>{t("accueil_analyses_comparaison", { pays: NB_PAYS })}</span>
+            <Link to="/donnees" className="feature-link">{t("accueil_analyses_lire")}</Link>
+          </div>
+          <div className="analyse-item">
+            <span>{t("accueil_analyses_alertes")}</span>
+            <Link to="/methodologie" className="feature-link">{t("accueil_analyses_lire")}</Link>
           </div>
         </div>
       </>
@@ -200,10 +272,16 @@ export default function Accueil() {
 
     {featureActive === "perspectives" && (
       <>
-        <h2 className="dynamic-section-title">Aperçu des prévisions macroéconomiques</h2>
+        <h2 className="dynamic-section-title">{t("accueil_perspectives_titre")}</h2>
         <div className="previsions-list">
-          <div className="prevision-item"><span>PIB 2026</span><strong>21 920 Mds FCFA</strong></div>
-          <div className="prevision-item"><span>Inflation 2026</span><strong>2.89 %</strong></div>
+          <div className="prevision-item">
+            <span>PIB 2026</span>
+            <strong>{prevs2026("pib") ? fmtValeur(prevs2026("pib").valeur_prevue, "Mds FCFA") : t("comparer_nd")}</strong>
+          </div>
+          <div className="prevision-item">
+            <span>Inflation 2026</span>
+            <strong>{prevs2026("inflation") ? fmtValeur(prevs2026("inflation").valeur_prevue, "%") : t("comparer_nd")}</strong>
+          </div>
         </div>
       </>
     )}
@@ -259,22 +337,24 @@ export default function Accueil() {
         <section style={{background: "#f7f7f5"}}>
   <div className="actu-newsletter-row">
   <div className="actu-col">
-    <h2>Actualités économiques</h2>
+    <h2>{t("accueil_resultats_titre")}</h2>
     <div className="actu-item">
-      <span className="actu-item-date">27 Juil. 2026</span>
-      <p className="actu-item-titre">Réunion du Conseil des Ministres de l'UEMOA : principales décisions</p>
-      <Link to="/donnees" className="actu-item-lien">Lire la suite →</Link>
+      <span className="actu-item-date">{t("accueil_resultats_maj")}</span>
+      <p className="actu-item-titre">{DATE_MAJ_ACCUEIL ? `${DATE_MAJ_ACCUEIL} UTC` : t("comparer_nd")}</p>
     </div>
     <div className="actu-item">
-      <span className="actu-item-date">23 Juil. 2026</span>
-      <p className="actu-item-titre">Le marché financier régional enregistre une hausse des émissions obligataires</p>
-      <Link to="/donnees" className="actu-item-lien">Lire la suite →</Link>
+      <span className="actu-item-date">{t("accueil_resultats_previsions")}</span>
+      <p className="actu-item-titre">{t("accueil_resultats_previsions_texte", { nb: NB_PREV, a: ANNEES_PREV[0], b: ANNEES_PREV[1] })}</p>
     </div>
     <div className="actu-item">
-      <span className="actu-item-date">19 Juil. 2026</span>
-      <p className="actu-item-titre">Perspectives économiques mondiales : le FMI révise ses prévisions</p>
-      <Link to="/donnees" className="actu-item-lien">Lire la suite →</Link>
+      <span className="actu-item-date">{t("accueil_resultats_comparaison")}</span>
+      <p className="actu-item-titre">{t("accueil_resultats_comparaison_texte", { pays: NB_PAYS, annee: DERNIERE_ANNEE })}</p>
     </div>
+    <div className="actu-item">
+      <span className="actu-item-date">{t("accueil_resultats_sources")}</span>
+      <p className="actu-item-titre">BCEAO · DBnomics</p>
+    </div>
+    <Link to="/methodologie" className="actu-item-lien">{t("accueil_resultats_lien")}</Link>
   </div>
   <div className="newsletter-card">
     <h2>{t("titre_newsletter")}</h2>
