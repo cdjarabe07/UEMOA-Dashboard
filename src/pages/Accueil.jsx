@@ -1,131 +1,50 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import FormulaireContact from "./Newsletter";
-import { Database, TrendingUp, PieChart, SlidersHorizontal, LayoutDashboard, Gauge, FolderOpen, Grid3x3, Search, GraduationCap, FileText, ChevronRight } from "lucide-react";
-import CartePays from "./CartePays";
-import PrevisionsSimulations from "./PrevisionsSimulations";
-import VeillePublicationsAlertes from "./VeillePublicationsAlertes";
-import previsionsData from "../data/previsions.json";
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
 import metaData from "../data/meta.json";
+import previsionsData from "../data/previsions.json";
 import comparaisonData from "../data/comparaison_pays.json";
- 
-function IconDocument() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
-      <path d="M14 3v5h5" />
-      <path d="M9 13h6M9 17h6" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconChart() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M4 20V10M12 20V4M20 20v-7" strokeLinecap="round" />
-      <path d="M2 20h20" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconSecteur() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <rect x="3" y="3" width="7" height="7" rx="1" />
-      <rect x="14" y="3" width="7" height="7" rx="1" />
-      <rect x="3" y="14" width="7" height="7" rx="1" />
-      <rect x="14" y="14" width="7" height="7" rx="1" />
-    </svg>
-  );
-}
-function IconFleche() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function IconTableauBord() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <rect x="3" y="4" width="18" height="16" rx="1" />
-      <path d="M3 9h18M8 9v11" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconBarometre() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" />
-      <path d="M12 12l4-3" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconDossier() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M3 7a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z" />
-    </svg>
-  );
-}
-function IconMethodologie() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="11" cy="11" r="7" />
-      <path d="M21 21l-4.3-4.3" strokeLinecap="round" />
-    </svg>
-  );
-}
-function IconPedagogie() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M12 4L2 9l10 5 10-5-10-5z" />
-      <path d="M6 11.5V17c0 1.5 3 3 6 3s6-1.5 6-3v-5.5" />
-    </svg>
-  );
-}
- 
-const CONTENUS_KEYS = [
-  { key: "tableau_bord", Icone: LayoutDashboard },
-  { key: "barometre", Icone: Gauge },
-  { key: "dossier", Icone: FolderOpen },
-  { key: "observatoire", Icone: Grid3x3 },
-  { key: "methodologie", Icone: Search },
-  { key: "comprendre", Icone: GraduationCap },
-];
- 
-// ---------- Données réelles pour l'Accueil -------------------------------
-// (previsions.json, meta.json, comparaison_pays.json — source de vérité)
-const NOMS_ACCUEIL = {
-  pib: "PIB nominal",
+import inflationData from "../data/inflation_senegal.json";
+import pibData from "../data/pib_senegal.json";
+import tauxChangeData from "../data/taux_change_uemoa.json";
+import { construireAlertes } from "./VeillePublicationsAlertes";
+
+// Métadonnées d'affichage uniquement (aucune valeur économique ici).
+const NOMS = {
   inflation: "Inflation",
+  pib: "PIB nominal",
+  agriculture: "PIB — Agriculture",
+  industrie: "PIB — Industrie",
+  services: "PIB — Services",
   masse_monetaire: "Masse monétaire (M2)",
+  taux_change: "Taux de change",
+};
+const UNITES = {
+  inflation: "%",
+  pib: "Mds FCFA",
+  agriculture: "Mds FCFA",
+  industrie: "Mds FCFA",
+  services: "Mds FCFA",
+  masse_monetaire: "Mds FCFA",
+  taux_change: "FCFA",
 };
 
-const fmtValeur = (v, unite) =>
-  unite === "%"
-    ? `${v.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} %`
-    : `${v.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} ${unite}`;
+const fmt0 = (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 0 });
+const fmt1 = (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 1 });
+const fmtV = (v, unite) => (unite === "%" ? `${fmt1(v)} %` : `${fmt0(v)} ${unite}`);
+const anneeDe = (period) => parseInt(period.slice(0, 4), 10);
+const dernierObs = (data) => (data.length ? data[data.length - 1] : null);
 
-const prevs2026 = (id) => previsionsData.find((p) => p.indicateur === id && p.annee === 2026);
-
-const NB_PREV = previsionsData
-  .map((p) => p.indicateur)
-  .filter((v, i, a) => a.indexOf(v) === i).length;
-
-const ANNEES_PREV = previsionsData.reduce(
-  (acc, p) => [Math.min(acc[0], p.annee), Math.max(acc[1], p.annee)],
-  [9999, 0]
-);
-
-const NB_PAYS = comparaisonData
-  .map((r) => r.pays)
-  .filter((v, i, a) => a.indexOf(v) === i).length;
-
-const DERNIERE_ANNEE = comparaisonData
-  .map((r) => parseInt(r.annee.slice(0, 4), 10))
-  .reduce((m, a) => Math.max(m, a), 0);
-
-const DATE_MAJ_ACCUEIL = (() => {
+// Date de dernière génération (meta.json — aucune date inventée).
+const DATE_MAJ = (() => {
   if (!metaData || typeof metaData.generated_at !== "string") return null;
   const d = new Date(metaData.generated_at);
   if (Number.isNaN(d.getTime())) return null;
@@ -138,244 +57,294 @@ const DATE_MAJ_ACCUEIL = (() => {
     timeZone: "UTC",
   });
 })();
- 
+
+// ---- 2. Indicateurs clés (prévisions 2026 ou dernière observation) ----
+const prevPar = (id, annee) =>
+  previsionsData.find((p) => p.indicateur === id && p.annee === annee);
+
+const kpis = [
+  {
+    id: "inflation",
+    nom: NOMS.inflation,
+    unite: UNITES.inflation,
+    valeur: prevPar("inflation", 2026)?.valeur_prevue ?? null,
+    type: "prevision",
+    annee: 2026,
+    obs: dernierObs(inflationData),
+  },
+  {
+    id: "pib",
+    nom: NOMS.pib,
+    unite: UNITES.pib,
+    valeur: prevPar("pib", 2026)?.valeur_prevue ?? null,
+    type: "prevision",
+    annee: 2026,
+    obs: dernierObs(pibData),
+  },
+  {
+    id: "masse",
+    nom: NOMS.masse_monetaire,
+    unite: UNITES.masse_monetaire,
+    valeur: prevPar("masse_monetaire", 2026)?.valeur_prevue ?? null,
+    type: "prevision",
+    annee: 2026,
+    obs: null,
+  },
+  {
+    id: "taux",
+    nom: NOMS.taux_change,
+    unite: UNITES.taux_change,
+    valeur: dernierObs(tauxChangeData)?.value ?? null,
+    type: "observation",
+    annee: dernierObs(tauxChangeData) ? anneeDe(dernierObs(tauxChangeData).period) : null,
+    obs: null,
+  },
+];
+
+// ---- 3. Table des prévisions 2026-2027 ----
+const prevIndics = [...new Set(previsionsData.map((p) => p.indicateur))];
+const prevRows = prevIndics.map((id) => {
+  const items = previsionsData
+    .filter((p) => p.indicateur === id)
+    .sort((a, b) => a.annee - b.annee);
+  return {
+    id,
+    nom: NOMS[id] || id,
+    unite: UNITES[id] || "",
+    y26: items.find((p) => p.annee === 2026) || null,
+    y27: items.find((p) => p.annee === 2027) || null,
+  };
+});
+
+// ---- 5. Comparaison des pays ----
+const paysUniq = [...new Set(comparaisonData.map((r) => r.pays))];
+const seriePour = (pays, indicateur) =>
+  comparaisonData
+    .filter((r) => r.pays === pays && r.indicateur === indicateur && r.valeur != null)
+    .sort((a, b) => a.annee.localeCompare(b.annee));
+const dernierePays = (s) => (s.length ? s[s.length - 1] : null);
+
+const paysRows = paysUniq.map((pays) => {
+  const pib = seriePour(pays, "pib");
+  const infl = seriePour(pays, "inflation");
+  const dPib = dernierePays(pib);
+  const dInfl = dernierePays(infl);
+  const varPib =
+    pib.length >= 2
+      ? ((pib[pib.length - 1].valeur - pib[pib.length - 2].valeur) / pib[pib.length - 2].valeur) *
+        100
+      : null;
+  const annee = dPib ? anneeDe(dPib.annee) : dInfl ? anneeDe(dInfl.annee) : null;
+  return { pays, dPib, dInfl, varPib, annee };
+});
+
+// ---- 4. Tendances (séries exportées) ----
+const tendances = [
+  { id: "inflation", nom: NOMS.inflation, unite: UNITES.inflation, periode: inflationData },
+  { id: "pib", nom: NOMS.pib, unite: UNITES.pib, periode: pibData },
+];
+
 export default function Accueil() {
-  const [featureActive, setFeatureActive] = useState("donnees");
   const { t } = useTranslation();
+  const alertes = construireAlertes(t);
 
-  // Cartes de chiffres clés, construites à partir des vraies prévisions.
-  const cartesCles = [
-    {
-      categorie: t("accueil_cles_categorie"),
-      titre: "PIB nominal",
-      date: prevs2026("pib") ? fmtValeur(prevs2026("pib").valeur_prevue, "Mds FCFA") : t("comparer_nd"),
-      Icone: IconChart,
-      accent: "accent-gold",
-    },
-    {
-      categorie: t("accueil_cles_categorie"),
-      titre: "Inflation",
-      date: prevs2026("inflation") ? fmtValeur(prevs2026("inflation").valeur_prevue, "%") : t("comparer_nd"),
-      Icone: IconDocument,
-      accent: "accent-teal",
-    },
-    {
-      categorie: t("accueil_cles_categorie"),
-      titre: "Masse monétaire (M2)",
-      date: prevs2026("masse_monetaire") ? fmtValeur(prevs2026("masse_monetaire").valeur_prevue, "Mds FCFA") : t("comparer_nd"),
-      Icone: IconSecteur,
-      accent: "accent-gold",
-    },
-  ];
- 
   return (
-    <div className="page-full">
-      <section className="hero-full">
-  <div className="hero-full-inner">
-    <h1 className="hero-title">{t("titre_hero")}</h1>
-    <div className="hero-divider"></div>
-    <p className="hero-sub">{t("sous_titre_hero")}</p>
-    <Link to="/donnees" className="cta-button">
-      {t("cta_explorer")}
-    </Link>
-  </div>
-</section>
- 
- <section className="features-strip">
-  <div className="features-grid">
-    <div className={`feature-card ${featureActive === "donnees" ? "active" : ""}`} onClick={() => setFeatureActive("donnees")}>
-      <div className="feature-icon-box" style={{background: "#e0e7ff", color: "#4338ca"}}><Database /></div>
-      <h3 className="feature-titre">Données fiables</h3>
-      <p className="feature-desc">Accédez à des données actualisées et harmonisées provenant de sources internationales reconnues.</p>
-      <Link to="/donnees" className="feature-link">Explorer les données →</Link>
-    </div>
-    <div className={`feature-card ${featureActive === "analyses" ? "active" : ""}`} onClick={() => setFeatureActive("analyses")}>
-      <div className="feature-icon-box" style={{background: "#dcfce7", color: "#15803d"}}><TrendingUp /></div>
-      <h3 className="feature-titre">Analyses approfondies</h3>
-      <p className="feature-desc">Des analyses détaillées pour comprendre les tendances et leurs impacts.</p>
-      <Link to="/donnees" className="feature-link">Consulter les analyses →</Link>
-    </div>
-    <div className={`feature-card ${featureActive === "perspectives" ? "active" : ""}`} onClick={() => setFeatureActive("perspectives")}>
-      <div className="feature-icon-box" style={{background: "#fef3c7", color: "#b45309"}}><PieChart /></div>
-      <h3 className="feature-titre">Perspectives éclairées</h3>
-      <p className="feature-desc">Des perspectives économiques et sectorielles pour anticiper les évolutions.</p>
-      <Link to="/donnees" className="feature-link">Voir les perspectives →</Link>
-    </div>
-    <div className={`feature-card ${featureActive === "outils" ? "active" : ""}`} onClick={() => setFeatureActive("outils")}>
-      <div className="feature-icon-box" style={{background: "#f3e8ff", color: "#7e22ce"}}><SlidersHorizontal /></div>
-      <h3 className="feature-titre">Outils interactifs</h3>
-      <p className="feature-desc">Simulez des scénarios, comparez des pays et évaluez des risques en quelques clics.</p>
-      <Link to="/donnees" className="feature-link">Découvrir les outils →</Link>
-    </div>
-  </div>
-</section>
+    <div className="page accueil-page">
+      {/* 1. En-tête de page */}
+      <header className="accueil-head">
+        <p className="accueil-eyebrow">{t("accueil2_eyebrow")}</p>
+        <h1 className="accueil-title">{t("accueil2_titre")}</h1>
+        <p className="accueil-desc">{t("accueil2_desc")}</p>
+        <div className="accueil-meta">
+          <span>
+            {t("footer_datemaj")} : {DATE_MAJ ? `${DATE_MAJ} UTC` : t("comparer_nd")}
+          </span>
+          <span>
+            {t("footer_sources")} : BCEAO · DBnomics
+          </span>
+        </div>
+      </header>
 
-      <div className="page page--wide">
-        <section className="contenus-section-light">
-  <h2 className="section-title section-title--nu" style={{color: "#0f1b2d", borderTop: "none"}}>{t("titre_contenus")}</h2>
-  <div className="contenus-grid-light">
-    {CONTENUS_KEYS.map((c, i) => (
-      <div key={i} className="contenu-card-light">
-        <span className="contenu-icon">
-          <c.Icone />
-        </span>
-        <h3 className="contenu-titre">{t(`${c.key}_titre`)}</h3>
-        <p className="contenu-description">{t(`${c.key}_desc`)}</p>
-      </div>
-    ))}
-  </div>
-  <p className="contenus-note-light">{t("note_contenus")}</p>
-</section>
- 
-        <section className="dynamic-content-section">
-  <div key={featureActive} className="dynamic-content-inner">
-    {featureActive === "donnees" && (
-      <>
-        <h2 className="dynamic-section-title">{t("accueil_cles_titre")}</h2>
-        <div className="pubs-light-grid">
-          {cartesCles.map((pub, i) => (
-            <article key={i} className="pub-light-card">
-              <div className="pub-light-image"></div>
-              <div className="pub-light-body">
-                <p className="pub-light-categorie">{pub.categorie}</p>
-                <h3 className="pub-light-titre">{pub.titre}</h3>
-                <div className="pub-light-footer">
-                  <span className="pub-light-date">{pub.date}</span>
-                  <span className="pub-light-download">↓</span>
-                </div>
-              </div>
-            </article>
+      {/* 2. Indicateurs clés */}
+      <section className="home-section" aria-label={t("accueil2_kpi_titre")}>
+        <h2 className="home-section-title">{t("accueil2_kpi_titre")}</h2>
+        <div className="kpi-grid">
+          {kpis.map((k) => (
+            <div key={k.id} className="kpi-card">
+              <p className="kpi-label">{k.nom}</p>
+              <p className="kpi-value">{k.valeur != null ? fmtV(k.valeur, k.unite) : t("comparer_nd")}</p>
+              <p className="kpi-sub">
+                {k.type === "prevision"
+                  ? t("accueil2_kpi_prev", { annee: k.annee })
+                  : t("accueil2_kpi_obs", { annee: k.annee ?? "" })}
+                {k.obs && (
+                  <>
+                    {" · "}
+                    {t("accueil2_kpi_obs", { annee: anneeDe(k.obs.period) })} :{" "}
+                    {fmtV(k.obs.value, k.unite)}
+                  </>
+                )}
+              </p>
+              {k.type === "observation" && (
+                <p className="kpi-acc">{t("prevision_indisponible")}</p>
+              )}
+            </div>
           ))}
         </div>
-      </>
-    )}
+      </section>
 
-    {featureActive === "analyses" && (
-      <>
-        <h2 className="dynamic-section-title">{t("accueil_analyses_titre")}</h2>
-        <div className="analyses-list">
-          <div className="analyse-item">
-            <span>{t("accueil_analyses_previsions", { nb: NB_PREV })}</span>
-            <Link to="/donnees" className="feature-link">{t("accueil_analyses_lire")}</Link>
+      {/* 3. Prévisions macroéconomiques */}
+      <section className="home-section" aria-label={t("accueil2_prev_titre")}>
+        <h2 className="home-section-title">{t("accueil2_prev_titre")}</h2>
+        <p className="home-section-desc">{t("accueil2_prev_intro")}</p>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>{t("accueil2_col_ind")}</th>
+                <th className="num">2026</th>
+                <th className="num">{t("prevision_ic")}</th>
+                <th className="num">2027</th>
+                <th className="num">{t("prevision_ic")}</th>
+                <th className="num">{t("accueil2_col_unite")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {prevRows.map((r) => (
+                <tr key={r.id}>
+                  <td>{r.nom}</td>
+                  <td className="num">{r.y26 ? fmtV(r.y26.valeur_prevue, r.unite) : t("comparer_nd")}</td>
+                  <td className="num muted">
+                    {r.y26 && r.y26.borne_basse != null
+                      ? `${fmtV(r.y26.borne_basse, r.unite)} – ${fmtV(r.y26.borne_haute, r.unite)}`
+                      : t("comparer_nd")}
+                  </td>
+                  <td className="num">{r.y27 ? fmtV(r.y27.valeur_prevue, r.unite) : t("comparer_nd")}</td>
+                  <td className="num muted">
+                    {r.y27 && r.y27.borne_basse != null
+                      ? `${fmtV(r.y27.borne_basse, r.unite)} – ${fmtV(r.y27.borne_haute, r.unite)}`
+                      : t("comparer_nd")}
+                  </td>
+                  <td className="num">{r.unite}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <Link to="/previsions" className="link-more">{t("accueil2_prev_lien")}</Link>
+      </section>
+
+      {/* 4. Tendances récentes */}
+      <section className="home-section" aria-label={t("accueil2_tend_titre")}>
+        <h2 className="home-section-title">{t("accueil2_tend_titre")}</h2>
+        <div className="charts-grid">
+          {tendances.map((c) => {
+            const data = c.periode.map(({ period, value }) => ({
+              annee: anneeDe(period),
+              valeur: value,
+            }));
+            const debut = data.length ? data[0].annee : null;
+            const fin = data.length ? data[data.length - 1].annee : null;
+            return (
+              <div key={c.id} className="chart-box">
+                <h4>
+                  {c.nom} <span className="chart-meta">({c.unite})</span>
+                </h4>
+                <p className="chart-meta">
+                  {debut != null ? `${debut}–${fin}` : ""} · {t("donnees_footer_source")}
+                </p>
+                <ResponsiveContainer width="100%" height={220}>
+                  <LineChart data={data}>
+                    <CartesianGrid stroke="#eef0f2" vertical={false} />
+                    <XAxis dataKey="annee" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
+                    <YAxis
+                      tick={{ fontSize: 11 }}
+                      axisLine={false}
+                      tickLine={false}
+                      width={62}
+                      tickFormatter={fmt0}
+                    />
+                    <Tooltip formatter={(v) => fmtV(v, c.unite)} />
+                    <Line type="monotone" dataKey="valeur" stroke="#1d4ed8" strokeWidth={2} dot={false} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 5. Comparaison UEMOA */}
+      <section className="home-section" aria-label={t("accueil2_comp_titre")}>
+        <h2 className="home-section-title">{t("accueil2_comp_titre")}</h2>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>{t("accueil2_comp_pays")}</th>
+                <th>{t("accueil2_comp_annee")}</th>
+                <th className="num">{t("comparer_pib")}</th>
+                <th className="num">{t("comparer_inflation")}</th>
+                <th className="num">{t("comparer_croissance")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paysRows.map((row) => (
+                <tr key={row.pays}>
+                  <td>{row.pays}</td>
+                  <td>{row.annee ?? t("comparer_nd")}</td>
+                  <td className="num">
+                    {row.dPib ? `${fmt0(row.dPib.valeur)} Mds FCFA` : t("comparer_nd")}
+                  </td>
+                  <td className="num">
+                    {row.dInfl ? `${fmt1(row.dInfl.valeur)} %` : t("comparer_nd")}
+                  </td>
+                  <td className="num">
+                    {row.varPib != null ? `${fmt1(row.varPib)} %` : t("comparer_nd")}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <Link to="/comparaison" className="link-more">{t("accueil2_comp_lien")}</Link>
+      </section>
+
+      {/* 6. Signaux calculés (mêmes règles que la Veille) */}
+      <section className="home-section" aria-label={t("accueil2_sign_titre")}>
+        <h2 className="home-section-title">{t("accueil2_sign_titre")}</h2>
+        <p className="home-section-desc">{t("accueil2_sign_intro")}</p>
+        <div className="signal-list">
+          {alertes.slice(0, 3).map((a, i) => (
+            <div key={i} className="signal-row">
+              <span className="signal-badge">{t("accueil2_sign_badge")}</span>
+              <div>
+                <strong>{a.titre}</strong>
+                <span>{a.texte}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 7. Sources et méthodologie */}
+      <section className="home-section" aria-label={t("accueil2_src_titre")}>
+        <h2 className="home-section-title">{t("accueil2_src_titre")}</h2>
+        <div className="src-list">
+          <div className="src-row">
+            <b>BCEAO</b>
+            <span>{t("veille_source_bceao_texte")}</span>
           </div>
-          <div className="analyse-item">
-            <span>{t("accueil_analyses_comparaison", { pays: NB_PAYS })}</span>
-            <Link to="/donnees" className="feature-link">{t("accueil_analyses_lire")}</Link>
+          <div className="src-row">
+            <b>DBnomics</b>
+            <span>{t("veille_source_dbnomics_texte")}</span>
           </div>
-          <div className="analyse-item">
-            <span>{t("accueil_analyses_alertes")}</span>
-            <Link to="/methodologie" className="feature-link">{t("accueil_analyses_lire")}</Link>
+          <div className="src-row">
+            <b>{t("footer_metho")}</b>
+            <Link to="/methodologie">{t("accueil_resultats_lien")}</Link>
           </div>
         </div>
-      </>
-    )}
-
-    {featureActive === "perspectives" && (
-      <>
-        <h2 className="dynamic-section-title">{t("accueil_perspectives_titre")}</h2>
-        <div className="previsions-list">
-          <div className="prevision-item">
-            <span>PIB 2026</span>
-            <strong>{prevs2026("pib") ? fmtValeur(prevs2026("pib").valeur_prevue, "Mds FCFA") : t("comparer_nd")}</strong>
-          </div>
-          <div className="prevision-item">
-            <span>Inflation 2026</span>
-            <strong>{prevs2026("inflation") ? fmtValeur(prevs2026("inflation").valeur_prevue, "%") : t("comparer_nd")}</strong>
-          </div>
-        </div>
-      </>
-    )}
-
-    {featureActive === "outils" && (
-      <div className="simulateur-card">
-        <h2 className="dynamic-section-title">Simulateur "Et si ?"</h2>
-        <p>Explorez l'impact de chocs externes (prix du pétrole, taux) sur les indicateurs macroéconomiques. Fonctionnalité en cours de fiabilisation — voir la méthodologie pour les détails.</p>
-        <Link to="/methodologie" className="cta-button">En savoir plus →</Link>
-      </div>
-    )}
-  </div>
-</section>
-
-<CartePays />
-
-<PrevisionsSimulations />
-
-<VeillePublicationsAlertes />
-
-<section className="plateforme-section">
-  <h2 className="plateforme-titre">Une plateforme au service de vos décisions</h2>
-  <p className="plateforme-sous-titre">Des ressources et des outils conçus pour répondre aux besoins des décideurs, chercheurs, investisseurs et citoyens.</p>
-  <div className="plateforme-grid">
-    <div className="plateforme-item">
-      <div className="plateforme-item-icon"><IconSecteur /></div>
-      <h3 className="plateforme-item-titre">Couverture mondiale</h3>
-      <p className="plateforme-item-desc">Suivez les évolutions économiques et financières par pays, région et au niveau global.</p>
-    </div>
-    <div className="plateforme-item">
-      <div className="plateforme-item-icon"><IconBarometre /></div>
-      <h3 className="plateforme-item-titre">Indicateurs clés</h3>
-      <p className="plateforme-item-desc">Des indicateurs macroéconomiques, financiers, sociaux et sectoriels mis à jour en continu.</p>
-    </div>
-    <div className="plateforme-item">
-      <div className="plateforme-item-icon"><IconMethodologie /></div>
-      <h3 className="plateforme-item-titre">Veille et alertes</h3>
-      <p className="plateforme-item-desc">Soyez informé des événements économiques importants et des risques émergents.</p>
-    </div>
-    <div className="plateforme-item">
-      <div className="plateforme-item-icon"><IconChart /></div>
-      <h3 className="plateforme-item-titre">Simulations & scénarios</h3>
-      <p className="plateforme-item-desc">Évaluez l'impact de différents chocs et scénarios sur les économies et les marchés.</p>
-    </div>
-    <div className="plateforme-item">
-      <div className="plateforme-item-icon"><IconTableauBord /></div>
-      <h3 className="plateforme-item-titre">Rapports & exports</h3>
-      <p className="plateforme-item-desc">Téléchargez des rapports personnalisés et des données dans plusieurs formats.</p>
-    </div>
-  </div>
-</section>
- 
-        <section style={{background: "#f7f7f5"}}>
-  <div className="actu-newsletter-row">
-  <div className="actu-col">
-    <h2>{t("accueil_resultats_titre")}</h2>
-    <div className="actu-item">
-      <span className="actu-item-date">{t("accueil_resultats_maj")}</span>
-      <p className="actu-item-titre">{DATE_MAJ_ACCUEIL ? `${DATE_MAJ_ACCUEIL} UTC` : t("comparer_nd")}</p>
-    </div>
-    <div className="actu-item">
-      <span className="actu-item-date">{t("accueil_resultats_previsions")}</span>
-      <p className="actu-item-titre">{t("accueil_resultats_previsions_texte", { nb: NB_PREV, a: ANNEES_PREV[0], b: ANNEES_PREV[1] })}</p>
-    </div>
-    <div className="actu-item">
-      <span className="actu-item-date">{t("accueil_resultats_comparaison")}</span>
-      <p className="actu-item-titre">{t("accueil_resultats_comparaison_texte", { pays: NB_PAYS, annee: DERNIERE_ANNEE })}</p>
-    </div>
-    <div className="actu-item">
-      <span className="actu-item-date">{t("accueil_resultats_sources")}</span>
-      <p className="actu-item-titre">BCEAO · DBnomics</p>
-    </div>
-    <Link to="/methodologie" className="actu-item-lien">{t("accueil_resultats_lien")}</Link>
-  </div>
-  <div className="newsletter-card">
-    <h2>{t("titre_newsletter")}</h2>
-    <p>{t("texte_newsletter")}</p>
-    <FormulaireContact />
-  </div>
-  </div>
-</section>
- 
-<section className="partenaires-strip">
-  <p className="partenaires-titre">Nos partenaires</p>
-  <div className="partenaires-logos">
-    <span className="partenaire-logo">BCEAO</span>
-    <span className="partenaire-logo">FMI</span>
-    <span className="partenaire-logo">BANQUE MONDIALE</span>
-    <span className="partenaire-logo">OCDE</span>
-    <span className="partenaire-logo">Union européenne</span>
-  </div>
-</section>
-</div>
-        {/* Le footer global institutionnel est rendu par App.jsx (shell). */}
+      </section>
     </div>
   );
 }

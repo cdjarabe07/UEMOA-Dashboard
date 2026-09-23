@@ -32,7 +32,7 @@ const fmt = (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 1 });
 //   Règle 3 : indicateur suivi sans prévision exportée (marche aléatoire).
 // ---------------------------------------------------------------------------
 
-function construireAlertes(t) {
+export function construireAlertes(t) {
   const alertes = [];
 
   // Règle 1 — intervalle de confiance qui traverse zéro.
