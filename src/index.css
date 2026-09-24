@@ -2021,3 +2021,35 @@ button:focus-visible {
     flex-direction: column;
   }
 }
+
+/* ---------- Page Prévisions : module analytique ---------- */
+
+.prevsim-root .home-section {
+  margin: 32px 0;
+}
+
+.prevsim-tabs {
+  margin-bottom: 20px;
+}
+
+.data-table tr.row-selected td {
+  background: #eef2ff;
+}
+
+.note-ic {
+  border: 1px solid #e5e7eb;
+  border-left: 3px solid #a8860d;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--ink);
+  background: #fbfaf6;
+  margin: 24px 0;
+}
+
+.prevsim-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 16px;
+}
