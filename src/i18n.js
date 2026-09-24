@@ -166,6 +166,15 @@ const resources = {
       prevsim4_lien_donnees: "Voir les données →",
       prevsim4_lien_metho: "Voir la méthodologie →",
       prevsim4_histo_indispo: "Aucun historique exporté pour cet indicateur — seules les prévisions sont affichées.",
+
+      compar5_titre: "Comparaison UEMOA",
+      compar5_desc: "Comparez les principaux indicateurs macroéconomiques des pays suivis.",
+      compar5_indicateur: "Indicateur",
+      compar5_derniere: "Dernière observation",
+      compar5_table_titre: "Dernières observations",
+      compar5_variation: "Variation du PIB",
+      compar5_periode_couverte: "Période couverte",
+      compar5_lien_prev: "Voir les prévisions →",
  
       methodo_eyebrow: "Méthodologie",
       methodo_titre: "Comment sont calculées les prévisions.",
@@ -344,6 +353,15 @@ const resources = {
       prevsim4_lien_donnees: "View the data →",
       prevsim4_lien_metho: "View the methodology →",
       prevsim4_histo_indispo: "No exported history for this indicator — only forecasts are shown.",
+
+      compar5_titre: "UEMOA comparison",
+      compar5_desc: "Compare the main macroeconomic indicators of the tracked countries.",
+      compar5_indicateur: "Indicator",
+      compar5_derniere: "Latest observation",
+      compar5_table_titre: "Latest observations",
+      compar5_variation: "GDP change",
+      compar5_periode_couverte: "Covered period",
+      compar5_lien_prev: "View the forecasts →",
  
       methodo_eyebrow: "Methodology",
       methodo_titre: "How the forecasts are calculated.",
