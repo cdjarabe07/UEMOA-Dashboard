@@ -18,6 +18,9 @@ const NOMS = {
   taux_change: "Taux de change",
 };
 
+// Libellé traduit (clé i18n "ind_<id>"), repli sur le nom statique.
+const libelle = (t, id) => t(`ind_${id}`, { defaultValue: NOMS[id] || id });
+
 const fmt = (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 1 });
 
 // ---------------------------------------------------------------------------
@@ -42,7 +45,7 @@ export function construireAlertes(t) {
         type: "alerte",
         categorie: t("veille_type_alerte"),
         titre: t("veille_alerte_ic_zero_titre", {
-          nom: NOMS[p.indicateur] || p.indicateur,
+          nom: libelle(t, p.indicateur),
           annee: p.annee,
         }),
         texte: t("veille_alerte_ic_zero_raison", {
@@ -70,7 +73,7 @@ export function construireAlertes(t) {
         type: "alerte",
         categorie: t("veille_type_alerte"),
         titre: t("veille_alerte_variation_titre", {
-          nom: NOMS[ind] || ind,
+          nom: libelle(t, ind),
           anneeA: a.annee,
           anneeB: b.annee,
         }),
@@ -86,8 +89,8 @@ export function construireAlertes(t) {
       alertes.push({
         type: "alerte",
         categorie: t("veille_type_alerte"),
-        titre: t("veille_alerte_sans_prev_titre", { nom: NOMS[i.id] || i.nom }),
-        texte: t("veille_alerte_sans_prev_raison", { nom: NOMS[i.id] || i.nom }),
+        titre: t("veille_alerte_sans_prev_titre", { nom: libelle(t, i.id) }),
+        texte: t("veille_alerte_sans_prev_raison", { nom: libelle(t, i.id) }),
         date: "2026–2027",
       });
     }

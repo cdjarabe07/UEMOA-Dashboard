@@ -11,7 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import comparaisonData from "../data/comparaison_pays.json";
-import metaData from "../data/meta.json";
+import { COULEURS, COULEURS_PAYS, DATE_MAJ, BandeauPage } from "./Visuels";
 
 // Pays réellement présents dans comparaison_pays.json (source de vérité).
 const PAYS = [...new Set(comparaisonData.map((r) => r.pays))];
@@ -22,21 +22,9 @@ const INDICATEURS_COMP = [
   { id: "inflation", nom: "Inflation", unite: "%" },
 ];
 
-const COLORS = ["#1d4ed8", "#0f766e", "#b45309", "#6b7280", "#7c3aed"];
+// Couleur stable par pays (ordre de comparaison_pays.json).
+const couleurPays = (pays) => COULEURS_PAYS[PAYS.indexOf(pays) % COULEURS_PAYS.length];
 
-const DATE_MAJ = (() => {
-  if (!metaData || typeof metaData.generated_at !== "string") return null;
-  const d = new Date(metaData.generated_at);
-  if (Number.isNaN(d.getTime())) return null;
-  return d.toLocaleString("fr-FR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "UTC",
-  });
-})();
 
 const fmt0 = (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 0 });
 const fmt1 = (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 1 });
@@ -59,7 +47,7 @@ const ANNEE_DERNIERE = "__derniere__";
 
 export default function CartePays() {
   const { t } = useTranslation();
-  const [paysActifs, setPaysActifs] = useState([PAYS[0]]);
+  const [paysActifs, setPaysActifs] = useState(PAYS);
   const [indicateurId, setIndicateurId] = useState("pib");
   const [anneeSelect, setAnneeSelect] = useState(ANNEE_DERNIERE);
 
@@ -114,177 +102,226 @@ export default function CartePays() {
     return row;
   });
 
+  const fmtInd = (v) => (indicateur.unite === "%" ? `${fmt1(v)} %` : `${fmt0(v)} ${indicateur.unite}`);
+
   return (
-    <div className="comp-root">
-      {/* 1. En-tête de page */}
-      <header className="accueil-head">
-        <p className="accueil-eyebrow">{t("footer_sources")} : BCEAO · DBnomics</p>
-        <h1 className="accueil-title">{t("compar5_titre")}</h1>
-        <p className="accueil-desc">{t("compar5_desc")}</p>
-        <div className="accueil-meta">
-          <span>
-            {t("footer_datemaj")} : {DATE_MAJ ? `${DATE_MAJ} UTC` : t("comparer_nd")}
-          </span>
-          <span>{t("compar5_periode_couverte")} : {PERIODE_GLOBALE}</span>
-        </div>
-      </header>
+    <div className="page-full">
+      <BandeauPage
+        eyebrow={`${t("nav_comparaison")} · ${PAYS.length} ${t("compar5_pays_suivis")}`}
+        titre={t("compar5_titre")}
+        sous={t("compar5_desc")}
+        meta={[
+          `${t("footer_datemaj")} : ${DATE_MAJ ? `${DATE_MAJ} UTC` : t("comparer_nd")}`,
+          `${t("compar5_periode_couverte")} : ${PERIODE_GLOBALE}`,
+        ]}
+      />
 
-      {/* 2. Filtres : pays (multi) / indicateur / année */}
-      <section className="comp-toolbar">
-        <div className="comp-row">
-          <span className="comp-label">{t("accueil2_comp_pays")}</span>
-          {PAYS.map((p) => (
-            <button
-              key={p}
-              className="chip"
-              data-active={paysActifs.includes(p)}
-              aria-pressed={paysActifs.includes(p)}
-              onClick={() => togglePays(p)}
-            >
-              {p}
-            </button>
-          ))}
-        </div>
-        <div className="comp-row">
-          <span className="comp-label">{t("compar5_indicateur")}</span>
-          {INDICATEURS_COMP.map((c) => (
-            <button
-              key={c.id}
-              className="chip"
-              data-active={c.id === indicateurId}
-              aria-pressed={c.id === indicateurId}
-              onClick={() => setIndicateurId(c.id)}
-            >
-              {c.nom} ({c.unite})
-            </button>
-          ))}
-        </div>
-        <div className="comp-row">
-          <span className="comp-label">{t("donnees3_periode")}</span>
-          <select
-            className="comp-select"
-            value={anneeSelect}
-            onChange={(e) => setAnneeSelect(e.target.value)}
-          >
-            <option value={ANNEE_DERNIERE}>{t("compar5_derniere")}</option>
-            {ANNEES_DISPO.map((y) => (
-              <option key={y} value={`${y}`}>{y}</option>
+      <div className="page page--data">
+        {/* 1. Filtres : pays (multi) / indicateur / année */}
+        <section className="comp-toolbar">
+          <div className="comp-row">
+            <span className="comp-label">{t("accueil2_comp_pays")}</span>
+            {PAYS.map((p) => (
+              <button
+                key={p}
+                className="chip"
+                data-active={paysActifs.includes(p)}
+                aria-pressed={paysActifs.includes(p)}
+                onClick={() => togglePays(p)}
+              >
+                <i className="chip-dot" style={{ background: couleurPays(p) }} />
+                {p}
+              </button>
             ))}
-          </select>
-        </div>
-      </section>
-
-      {/* 3. Dernières observations / année choisie */}
-      <section className="home-section" aria-label={t("compar5_table_titre")}>
-        <h2 className="home-section-title">{t("compar5_table_titre")}</h2>
-        <div className="table-scroll">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>{t("accueil2_comp_pays")}</th>
-                <th>{t("donnees3_annee")}</th>
-                <th className="num">{t("comparer_pib")} (Mds FCFA)</th>
-                <th className="num">{t("comparer_inflation")} (%)</th>
-                <th className="num">{t("compar5_variation")} (%)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r) => (
-                <tr key={r.pays}>
-                  <td>{r.pays}</td>
-                  <td>{r.annee ?? t("comparer_nd")}</td>
-                  <td className="num">{r.dPib ? fmt0(r.dPib.valeur) : t("comparer_nd")}</td>
-                  <td className="num">{r.dInfl ? fmt1(r.dInfl.valeur) : t("comparer_nd")}</td>
-                  <td className="num">{r.varPib != null ? fmt1(r.varPib) : t("comparer_nd")}</td>
-                </tr>
+          </div>
+          <div className="comp-row">
+            <span className="comp-label">{t("compar5_indicateur")}</span>
+            {INDICATEURS_COMP.map((c) => (
+              <button
+                key={c.id}
+                className="chip"
+                data-active={c.id === indicateurId}
+                aria-pressed={c.id === indicateurId}
+                onClick={() => setIndicateurId(c.id)}
+              >
+                {t(`ind_comp_${c.id}`, { defaultValue: c.nom })} ({c.unite})
+              </button>
+            ))}
+          </div>
+          <div className="comp-row">
+            <span className="comp-label">{t("donnees3_periode")}</span>
+            <select
+              className="comp-select"
+              value={anneeSelect}
+              onChange={(e) => setAnneeSelect(e.target.value)}
+            >
+              <option value={ANNEE_DERNIERE}>{t("compar5_derniere")}</option>
+              {[...ANNEES_DISPO].reverse().map((y) => (
+                <option key={y} value={`${y}`}>{y}</option>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+            </select>
+          </div>
+        </section>
 
-      {/* 4. Comparaison visuelle (une ligne par pays) */}
-      {chartData.length > 1 && (
-        <section className="home-section" aria-label={indicateur.nom}>
-          <h2 className="home-section-title">
-            {indicateur.nom} ({indicateur.unite})
-          </h2>
-          <div className="data-chart">
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={chartData}>
-                <CartesianGrid stroke="#eef0f2" vertical={false} />
+        {/* 2. Fiches pays (dernière observation ou année choisie) */}
+        <div className="country-grid">
+          {rows.map((r) => (
+            <article key={r.pays} className="country-card" style={{ borderTopColor: couleurPays(r.pays) }}>
+              <div className="country-card-head">
+                <h3>{r.pays}</h3>
+                <span>{r.annee ?? t("comparer_nd")}</span>
+              </div>
+              <div className="country-card-stats">
+                <div>
+                  <span className="value-label">{t("comparer_pib")}</span>
+                  <b>{r.dPib ? fmt0(r.dPib.valeur) : t("comparer_nd")}</b>
+                  <small>Mds FCFA</small>
+                </div>
+                <div>
+                  <span className="value-label">{t("comparer_inflation")}</span>
+                  <b>{r.dInfl ? `${fmt1(r.dInfl.valeur)} %` : t("comparer_nd")}</b>
+                </div>
+                <div>
+                  <span className="value-label">{t("compar5_variation")}</span>
+                  <b className={r.varPib != null ? (r.varPib >= 0 ? "pos" : "neg") : undefined}>
+                    {r.varPib != null ? `${r.varPib >= 0 ? "+" : ""}${fmt1(r.varPib)} %` : t("comparer_nd")}
+                  </b>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* 3. Comparaison visuelle (une ligne par pays) */}
+        {chartData.length > 1 && (
+          <section className="chart-card chart-card--full" aria-label={indicateur.nom}>
+            <div className="chart-card-head">
+              <h3>{t(`ind_comp_${indicateur.id}`, { defaultValue: indicateur.nom })}</h3>
+              <span>{indicateur.unite}</span>
+            </div>
+            <ResponsiveContainer width="100%" height={360}>
+              <LineChart data={chartData} margin={{ top: 12, right: 16, bottom: 0, left: 0 }}>
+                <CartesianGrid stroke={COULEURS.grid} vertical={false} />
                 <XAxis
                   dataKey="annee"
-                  stroke="#d1d5db"
-                  tick={{ fontFamily: "IBM Plex Mono", fontSize: 11 }}
-                  axisLine={false}
+                  type="number"
+                  domain={["dataMin", "dataMax"]}
+                  allowDecimals={false}
+                  tickCount={10}
+                  tick={{ fontFamily: "IBM Plex Mono", fontSize: 11, fill: COULEURS.muted }}
+                  axisLine={{ stroke: "rgba(237,233,223,0.18)" }}
                   tickLine={false}
                 />
                 <YAxis
-                  stroke="#d1d5db"
-                  tick={{ fontFamily: "IBM Plex Mono", fontSize: 11 }}
+                  tick={{ fontFamily: "IBM Plex Mono", fontSize: 11, fill: COULEURS.muted }}
                   axisLine={false}
                   tickLine={false}
                   width={70}
+                  tickFormatter={fmt0}
                 />
-                <Tooltip />
-                {paysActifs.map((p, i) => (
+                <Tooltip
+                  formatter={(v, name) => [fmtInd(v), name]}
+                  contentStyle={{
+                    background: COULEURS.surface,
+                    border: "1px solid rgba(237,233,223,0.2)",
+                    borderRadius: 8,
+                    fontFamily: "IBM Plex Mono",
+                    fontSize: 12,
+                  }}
+                  labelStyle={{ color: COULEURS.muted }}
+                  itemStyle={{ color: COULEURS.cream }}
+                  cursor={{ stroke: "rgba(237,233,223,0.25)" }}
+                />
+                {paysActifs.map((p) => (
                   <Line
                     key={p}
                     type="monotone"
                     dataKey={p}
-                    stroke={COLORS[i % COLORS.length]}
+                    stroke={couleurPays(p)}
                     strokeWidth={2}
                     dot={false}
+                    connectNulls
+                    isAnimationActive={false}
                   />
                 ))}
               </LineChart>
             </ResponsiveContainer>
-            <div className="chart-legend">
-              {paysActifs.map((p, i) => (
+            <div className="chart-legend chart-legend--dark">
+              {paysActifs.map((p) => (
                 <span key={p}>
-                  <i className="key" style={{ background: COLORS[i % COLORS.length] }} /> {p}
+                  <i className="key" style={{ background: couleurPays(p) }} /> {p}
                 </span>
               ))}
             </div>
-            <p className="chart-meta">
+            <p className="chart-card-foot">
               {t("donnees_footer_source")} · {t("donnees3_periode")} : {PERIODE_GLOBALE}
             </p>
+          </section>
+        )}
+
+        {/* 4. Tableau */}
+        <section className="home-section" aria-label={t("compar5_table_titre")}>
+          <h2 className="section-heading">{t("compar5_table_titre")}</h2>
+          <div className="table-scroll">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>{t("accueil2_comp_pays")}</th>
+                  <th>{t("donnees3_annee")}</th>
+                  <th className="num">{t("comparer_pib")} (Mds FCFA)</th>
+                  <th className="num">{t("comparer_inflation")} (%)</th>
+                  <th className="num">{t("compar5_variation")} (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((r) => (
+                  <tr key={r.pays}>
+                    <td>
+                      <i className="chip-dot" style={{ background: couleurPays(r.pays) }} /> {r.pays}
+                    </td>
+                    <td>{r.annee ?? t("comparer_nd")}</td>
+                    <td className="num">{r.dPib ? fmt0(r.dPib.valeur) : t("comparer_nd")}</td>
+                    <td className="num">{r.dInfl ? fmt1(r.dInfl.valeur) : t("comparer_nd")}</td>
+                    <td className="num">{r.varPib != null ? fmt1(r.varPib) : t("comparer_nd")}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
-      )}
 
-      {/* 5. Métadonnées */}
-      <section className="home-section" aria-label={t("accueil2_src_titre")}>
-        <h2 className="home-section-title">{t("accueil2_src_titre")}</h2>
-        <div className="metadata">
-          <div className="metadata-row">
-            <b>{t("footer_sources")}</b>
-            <span>BCEAO · DBnomics</span>
+        {/* 5. Métadonnées */}
+        <section className="home-section" aria-label={t("accueil2_src_titre")}>
+          <h2 className="section-heading">{t("accueil2_src_titre")}</h2>
+          <div className="metadata">
+            <div className="metadata-row">
+              <b>{t("footer_sources")}</b>
+              <span>BCEAO · DBnomics</span>
+            </div>
+            <div className="metadata-row">
+              <b>{t("footer_datemaj")}</b>
+              <span>{DATE_MAJ ? `${DATE_MAJ} UTC` : t("comparer_nd")}</span>
+            </div>
+            <div className="metadata-row">
+              <b>{t("compar5_periode_couverte")}</b>
+              <span>{PERIODE_GLOBALE}</span>
+            </div>
+            <div className="metadata-row">
+              <b>{t("compar5_indicateur")}</b>
+              <span>{t(`ind_comp_${indicateur.id}`, { defaultValue: indicateur.nom })}</span>
+            </div>
+            <div className="metadata-row">
+              <b>{t("accueil2_col_unite")}</b>
+              <span>{indicateur.unite}</span>
+            </div>
           </div>
-          <div className="metadata-row">
-            <b>{t("footer_datemaj")}</b>
-            <span>{DATE_MAJ ? `${DATE_MAJ} UTC` : t("comparer_nd")}</span>
-          </div>
-          <div className="metadata-row">
-            <b>{t("compar5_periode_couverte")}</b>
-            <span>{PERIODE_GLOBALE}</span>
-          </div>
-          <div className="metadata-row">
-            <b>{t("compar5_indicateur")}</b>
-            <span>{indicateur.nom}</span>
-          </div>
-          <div className="metadata-row">
-            <b>{t("accueil2_col_unite")}</b>
-            <span>{indicateur.unite}</span>
-          </div>
+        </section>
+
+        {/* 6. Navigation */}
+        <div className="prevsim-links">
+          <Link to="/donnees" className="link-more">{t("prevsim4_lien_donnees")}</Link>
+          <Link to="/previsions" className="link-more">{t("compar5_lien_prev")}</Link>
         </div>
-      </section>
-
-      {/* 6. Navigation */}
-      <div className="prevsim-links">
-        <Link to="/donnees" className="link-more">{t("prevsim4_lien_donnees")}</Link>
-        <Link to="/previsions" className="link-more">{t("compar5_lien_prev")}</Link>
       </div>
     </div>
   );

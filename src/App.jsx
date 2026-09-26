@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Routes, Route, Link, NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Accueil from "./pages/Accueil.jsx";
 import Donnees from "./pages/Donnees.jsx";
@@ -36,8 +36,7 @@ function NavBar() {
   return (
     <header className="site-nav">
       <Link to="/" className="site-brand">
-        <span className="site-brand-title">{t("brand_titre")}</span>
-        <span className="site-brand-sub">{t("brand_sous_titre")}</span>
+        {t("brand_titre")}
       </Link>
       <nav aria-label={t("nav_label")}>
         <NavLink to="/" end className="nav-link">{t("accueil")}</NavLink>
@@ -70,30 +69,61 @@ function Footer() {
     }
   }
   return (
-    <footer className="app-footer">
-      <div className="app-footer-inner">
-        <span>{t("brand_titre")}</span>
-        <span className="app-footer-links">
-          <Link to="/donnees">{t("footer_donnees")}</Link>
-          <Link to="/methodologie">{t("footer_metho")}</Link>
-          {dateMaj && <span>{t("footer_datemaj")} : {dateMaj} UTC</span>}
-        </span>
-        <span>{t("footer_sources")} : BCEAO · DBnomics</span>
+    <footer className="site-footer-full">
+      <div className="footer-columns">
+        <div className="footer-brand-col">
+          <h3>{t("brand_titre")}</h3>
+          <p>{t("footer_texte")}</p>
+        </div>
+        <div className="footer-col">
+          <h4>{t("footer_navigation")}</h4>
+          <Link to="/">{t("accueil")}</Link>
+          <Link to="/donnees">{t("donnees")}</Link>
+          <Link to="/previsions">{t("nav_previsions")}</Link>
+          <Link to="/comparaison">{t("nav_comparaison")}</Link>
+        </div>
+        <div className="footer-col">
+          <h4>{t("footer_ressources")}</h4>
+          <Link to="/methodologie">{t("methodologie")}</Link>
+          <Link to="/donnees">{t("footer_exports")}</Link>
+        </div>
+        <div className="footer-col">
+          <h4>{t("footer_sources")}</h4>
+          <span>BCEAO</span>
+          <span>DBnomics</span>
+        </div>
+        <div className="footer-col">
+          <h4>{t("footer_datemaj")}</h4>
+          <span>{dateMaj ? `${dateMaj} UTC` : t("comparer_nd")}</span>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        © {new Date().getFullYear()} {t("brand_titre")} · {t("footer_mention")}
       </div>
     </footer>
   );
 }
 
+// Remonte en haut de page à chaque changement de route.
+function RetourHaut() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <>
+      <RetourHaut />
       <NavBar />
       <main>
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/donnees" element={<Donnees />} />
-          <Route path="/previsions" element={<div className="page"><PrevisionsSimulations /></div>} />
-          <Route path="/comparaison" element={<div className="page"><CartePays /></div>} />
+          <Route path="/previsions" element={<PrevisionsSimulations />} />
+          <Route path="/comparaison" element={<CartePays />} />
           <Route path="/methodologie" element={<Methodologie />} />
         </Routes>
       </main>
