@@ -1,0 +1,255 @@
+/* ==========================================================================
+   Observatoire économique de l'UEMOA — thème « Afrique de l'Ouest »
+   Sable, indigo, terracotta, ocre, vert sahel. Titres Bricolage Grotesque,
+   texte Inter. Signature : motif géométrique inspiré des textiles.
+   ========================================================================== */
+
+:root {
+  --sable: #f4ede2;
+  --sable-clair: #fbf8f2;
+  --sable-fonce: #e9dcc7;
+  --ligne: #e1d4bf;
+
+  --encre: #1f1a17;
+  --encre-2: #4a403a;
+  --gris: #7a6f66;
+
+  --indigo: #263a7a;
+  --indigo-fonce: #18254f;
+  --terracotta: #b8502a;
+  --ocre: #d39b2a;
+  --sahel: #5e7d3a;
+
+  --ok: #4f7a2e;
+  --ko: #b8502a;
+
+  --f-titre: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-texte: "Inter", "Segoe UI", system-ui, sans-serif;
+
+  --rayon: 10px;
+  --largeur: 1200px;
+  --marge: 28px;
+
+  --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='12' viewBox='0 0 36 12'%3E%3Crect width='36' height='12' fill='%23b8502a'/%3E%3Cpath d='M0 12L9 0l9 12z' fill='%23263a7a'/%3E%3Cpath d='M18 12L27 0l9 12z' fill='%23d39b2a'/%3E%3Ccircle cx='18' cy='4' r='1.7' fill='%23f4ede2'/%3E%3Ccircle cx='0' cy='4' r='1.7' fill='%23f4ede2'/%3E%3Ccircle cx='36' cy='4' r='1.7' fill='%23f4ede2'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 640px) {
+  :root {
+    --marge: 16px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--sable);
+  color: var(--encre);
+  font-family: var(--f-texte);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--f-titre);
+  color: var(--encre);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--indigo);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ---------- Utilitaires ---------- */
+
+.conteneur {
+  width: 100%;
+  max-width: calc(var(--largeur) + 2 * var(--marge));
+  margin: 0 auto;
+  padding-left: var(--marge);
+  padding-right: var(--marge);
+}
+
+.nombre {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.motif {
+  height: 10px;
+  background: var(--motif) repeat-x;
+  background-size: auto 10px;
+}
+
+.motif--fin {
+  height: 6px;
+  background-size: auto 6px;
+}
+
+.surtitre {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.section {
+  padding: 72px 0;
+}
+
+.section--claire {
+  background: var(--sable-clair);
+}
+
+.section-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.section-tete h2 {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1.1;
+  max-width: 22ch;
+}
+
+.section-tete p {
+  margin: 10px 0 0;
+  color: var(--encre-2);
+  max-width: 60ch;
+}
+
+.lien-fleche {
+  font-weight: 600;
+  color: var(--indigo);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lien-fleche:hover {
+  color: var(--terracotta);
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1.5px solid var(--encre);
+  background: transparent;
+  color: var(--encre);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.bouton:hover {
+  background: var(--encre);
+  color: var(--sable-clair);
+}
+
+.bouton--plein {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #fff;
+}
+
+.bouton--plein:hover {
+  background: #9c4223;
+  border-color: #9c4223;
+  color: #fff;
+}
+
+.bouton--petit {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: var(--gris);
+}
+
+.page-tete {
+  padding: 56px 0 40px;
+}
+
+.page-tete h1 {
+  margin: 0;
+  font-size: clamp(34px, 4.6vw, 56px);
+  font-weight: 700;
+  line-height: 1.04;
+  max-width: 20ch;
+}
+
+.page-tete .chapeau {
+  margin: 16px 0 0;
+  font-size: 17px;
+  color: var(--encre-2);
+  max-width: 62ch;
+}
+
+.puces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.puce {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--ligne);
+  background: var(--sable-clair);
+  color: var(--encre-2);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.puce:hover {
+  border-color: var(--encre-2);
+  color: var(--encre);
+}
+
+.puce[aria-pressed="true"],
+.puce.active {
+  background: var(--indigo);
+  border-color: var(--indigo);
+  color: #fff;
+}

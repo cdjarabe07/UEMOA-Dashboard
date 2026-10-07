@@ -1,0 +1,1158 @@
+/* ==========================================================================
+   Mise en page des pages — modèle « portail statistique officiel »
+   ========================================================================== */
+
+/* ---------- Bandeau de page ---------- */
+
+.bandeau {
+  background: var(--indigo);
+  color: #fff;
+}
+
+.bandeau-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 48px;
+  padding-top: 40px;
+  padding-bottom: 44px;
+}
+
+.bandeau-fil {
+  margin-bottom: 22px;
+  font-size: 13px;
+  color: #b9c1dd;
+}
+
+.bandeau-fil a {
+  color: #dfe3f1;
+}
+
+.bandeau-surtitre {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ocre);
+}
+
+.bandeau h1 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  line-height: 1.06;
+  color: #fff;
+  max-width: 22ch;
+}
+
+.bandeau-sous-titre {
+  margin: 16px 0 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #dfe3f1;
+  max-width: 62ch;
+}
+
+.bandeau-cote {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-self: end;
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid var(--ocre);
+  border-radius: 0 var(--rayon) var(--rayon) 0;
+}
+
+.bandeau-cote dl {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.bandeau-cote dt {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b9c1dd;
+}
+
+.bandeau-cote dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.bouton--clair {
+  border-color: #fff;
+  color: #fff;
+  justify-content: center;
+}
+
+.bouton--clair:hover {
+  background: #fff;
+  color: var(--indigo);
+}
+
+.selecteur {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--encre-2);
+}
+
+.selecteur select {
+  padding: 9px 12px;
+  border: 1px solid var(--ligne);
+  border-radius: 8px;
+  background: var(--sable-clair);
+  color: var(--encre);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.selecteur--clair {
+  color: #b9c1dd;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.selecteur--clair select {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.visuellement-cache {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Tableaux d'indicateurs (valeur récente + tendance) ---------- */
+
+.tab-ind + .tab-ind {
+  margin-top: 40px;
+}
+
+.tab-ind-titre {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tableau--aere th,
+.tableau--aere td {
+  padding: 16px 18px;
+}
+
+.tableau--aere tbody th {
+  font-size: 15px;
+}
+
+.tableau--aere tbody th small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gris);
+}
+
+.tab-ind-valeur {
+  display: block;
+  font-family: var(--f-titre);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.tab-ind .num small {
+  font-size: 12px;
+  color: var(--gris);
+}
+
+.tab-ind-comparaison {
+  color: var(--encre-2);
+  font-size: 15px;
+}
+
+.tab-ind-tendance {
+  width: 200px;
+}
+
+.tab-ind-bornes {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--gris);
+}
+
+/* ---------- Bloc de visualisation ---------- */
+
+.visu {
+  padding: 28px;
+  background: var(--sable-clair);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+}
+
+.section--claire .visu {
+  background: #fff;
+}
+
+.visu-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--ligne);
+}
+
+.visu-tete h2 {
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.visu-tete p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--gris);
+}
+
+.visu-outils {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.bascule {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 3px;
+  border: 1px solid var(--ligne);
+  border-radius: 999px;
+  background: var(--sable);
+}
+
+.bascule button {
+  border: none;
+  background: none;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--encre-2);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bascule button[aria-pressed="true"] {
+  background: var(--indigo);
+  color: #fff;
+}
+
+.visu-notes {
+  display: grid;
+  gap: 6px;
+  margin: 22px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--ligne);
+  font-size: 13px;
+  color: var(--encre-2);
+}
+
+.visu-notes div {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 12px;
+}
+
+.visu-notes dt {
+  font-weight: 600;
+  color: var(--encre);
+}
+
+.visu-notes dd {
+  margin: 0;
+}
+
+.visu + .lien-fleche {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+/* ---------- Accueil ---------- */
+
+/* Grand visuel : photo de Dakar sous un voile indigo */
+.heros {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: clamp(540px, 80vh, 760px);
+  padding: 72px 0 150px;
+  background:
+    linear-gradient(90deg, rgba(24, 37, 79, 0.94) 0%, rgba(24, 37, 79, 0.78) 38%, rgba(24, 37, 79, 0.2) 72%, rgba(24, 37, 79, 0.05) 100%),
+    url("../assets/dakar.jpg") center 60% / cover no-repeat;
+  color: #fff;
+}
+
+.heros::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  background: var(--motif) repeat-x;
+  background-size: auto 8px;
+}
+
+.heros-contenu > * {
+  max-width: 620px;
+}
+
+.heros-surtitre {
+  margin: 0 0 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocre);
+}
+
+.heros h1 {
+  margin: 0;
+  font-size: clamp(40px, 5.4vw, 70px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.heros-phrase {
+  margin: 22px 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #dfe3f1;
+}
+
+.heros-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* L'Union en chiffres : bande posée sur le bas du visuel */
+.chiffres-union {
+  position: relative;
+  z-index: 2;
+  margin-top: -92px;
+}
+
+.chiffres-union-cadre {
+  padding: 26px 30px 30px;
+  background: var(--sable-clair);
+  border: 1px solid var(--ligne);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(24, 37, 79, 0.14);
+}
+
+.chiffres-union-titre {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 18px;
+  font-family: var(--f-titre);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.chiffres-union-titre a {
+  font-family: var(--f-texte);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--indigo);
+  text-decoration: none;
+}
+
+.chiffres-union dl,
+.chiffres-cles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+}
+
+.chiffres-union dl > div,
+.chiffres-cles > div {
+  padding: 4px 22px;
+}
+
+.chiffres-union dl > div:first-child,
+.chiffres-cles > div:first-child {
+  padding-left: 0;
+}
+
+.chiffres-union dl > div + div,
+.chiffres-cles > div + div {
+  border-left: 1px solid var(--ligne);
+}
+
+.chiffres-union dt,
+.chiffres-cles dt {
+  font-size: 14px;
+  color: var(--encre-2);
+}
+
+.chiffres-union dd,
+.chiffres-cles dd {
+  margin: 6px 0 4px;
+  font-family: var(--f-titre);
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--indigo);
+}
+
+.chiffres-union span,
+.chiffres-cles span {
+  font-size: 12px;
+  color: var(--gris);
+}
+
+/* Accès aux rubriques */
+.acces-grille {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.acces-bloc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 24px 54px;
+  background: var(--sable-clair);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+  color: var(--encre);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.acces-bloc:hover {
+  border-color: var(--terracotta);
+  transform: translateY(-2px);
+}
+
+.acces-icone {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--indigo);
+  color: #fff;
+}
+
+.acces-nom {
+  font-family: var(--f-titre);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.acces-texte {
+  font-size: 14px;
+  color: var(--encre-2);
+}
+
+.acces-fleche {
+  position: absolute;
+  left: 24px;
+  bottom: 20px;
+  color: var(--terracotta);
+}
+
+/* Un point à la une */
+.une {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.une-texte h2 {
+  margin: 0 0 14px;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.une-texte p:not(.surtitre) {
+  margin: 0 0 22px;
+  font-size: 16px;
+  color: var(--encre-2);
+}
+
+.une-graphique {
+  margin: 0;
+  padding: 22px 22px 14px;
+  background: #fff;
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+}
+
+/* ---------- Onglets ---------- */
+
+.onglets-liste {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--ligne);
+  overflow-x: auto;
+}
+
+.onglets-liste button {
+  flex: none;
+  padding: 12px 18px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gris);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.onglets-liste button:hover {
+  color: var(--encre);
+}
+
+.onglets-liste button[aria-selected="true"] {
+  color: var(--encre);
+  border-bottom-color: var(--terracotta);
+}
+
+.onglets-panneau {
+  padding-top: 28px;
+}
+
+.onglets-panneau > .texte-secondaire {
+  margin: 0 0 18px;
+}
+
+.chiffres-cles {
+  margin-bottom: 40px;
+  padding-top: 18px;
+  border-top: 3px solid var(--encre);
+}
+
+/* ---------- Catalogue d'indicateurs ---------- */
+
+.catalogue {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 48px;
+}
+
+.catalogue-famille h2 {
+  margin: 0 0 6px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--terracotta);
+  font-size: 20px;
+}
+
+.catalogue-famille ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.catalogue-famille a {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--ligne);
+  color: var(--encre);
+  text-decoration: none;
+}
+
+.catalogue-famille a:hover b {
+  color: var(--terracotta);
+}
+
+.catalogue-famille b {
+  font-weight: 600;
+}
+
+.catalogue-famille span {
+  font-size: 13px;
+  color: var(--gris);
+}
+
+.liste-liens {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.liste-liens li a {
+  display: block;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ligne);
+  color: var(--encre);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.liste-liens li a:hover {
+  color: var(--terracotta);
+}
+
+.fiche-pied--fin {
+  padding-top: 0;
+}
+
+/* ---------- Pays ---------- */
+
+.conv-pays {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.conv-pays > * {
+  min-width: 0;
+}
+
+.conv-pays h2 {
+  margin: 0 0 10px;
+  font-size: 26px;
+}
+
+.texte-secondaire {
+  color: var(--encre-2);
+}
+
+.statut {
+  font-weight: 600;
+}
+
+.statut svg {
+  vertical-align: -3px;
+  margin-right: 4px;
+}
+
+.statut.ok {
+  color: var(--ok);
+}
+
+.statut.ko {
+  color: var(--ko);
+}
+
+.encart-lien {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 18px 22px;
+  border: 1px solid var(--terracotta);
+  border-left-width: 5px;
+  border-radius: var(--rayon);
+  color: var(--encre);
+  text-decoration: none;
+}
+
+.encart-lien:hover {
+  background: #f6e3d8;
+}
+
+/* ---------- Fiche indicateur ---------- */
+
+.fiche-zones {
+  margin-bottom: 18px;
+}
+
+.puce-zone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.puce-zone i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.puce-zone[aria-pressed="false"] {
+  opacity: 0.5;
+}
+
+.puce-zone[aria-pressed="true"] {
+  background: #fff;
+  border-color: var(--encre);
+  color: var(--encre);
+}
+
+.fiche-pied {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 56px;
+}
+
+.fiche-pied h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.fiche-pied code,
+.meth code {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--sable-fonce);
+}
+
+/* ---------- Convergence ---------- */
+
+.tableau-conv td svg {
+  margin-left: 6px;
+  vertical-align: -3px;
+}
+
+.tableau-conv .total {
+  font-weight: 700;
+}
+
+.tableau-temps tbody th small {
+  display: inline;
+  margin-left: 6px;
+}
+
+.cellule-part {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(79, 122, 46, calc(0.08 + var(--part) * 0.8));
+}
+
+.cellule-part b {
+  font-family: var(--f-titre);
+  font-size: 16px;
+}
+
+/* ---------- Prévisions ---------- */
+
+.fiche-modele {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 20px 0 0;
+  border-top: 3px solid var(--encre);
+}
+
+.fiche-modele div {
+  padding: 16px 16px 16px 0;
+}
+
+.fiche-modele div + div {
+  padding-left: 16px;
+  border-left: 1px solid var(--ligne);
+}
+
+.fiche-modele dt {
+  font-size: 12px;
+  color: var(--gris);
+}
+
+.fiche-modele dd {
+  margin: 4px 0 0;
+  font-family: var(--f-titre);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.ligne-prevision td {
+  background: #f6e3d8;
+}
+
+.lien-bouton {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--indigo);
+  cursor: pointer;
+  text-align: left;
+}
+
+.lien-bouton:hover {
+  color: var(--terracotta);
+}
+
+.signaux {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 860px;
+}
+
+.signaux li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--ligne);
+  color: var(--encre-2);
+}
+
+.signaux svg {
+  color: var(--terracotta);
+  margin-top: 3px;
+}
+
+.signaux b {
+  display: block;
+  color: var(--encre);
+}
+
+/* ---------- Méthodologie ---------- */
+
+.meth {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+}
+
+.meth-sommaire {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+}
+
+.meth-sommaire ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.meth-sommaire a {
+  display: block;
+  padding: 7px 0 7px 14px;
+  border-left: 2px solid var(--ligne);
+  color: var(--encre-2);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.meth-sommaire a:hover {
+  border-left-color: var(--terracotta);
+  color: var(--encre);
+}
+
+.meth-corps {
+  max-width: 820px;
+  min-width: 0;
+}
+
+.meth-corps section {
+  padding: 8px 0 32px;
+  scroll-margin-top: 110px;
+}
+
+.meth-corps section + section {
+  border-top: 1px solid var(--ligne);
+  padding-top: 32px;
+}
+
+.meth-corps h2 {
+  margin: 0 0 14px;
+  font-size: 26px;
+}
+
+.meth-corps p,
+.meth-corps li {
+  color: var(--encre-2);
+}
+
+.meth-corps li {
+  margin-bottom: 8px;
+}
+
+.meth-corps .tableau td {
+  white-space: normal;
+}
+
+/* ---------- 404 ---------- */
+
+.introuvable {
+  padding: 96px 0 120px;
+}
+
+.introuvable h1 {
+  margin: 0;
+  font-size: clamp(34px, 4.6vw, 56px);
+}
+
+.introuvable .chapeau {
+  font-size: 17px;
+  color: var(--encre-2);
+}
+
+.introuvable .bouton {
+  margin-top: 28px;
+}
+
+
+/* ---------- Cartes d'accès aux pays ---------- */
+
+.cartes-pays {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.carte-pays {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  padding: 20px 20px 18px;
+  background: #fff;
+  border: 1px solid var(--ligne);
+  border-top: 5px solid var(--couleur-pays, var(--indigo));
+  border-radius: var(--rayon);
+  color: var(--encre);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.section:not(.section--claire) .carte-pays {
+  background: var(--sable-clair);
+}
+
+.carte-pays:hover {
+  transform: translateY(-2px);
+  border-color: var(--encre-2);
+  border-top-color: var(--couleur-pays, var(--indigo));
+  box-shadow: 0 10px 22px rgba(24, 37, 79, 0.08);
+}
+
+.carte-pays-iso {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--couleur-pays, var(--indigo));
+}
+
+.carte-pays-nom {
+  font-family: var(--f-titre);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.carte-pays-chiffre {
+  font-size: 13px;
+  color: var(--encre-2);
+}
+
+.carte-pays-chiffre b {
+  color: var(--encre);
+}
+
+.carte-pays-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--terracotta);
+}
+
+/* Lignes de tableau cliquables */
+.tableau-cliquable tbody tr:not(.ligne-union) {
+  cursor: pointer;
+}
+
+.cellule-profil {
+  text-align: right;
+}
+
+.cellule-profil a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--terracotta);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ---------- En bref ---------- */
+
+.renvois {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.renvoi {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid var(--ligne);
+  border-top: 4px solid var(--indigo);
+  border-radius: var(--rayon);
+  color: var(--encre);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.renvoi:hover {
+  border-color: var(--encre-2);
+  border-top-color: var(--terracotta);
+}
+
+.renvoi-chiffre {
+  margin: 4px 0 8px;
+  font-family: var(--f-titre);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--indigo);
+}
+
+.renvoi-texte {
+  margin: 0 0 18px;
+  color: var(--encre-2);
+  flex: 1;
+}
+
+@media (max-width: 960px) {
+  .cartes-pays {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .renvois {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .cartes-pays {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+  .bandeau-grille,
+  .une,
+  .conv-pays,
+  .fiche-pied {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .acces-grille,
+  .catalogue {
+    grid-template-columns: 1fr 1fr;
+  }
+  .chiffres-union dl,
+  .chiffres-cles {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 20px;
+  }
+  .chiffres-union dl > div:nth-child(3),
+  .chiffres-cles > div:nth-child(3) {
+    padding-left: 0;
+    border-left: none;
+  }
+  .meth {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .meth-sommaire {
+    position: static;
+  }
+  .fiche-modele {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fiche-modele div:nth-child(3) {
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 48px 0;
+  }
+  .visu {
+    padding: 18px 16px;
+  }
+  .visu-notes div {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .tab-ind-tendance {
+    width: 110px;
+  }
+  .tableau--aere th,
+  .tableau--aere td {
+    padding: 12px 10px;
+  }
+  .tab-ind-valeur {
+    font-size: 19px;
+  }
+  .acces-grille,
+  .catalogue {
+    grid-template-columns: 1fr;
+  }
+  .heros {
+    min-height: 0;
+    padding: 56px 0 130px;
+    background:
+      linear-gradient(180deg, rgba(24, 37, 79, 0.9) 0%, rgba(24, 37, 79, 0.8) 100%),
+      url("../assets/dakar.jpg") 70% center / cover no-repeat;
+  }
+  .chiffres-union-cadre {
+    padding: 20px;
+  }
+  .chiffres-union dl > div,
+  .chiffres-cles > div {
+    padding: 4px 12px;
+  }
+  .bandeau-grille {
+    padding-top: 28px;
+    padding-bottom: 32px;
+  }
+}
