@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T22:17:52Z",
+  "generated_at": "2026-10-07T23:48:35Z",
   "source": "data/processed",
   "destination": "..\\uemoa-dashboard\\src\\data",
   "files": {
@@ -7,6 +7,7 @@
     "pib_senegal.json": 65,
     "taux_change_uemoa.json": 65,
     "previsions.json": 12,
+    "previsions_metriques.json": 7,
     "comparaison_pays.json": 406
   }
 }

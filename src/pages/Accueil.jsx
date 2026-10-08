@@ -4,9 +4,9 @@ import { ArrowRight, Globe, ChartLine, Scale, TrendingUp } from "lucide-react";
 import { BarresPays } from "../components/Graphiques.jsx";
 import CartesPays from "../components/CartesPays.jsx";
 import { PAYS, UNION, INDICATEURS, getIndicateur, valeur, derniereAnnee } from "../data/portail.js";
-import { getIndicateur as indicateurPrevision, previsionPour } from "../data/catalogue.js";
+import { getIndicateur as indicateurPrevision, dernierePrevision, PERIODE_PREVISION } from "../data/catalogue.js";
 import { evaluerConvergence } from "../lib/convergence.js";
-import { fmtValeur, fmtCourt, fmtVariation, libelleUnite } from "../lib/format.js";
+import { fmtValeur, fmtCourt, fmtVariation, fmtPeriode, libelleUnite } from "../lib/format.js";
 
 // Quatre chiffres de l'Union, et pas davantage : le détail vit dans les pages.
 const CHIFFRES = ["croissance_reelle", "inflation", "dette_pib", "solde_budgetaire_pib"];
@@ -33,7 +33,7 @@ export default function Accueil() {
   const nbDette = respecteCritere("dette");
   const nbInflation = respecteCritere("inflation");
   const pib = indicateurPrevision("pib");
-  const p27 = previsionPour(pib, 2027);
+  const pDerniere = dernierePrevision(pib);
 
   return (
     <>
@@ -99,7 +99,7 @@ export default function Accueil() {
                   <Icone size={22} />
                 </span>
                 <span className="acces-nom">{t(`nav_${cle}`)}</span>
-                <span className="acces-texte">{t(`acc_acces_${cle}`, { n: PAYS.length })}</span>
+                <span className="acces-texte">{t(`acc_acces_${cle}`, { n: PAYS.length, periode: fmtPeriode(PERIODE_PREVISION) })}</span>
                 <span className="acces-fleche" aria-hidden="true">
                   <ArrowRight size={18} />
                 </span>
@@ -163,8 +163,8 @@ export default function Accueil() {
             </Link>
             <Link to="/previsions" className="renvoi">
               <p className="surtitre">{t("nav_previsions")} · {t("zone_senegal")}</p>
-              <p className="renvoi-chiffre nombre">{fmtCourt(p27?.valeur_prevue, pib.unite)}</p>
-              <p className="renvoi-texte">{t("acc_bref_prev", { annee: p27?.annee, unite: libelleUnite(pib.unite) })}</p>
+              <p className="renvoi-chiffre nombre">{fmtCourt(pDerniere?.valeur_prevue, pib.unite)}</p>
+              <p className="renvoi-texte">{t("acc_bref_prev", { annee: pDerniere?.annee, unite: libelleUnite(pib.unite) })}</p>
               <span className="lien-fleche">{t("acc_bref_prev_lien")}</span>
             </Link>
             <Link to="/methodologie" className="renvoi">

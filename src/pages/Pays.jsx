@@ -5,6 +5,7 @@ import { Check, X, ArrowRight } from "lucide-react";
 import { PAYS, UNION, INDICATEURS, valeur, serie, derniereAnnee, getIndicateur, famillesDisponibles } from "../data/portail.js";
 import { CRITERES, respecte } from "../lib/convergence.js";
 import { fmtValeur, fmtCourt, fmtPeriode, libelleUnite } from "../lib/format.js";
+import { PERIODE_PREVISION } from "../data/catalogue.js";
 import { GraphiqueSeries, COULEUR_ZONE } from "../components/Graphiques.jsx";
 import Bandeau from "../components/Bandeau.jsx";
 import TableauIndicateurs from "../components/TableauIndicateurs.jsx";
@@ -325,7 +326,7 @@ export default function ProfilPays() {
           {pays.id === "senegal" && (
             <Link to="/previsions" className="encart-lien">
               <span>
-                <b>{t("profil_prev_titre")}</b> {t("profil_prev_texte")}
+                <b>{t("profil_prev_titre", { periode: fmtPeriode(PERIODE_PREVISION) })}</b> {t("profil_prev_texte")}
               </span>
               <ArrowRight size={18} />
             </Link>

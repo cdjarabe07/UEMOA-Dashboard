@@ -11,6 +11,7 @@ import inflationSenegal from "./inflation_senegal.json";
 import pibSenegal from "./pib_senegal.json";
 import tauxChangeUemoa from "./taux_change_uemoa.json";
 import previsionsData from "./previsions.json";
+import metriquesData from "./previsions_metriques.json";
 import comparaisonData from "./comparaison_pays.json";
 
 const annee = (period) => parseInt(String(period).slice(0, 4), 10);
@@ -23,13 +24,23 @@ export const FAMILLES = [
   { id: "change", libelle: "famille_change" },
 ];
 
-// Métadonnées des modèles : reprises telles quelles des résultats du pipeline
-// (anciennement dans indicateurs.js). Absentes quand le pipeline ne les exporte pas.
-const MODELES = {
-  inflation: { type: "SARIMA", ordre: "(1,1,2)", mae: 1.42 },
-  pib: { type: "SARIMA", ordre: "(2,1,0)", mae: 361.61 },
-  taux_change: { type: "SARIMA", ordre: "(1,0,0)", mae: 28.45 },
-};
+// Métadonnées des modèles : lues dans previsions_metriques.json, produit par
+// observatoire/modeles/prevision.py (aucune métrique recopiée à la main).
+const MODELES = Object.fromEntries(
+  metriquesData.map((m) => [
+    m.indicateur,
+    {
+      type: m.modele,
+      ordre: m.ordre,
+      mae: m.mae,
+      maeNaif: m.mae_naif,
+      horizonValidation: m.horizon_validation,
+      nbAnneesValidation: m.nb_annees_validation,
+      derniereObservation: m.derniere_observation,
+      dateEntrainement: m.date_entrainement,
+    },
+  ])
+);
 
 const previsionsPour = (id) =>
   previsionsData.filter((p) => p.indicateur === id).sort((a, b) => a.annee - b.annee);
@@ -67,6 +78,18 @@ export const INDICATEURS = DEFINITIONS.map((d) => {
 });
 
 export const getIndicateur = (id) => INDICATEURS.find((i) => i.id === id) || null;
+
+// Période couverte par les prévisions publiées, déduite des données : [première, dernière année prévue].
+const ANNEES_PREVUES = previsionsData.map((p) => p.annee);
+export const PERIODE_PREVISION = ANNEES_PREVUES.length
+  ? [Math.min(...ANNEES_PREVUES), Math.max(...ANNEES_PREVUES)]
+  : null;
+
+// Années prévues, dans l'ordre (en-têtes de tableaux).
+export const ANNEES_PREVISION = [...new Set(ANNEES_PREVUES)].sort((a, b) => a - b);
+
+// Dernière prévision publiée d'un indicateur (horizon le plus lointain).
+export const dernierePrevision = (ind) => (ind.previsions.length ? ind.previsions[ind.previsions.length - 1] : null);
 
 // Familles réellement alimentées, avec leurs indicateurs (familles vides masquées).
 export const famillesDisponibles = () =>

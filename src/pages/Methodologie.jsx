@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Bandeau from "../components/Bandeau.jsx";
 import { useTranslation } from "react-i18next";
 import { INDICATEURS as REGIONAUX, PAYS, SOURCE } from "../data/portail.js";
-import { INDICATEURS as PREVISIONNELS } from "../data/catalogue.js";
+import { INDICATEURS as PREVISIONNELS, PERIODE_PREVISION } from "../data/catalogue.js";
 import { CRITERES } from "../lib/convergence.js";
 import { SEUIL_VARIATION } from "../lib/signaux.js";
 import { DATE_GENERATION } from "../lib/meta.js";
@@ -121,7 +121,7 @@ export default function Methodologie() {
                 </tbody>
               </table>
             </div>
-            <p>{t("meth_previsions_p2")}</p>
+            <p>{t("meth_previsions_p2", { periode: fmtPeriode(PERIODE_PREVISION) })}</p>
           </section>
 
           <section id="signaux">

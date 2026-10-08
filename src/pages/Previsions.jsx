@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { TriangleAlert } from "lucide-react";
-import { INDICATEURS } from "../data/catalogue.js";
+import { INDICATEURS, PERIODE_PREVISION, ANNEES_PREVISION } from "../data/catalogue.js";
 import { calculerSignaux, texteSignal } from "../lib/signaux.js";
 import { fmtValeur, fmtCourt, fmtIntervalle, fmtNombre, fmtPeriode, libelleUnite } from "../lib/format.js";
 import { GraphiquePrevision, serieAvecPrevision } from "../components/Graphiques.jsx";
@@ -22,6 +22,9 @@ export default function Previsions() {
   const derniere = ind.previsions[ind.previsions.length - 1];
   const avecPrevision = INDICATEURS.filter((i) => i.previsions.length > 0);
   const signaux = calculerSignaux();
+  // Période et modèle(s) déduits des données exportées par le pipeline.
+  const periode = fmtPeriode(PERIODE_PREVISION);
+  const modeles = [...new Set(INDICATEURS.map((i) => i.modele?.type).filter(Boolean))].join(", ") || "—";
 
   // Tableau de la visualisation : 5 dernières observations + prévisions.
   const lignesVue = [
@@ -58,12 +61,12 @@ export default function Previsions() {
       <Bandeau
         fil={[{ to: "/", label: t("accueil") }, { label: t("nav_previsions") }]}
         surtitre={t("prev_surtitre")}
-        titre={t("prev_titre")}
+        titre={t("prev_titre", { periode: periode })}
         sousTitre={t("prev_chapeau")}
         meta={[
           { label: t("prev_meta_zone"), valeur: t("zone_senegal") },
-          { label: t("prev_meta_horizon"), valeur: "2026–2027" },
-          { label: t("prev_modele"), valeur: "SARIMA" },
+          { label: t("prev_meta_horizon"), valeur: periode },
+          { label: t("prev_modele"), valeur: modeles },
           { label: t("prev_meta_incertitude"), valeur: t("leg_ic") },
         ]}
       />
@@ -165,15 +168,17 @@ export default function Previsions() {
                         <thead>
                           <tr>
                             <th scope="col">{t("col_indicateur")}</th>
-                            <th scope="col" className="num">2026</th>
-                            <th scope="col" className="num">{t("col_intervalle")} 2026</th>
-                            <th scope="col" className="num">2027</th>
-                            <th scope="col" className="num">{t("col_intervalle")} 2027</th>
+                            {ANNEES_PREVISION.map((an) => (
+                              <Fragment key={an}>
+                                <th scope="col" className="num">{an}</th>
+                                <th scope="col" className="num">{t("col_intervalle")} {an}</th>
+                              </Fragment>
+                            ))}
                           </tr>
                         </thead>
                         <tbody>
                           {avecPrevision.map((i) => {
-                            const [a, b] = i.previsions;
+                            const parAnnee = (an) => i.previsions.find((p) => p.annee === an);
                             return (
                               <tr key={i.id}>
                                 <th scope="row">
@@ -182,17 +187,24 @@ export default function Previsions() {
                                   </button>
                                   <small>{libelleUnite(i.unite)}</small>
                                 </th>
-                                <td className="num nombre">{fmtValeur(a?.valeur_prevue, i.unite, undefined, true)}</td>
-                                <td className="num nombre discret">{a?.borne_basse != null ? `${fmtCourt(a.borne_basse, i.unite)} – ${fmtCourt(a.borne_haute, i.unite)}` : "—"}</td>
-                                <td className="num nombre">{fmtValeur(b?.valeur_prevue, i.unite, undefined, true)}</td>
-                                <td className="num nombre discret">{b?.borne_basse != null ? `${fmtCourt(b.borne_basse, i.unite)} – ${fmtCourt(b.borne_haute, i.unite)}` : "—"}</td>
+                                {ANNEES_PREVISION.map((an) => {
+                                  const p = parAnnee(an);
+                                  return (
+                                    <Fragment key={an}>
+                                      <td className="num nombre">{fmtValeur(p?.valeur_prevue, i.unite, undefined, true)}</td>
+                                      <td className="num nombre discret">
+                                        {p?.borne_basse != null ? `${fmtCourt(p.borne_basse, i.unite)} – ${fmtCourt(p.borne_haute, i.unite)}` : "—"}
+                                      </td>
+                                    </Fragment>
+                                  );
+                                })}
                               </tr>
                             );
                           })}
                         </tbody>
                       </table>
                     </div>
-                    <Exports nom="uemoa_previsions_senegal" titre={t("prev_titre")} colonnes={colonnesExport} lignes={lignesExport} />
+                    <Exports nom="uemoa_previsions_senegal" titre={t("prev_titre", { periode: periode })} colonnes={colonnesExport} lignes={lignesExport} />
                   </>
                 ),
               },
