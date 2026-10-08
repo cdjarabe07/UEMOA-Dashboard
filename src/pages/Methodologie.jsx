@@ -4,11 +4,12 @@ import { useTranslation } from "react-i18next";
 import { INDICATEURS as REGIONAUX, PAYS, UNION, SOURCE, RUPTURES, valeur, getIndicateur } from "../data/portail.js";
 import { INDICATEURS as PREVISIONNELS, PERIODE_PREVISION } from "../data/catalogue.js";
 import { CRITERES } from "../lib/convergence.js";
+import { PHOTOS } from "../contenu/photos.js";
 import { SEUIL_VARIATION } from "../lib/signaux.js";
 import { DATE_GENERATION } from "../lib/meta.js";
 import { fmtDate, fmtNombre, fmtPeriode, fmtValeur, libelleUnite } from "../lib/format.js";
 
-const SECTIONS = ["sources", "preparation", "ruptures", "indicateurs", "convergence", "previsions", "signaux", "attention", "limites"];
+const SECTIONS = ["sources", "preparation", "ruptures", "indicateurs", "convergence", "previsions", "signaux", "attention", "limites", "credits"];
 
 export default function Methodologie() {
   const { t } = useTranslation();
@@ -235,6 +236,20 @@ export default function Methodologie() {
               <li>{t("meth_limites_l2")}</li>
               <li>{t("meth_limites_l3")}</li>
               <li>{t("meth_limites_l4")}</li>
+            </ul>
+          </section>
+
+          <section id="credits">
+            <h2>{t("meth_credits_titre")}</h2>
+            <p>{t("meth_credits_p1")}</p>
+            <ul>
+              {PHOTOS.map((p) => (
+                <li key={p.zone}>
+                  <b>{p.ville}</b> : « {p.titre} », {p.auteur},{" "}
+                  <a href={p.licence_url} target="_blank" rel="noreferrer">{p.licence}</a>,{" "}
+                  <a href={p.source} target="_blank" rel="noreferrer">Wikimedia Commons</a>.
+                </li>
+              ))}
             </ul>
           </section>
         </div>

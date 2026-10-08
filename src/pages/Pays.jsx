@@ -17,6 +17,8 @@ import MatieresPremieres, { NoteMatieres } from "../components/MatieresPremieres
 import ProjectionsFMI from "../components/ProjectionsFMI.jsx";
 import { produitsDuPays, ANNEES_PROJECTION } from "../data/fmi.js";
 import ConditionsDeVie from "../components/ConditionsDeVie.jsx";
+import { PhotoPays } from "../components/HerosPhotos.jsx";
+import { photoDe } from "../contenu/photos.js";
 import Introuvable from "./Introuvable.jsx";
 
 // Chiffres clés affichés en tête de fiche.
@@ -165,6 +167,10 @@ export default function ProfilPays() {
           </select>
         </label>
       </Bandeau>
+
+      <div className="conteneur">
+        <PhotoPays photo={photoDe(pays.id)} />
+      </div>
 
       {/* Principaux indicateurs, par thème */}
       <section className="section">

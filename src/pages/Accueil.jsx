@@ -13,6 +13,8 @@ import { ANALYSES, PUBLICATIONS } from "../contenu/index.js";
 import CarteUEMOA, { LegendeCarte } from "../components/CarteUEMOA.jsx";
 import Apercu from "../components/Apercu.jsx";
 import Journal from "../components/Journal.jsx";
+import BandeauChiffres from "../components/BandeauChiffres.jsx";
+import HerosPhotos from "../components/HerosPhotos.jsx";
 import { LigneAnalyse, ListeDossiers, ListePublications } from "./Analyses.jsx";
 
 // Indicateurs de la conjoncture de l'Union, dans l'ordre de lecture.
@@ -161,6 +163,7 @@ export default function Accueil() {
     <>
       {/* Grand visuel */}
       <section className="heros">
+        <HerosPhotos />
         <div className="conteneur heros-contenu">
           <p className="heros-surtitre">{t("acc_surtitre")}</p>
           <h1>{t("acc_titre")}</h1>
@@ -175,6 +178,8 @@ export default function Accueil() {
           </div>
         </div>
       </section>
+
+      <BandeauChiffres />
 
       {/* A. L'Observatoire */}
       <section className="acc-section acc-intro">

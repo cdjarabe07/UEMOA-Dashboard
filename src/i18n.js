@@ -709,6 +709,22 @@ const fr = {
   acc_population_val: "{{n}} millions",
   journal_bm: "Indicateurs de population et de conditions de vie chargés (Banque mondiale) : {{n}} indicateurs, {{pays}} pays.",
   meth_sources_bm: "Les indicateurs de population et de conditions de vie des profils pays viennent de la Banque mondiale (World Development Indicators), lus sur son API. Les libellés suivent ceux de la source ; la pauvreté est mesurée au seuil international de 3,00 dollars par jour en parité de pouvoir d'achat de 2021. La population de l'Union est la somme des huit pays, calculée par l'Observatoire.",
+  // Bandeau de chiffres
+  bc_titre: "Derniers chiffres",
+  bc_pause: "Pause",
+  bc_reprendre: "Reprendre",
+  bc_croissance_reelle: "Croissance UEMOA {{annee}}",
+  bc_inflation: "Inflation UEMOA {{annee}}",
+  bc_solde_budgetaire_pib: "Solde budgétaire UEMOA {{annee}}",
+  bc_dette_pib: "Dette publique UEMOA {{annee}}",
+  bc_change: "FCFA pour 1 dollar, {{annee}}",
+  bc_prix: "{{produit}}, {{mois}}",
+  // Photos
+  photo_credit: "Photo : {{auteur}},",
+  photo_afficher: "Afficher la photo de {{ville}}",
+  photo_alt: "Vue de {{ville}}",
+  meth_credits_titre: "Crédits photographiques",
+  meth_credits_p1: "Les photos des capitales viennent de Wikimedia Commons, sous licence libre. Elles sont affichées sans retouche, avec leur auteur et leur licence.",
 };
 
 const en = {
@@ -1403,6 +1419,22 @@ const en = {
   acc_population_val: "{{n}} million",
   journal_bm: "Population and living-conditions indicators loaded (World Bank): {{n}} indicators, {{pays}} countries.",
   meth_sources_bm: "Population and living-conditions indicators in the country profiles come from the World Bank (World Development Indicators), read from its API. Labels follow the source; poverty is measured at the international line of $3.00 a day in 2021 purchasing power parity. The Union's population is the sum of the eight countries, computed by the Observatory.",
+  // Figures ticker
+  bc_titre: "Latest figures",
+  bc_pause: "Pause",
+  bc_reprendre: "Resume",
+  bc_croissance_reelle: "WAEMU growth {{annee}}",
+  bc_inflation: "WAEMU inflation {{annee}}",
+  bc_solde_budgetaire_pib: "WAEMU fiscal balance {{annee}}",
+  bc_dette_pib: "WAEMU public debt {{annee}}",
+  bc_change: "CFA francs per dollar, {{annee}}",
+  bc_prix: "{{produit}}, {{mois}}",
+  // Photos
+  photo_credit: "Photo: {{auteur}},",
+  photo_afficher: "Show the photo of {{ville}}",
+  photo_alt: "View of {{ville}}",
+  meth_credits_titre: "Photo credits",
+  meth_credits_p1: "Photos of the capitals come from Wikimedia Commons, under free licences. They are shown unaltered, with their author and licence.",
 };
 
 i18n.use(initReactI18next).init({

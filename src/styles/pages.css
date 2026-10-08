@@ -303,9 +303,8 @@
   align-items: center;
   min-height: clamp(540px, 80vh, 760px);
   padding: 72px 0 150px;
-  background:
-    linear-gradient(90deg, rgba(24, 37, 79, 0.94) 0%, rgba(24, 37, 79, 0.78) 38%, rgba(24, 37, 79, 0.2) 72%, rgba(24, 37, 79, 0.05) 100%),
-    url("../assets/dakar.jpg") center 60% / cover no-repeat;
+  overflow: hidden;
+  background: var(--indigo-fonce);
   color: #fff;
 }
 
@@ -1140,9 +1139,9 @@
   .heros {
     min-height: 0;
     padding: 56px 0 130px;
-    background:
-      linear-gradient(180deg, rgba(24, 37, 79, 0.9) 0%, rgba(24, 37, 79, 0.8) 100%),
-      url("../assets/dakar.jpg") 70% center / cover no-repeat;
+  }
+  .heros-voile {
+    background: linear-gradient(180deg, rgba(24, 37, 79, 0.9) 0%, rgba(24, 37, 79, 0.8) 100%);
   }
   .chiffres-union-cadre {
     padding: 20px;
@@ -2638,4 +2637,231 @@ fiche série) et Conjoncture
 
 .tableau-bm .apercu {
   display: block;
+}
+
+/* ---------- Bandeau défilant de chiffres ---------- */
+
+.bc {
+  display: flex;
+  align-items: stretch;
+  background: var(--indigo-fonce);
+  color: #fff;
+  border-bottom: 3px solid var(--ocre);
+}
+
+.bc-piste {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+
+.bc-defilement {
+  display: flex;
+  width: max-content;
+  animation: bc-defile 60s linear infinite;
+}
+
+.bc:hover .bc-defilement,
+.bc:focus-within .bc-defilement,
+.bc--pause .bc-defilement {
+  animation-play-state: paused;
+}
+
+@keyframes bc-defile {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.bc-rangee {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bc-rangee li {
+  white-space: nowrap;
+}
+
+.bc-rangee a {
+  display: block;
+  padding: 11px 22px;
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background var(--t-court) var(--ease-out);
+}
+
+.bc-rangee a:hover,
+.bc-rangee a:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bc-libelle {
+  color: #cfd5e8;
+}
+
+.bc-rangee b {
+  color: var(--ocre);
+  font-weight: 700;
+}
+
+.bc-bouton {
+  flex: none;
+  padding: 0 16px;
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  color: #cfd5e8;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bc-bouton:hover {
+  color: #fff;
+}
+
+/* Mouvement réduit : liste fixe que l'on fait défiler soi-même. */
+@media (prefers-reduced-motion: reduce) {
+  .bc-piste {
+    overflow-x: auto;
+    mask-image: none;
+  }
+  .bc-defilement {
+    animation: none;
+  }
+  .bc-rangee[aria-hidden="true"],
+  .bc-bouton {
+    display: none;
+  }
+}
+
+/* ---------- Grand visuel : photos des capitales ---------- */
+
+.heros-photos,
+.heros-voile {
+  position: absolute;
+  inset: 0;
+}
+
+.heros-photos img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease-io);
+}
+
+.heros-photos img.actif {
+  opacity: 1;
+}
+
+.heros-voile {
+  background: linear-gradient(90deg, rgba(24, 37, 79, 0.94) 0%, rgba(24, 37, 79, 0.78) 38%, rgba(24, 37, 79, 0.25) 72%, rgba(24, 37, 79, 0.1) 100%);
+}
+
+.heros-contenu {
+  position: relative;
+  z-index: 1;
+}
+
+.heros-legende {
+  position: absolute;
+  z-index: 1;
+  right: var(--marge);
+  bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: min(560px, calc(100% - 2 * var(--marge)));
+  text-align: right;
+}
+
+.heros-legende p {
+  margin: 0;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(24, 37, 79, 0.72);
+  font-size: 12px;
+  color: #dfe3f1;
+}
+
+.heros-legende a {
+  color: #f3d58f;
+}
+
+.heros-commandes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.heros-point {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--t-court) var(--ease-out);
+}
+
+.heros-point[aria-pressed="true"] {
+  background: var(--ocre);
+  border-color: var(--ocre);
+}
+
+.heros-pause {
+  margin-left: 6px;
+  padding: 2px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  background: rgba(24, 37, 79, 0.6);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heros-photos img {
+    transition: none;
+  }
+}
+
+/* ---------- Photo en tête du profil pays ---------- */
+
+.photo-pays {
+  margin: 28px 0 0;
+}
+
+.photo-pays img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: clamp(180px, 28vw, 320px);
+  object-fit: cover;
+  border-radius: var(--rayon);
+}
+
+.photo-pays figcaption {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--gris);
+}
+
+@media (max-width: 640px) {
+  .heros-legende {
+    left: var(--marge);
+    align-items: flex-start;
+    text-align: left;
+  }
 }

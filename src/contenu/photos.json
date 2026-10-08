@@ -1,0 +1,82 @@
+[
+  {
+    "zone": "senegal",
+    "ville": "Dakar",
+    "fichier": "senegal.jpg",
+    "titre": "Dakar, Senegal - Left Half (5662420768)",
+    "auteur": "Jeff Attaway from Abuja, Nigeria",
+    "licence": "CC BY 2.0",
+    "licence_url": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Dakar,_Senegal_-_Left_Half_(5662420768).jpg"
+  },
+  {
+    "zone": "cote_ivoire",
+    "ville": "Abidjan",
+    "fichier": "cote_ivoire.jpg",
+    "titre": "Abidjan des Lagune",
+    "auteur": "Aman ADO",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Abidjan_des_Lagune.jpg"
+  },
+  {
+    "zone": "benin",
+    "ville": "Cotonou",
+    "fichier": "benin.jpg",
+    "titre": "BCEAO tower Cotonou, Benin",
+    "auteur": "Adoscam",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:BCEAO_tower_Cotonou,_Benin.jpg"
+  },
+  {
+    "zone": "burkina",
+    "ville": "Ouagadougou",
+    "fichier": "burkina.jpg",
+    "titre": "Avenue a Ouagadougou",
+    "auteur": "Thigre",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Avenue_a_Ouagadougou.jpg"
+  },
+  {
+    "zone": "mali",
+    "ville": "Bamako",
+    "fichier": "mali.jpg",
+    "titre": "Bamako ACI 2000 Aeriel",
+    "auteur": "Mark Fischer",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bamako_ACI_2000_Aeriel.jpg"
+  },
+  {
+    "zone": "niger",
+    "ville": "Niamey",
+    "fichier": "niger.jpg",
+    "titre": "Zoom sur le centre ville de la capitale Niamey depuis le fleuve Niger 07",
+    "auteur": "Sakou Gado",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Zoom_sur_le_centre_ville_de_la_capitale_Niamey_depuis_le_fleuve_Niger_07.jpg"
+  },
+  {
+    "zone": "togo",
+    "ville": "Lomé",
+    "fichier": "togo.jpg",
+    "titre": "Lome Togo Beach Road",
+    "auteur": "Philip Nalangan",
+    "licence": "CC BY 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lome_Togo_Beach_Road.jpg"
+  },
+  {
+    "zone": "guinee_bissau",
+    "ville": "Bissau",
+    "fichier": "guinee_bissau.jpg",
+    "titre": "Avenida dos Combatentes da Liberdade da Pátria, Bissau (2)",
+    "auteur": "Joehawkins",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Avenida_dos_Combatentes_da_Liberdade_da_P%C3%A1tria,_Bissau_(2).jpg"
+  }
+]
