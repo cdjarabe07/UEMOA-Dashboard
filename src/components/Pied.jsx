@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Logo } from "./Entete.jsx";
 import { DATE_GENERATION, SOURCES } from "../lib/meta.js";
 import { fmtDate } from "../lib/format.js";
 import { PAYS } from "../data/portail.js";
@@ -8,8 +9,10 @@ export default function Pied() {
   const { t } = useTranslation();
   return (
     <footer className="pied">
+      <div className="motif" />
       <div className="conteneur pied-grille">
         <div className="pied-marque">
+          <Logo />
           <p>
             <b>{t("marque")}</b>
             <br />

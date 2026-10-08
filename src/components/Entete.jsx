@@ -12,6 +12,17 @@ const LIENS = [
   { to: "/methodologie", cle: "nav_methodologie" },
 ];
 
+export function Logo() {
+  return (
+    <svg className="logo-motif" viewBox="0 0 32 32" aria-hidden="true">
+      <rect width="32" height="32" rx="7" fill="#263a7a" />
+      <path d="M4 26L11 10l7 16z" fill="#d39b2a" />
+      <path d="M14 26l7-16 7 16z" fill="#b8502a" />
+      <circle cx="16" cy="7" r="2.2" fill="#f4ede2" />
+    </svg>
+  );
+}
+
 export default function Entete() {
   const { t, i18n } = useTranslation();
   const langue = i18n.language?.startsWith("en") ? "en" : "fr";
@@ -27,6 +38,7 @@ export default function Entete() {
     <header className="entete">
       <div className="conteneur entete-barre">
         <Link to="/" className="marque" aria-label={t("marque")}>
+          <Logo />
           <span className="marque-texte">
             <b>{t("marque_l1")}</b>
             <span>{t("marque_l2")}</span>
@@ -65,6 +77,7 @@ export default function Entete() {
           </button>
         </div>
       </div>
+      <div className="motif motif--fin" />
     </header>
   );
 }

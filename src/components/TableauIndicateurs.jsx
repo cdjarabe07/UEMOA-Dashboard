@@ -6,7 +6,7 @@ import { MiniCourbe } from "./Graphiques.jsx";
  * lignes = [{ id, libelle, unite, lien, valeur, annee, comparaison, points }]
  * colonnes = { valeur, comparaison?, tendance }  (en-têtes)
  */
-export default function TableauIndicateurs({ titre, lignes, colonnes, couleur = "#24346b" }) {
+export default function TableauIndicateurs({ titre, lignes, colonnes, couleur = "#263a7a" }) {
   return (
     <section className="tab-ind">
       {titre && <h3 className="tab-ind-titre">{titre}</h3>}

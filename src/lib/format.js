@@ -23,8 +23,8 @@ const estPourcentage = (unite) => unite === "%" || unite === "% du PIB";
 // Précision par défaut selon l'unité : 1 décimale pour les %, 0 sinon.
 const decimalesPour = (unite) => (estPourcentage(unite) ? 1 : 0);
 
-// Espace insécable avant « % » en français (U+00A0 : l'espace fine U+202F est trop étroite en Source Sans 3) : le symbole ne passe jamais seul à la ligne.
-const pct = (n) => (locale() === "fr-FR" ? `${n} %` : `${n}%`);
+// Espace fine insécable avant « % » en français : le symbole ne passe jamais seul à la ligne.
+const pct = (n) => (locale() === "fr-FR" ? `${n} %` : `${n}%`);
 
 // Valeur + unité : "2,9 %", "62,4 % du PIB", "21 920 Mds FCFA" / "2.9%", "62.4% of GDP".
 // court=true : unité abrégée pour tableaux et cartes ("62,4 %", "21 920").

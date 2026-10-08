@@ -2,10 +2,10 @@
 
 .entete {
   position: sticky;
-  top: env(safe-area-inset-top, 0px);
+  top: 0;
   z-index: 50;
-  background: var(--sable);
-  border-bottom: 1px solid var(--encre);
+  background: var(--sable-clair);
+  border-bottom: 1px solid var(--ligne);
 }
 
 .entete-barre {
@@ -38,7 +38,7 @@
 }
 
 .marque-texte b {
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 700;
 }
 
@@ -53,44 +53,23 @@
 }
 
 .entete-lien {
-  position: relative;
+  white-space: nowrap;
   padding: 8px 14px;
+  border-radius: 999px;
   color: var(--encre-2);
   font-weight: 500;
   text-decoration: none;
-  transition: color var(--t-court) var(--ease-out);
-}
-
-/* Soulignement qui se déploie au survol, fixe sur la rubrique active. */
-.entete-lien::after {
-  content: "";
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 2px;
-  height: 2px;
-  background: var(--encre);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--t-base) var(--ease-out);
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .entete-lien:hover {
+  background: var(--sable-fonce);
   color: var(--encre);
 }
 
-.entete-lien:hover::after {
-  transform: scaleX(1);
-}
-
 .entete-lien.active {
-  color: var(--indigo);
-  font-weight: 600;
-}
-
-.entete-lien.active::after {
-  background: var(--terracotta);
-  transform: scaleX(1);
+  background: var(--indigo);
+  color: #fff;
 }
 
 .entete-outils {
@@ -101,20 +80,20 @@
 
 .langue {
   display: flex;
-  border: 1px solid #c9c4b9;
-  border-radius: var(--rayon);
-  overflow: hidden;
+  border: 1px solid var(--ligne);
+  border-radius: 999px;
+  padding: 2px;
 }
 
 .langue button {
   border: none;
   background: none;
-  padding: 4px 9px;
-  font-size: 12.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--gris);
   cursor: pointer;
-  transition: background var(--t-court) var(--ease-out), color var(--t-court) var(--ease-out);
 }
 
 .langue button[aria-pressed="true"] {
@@ -131,7 +110,8 @@
   cursor: pointer;
 }
 
-@media (max-width: 860px) {
+/* Menu en panneau dès que les six rubriques ne tiennent plus sur une ligne. */
+@media (max-width: 1180px) {
   .entete-burger {
     display: block;
   }
@@ -164,8 +144,8 @@
 
 .pied {
   margin-top: 0;
-  background: var(--encre);
-  color: #d6d8dc;
+  background: var(--indigo-fonce);
+  color: #cfd5e8;
   font-size: 14px;
 }
 
@@ -198,16 +178,16 @@
   margin: 0 0 12px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #9ea3ab;
+  color: var(--ocre);
 }
 
 .pied a,
 .pied span {
   display: block;
   margin-bottom: 7px;
-  color: #d6d8dc;
+  color: #cfd5e8;
   text-decoration: none;
 }
 
@@ -218,7 +198,7 @@
 .pied .pied-note {
   margin-top: 12px;
   font-size: 12px;
-  color: #9ea3ab;
+  color: #9aa3c4;
 }
 
 @media (max-width: 860px) {
@@ -235,12 +215,14 @@
 .infobulle {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
+  min-width: 160px;
   padding: 10px 12px;
-  background: #fff;
-  border: 1px solid var(--encre);
-  border-radius: var(--rayon);
-  font-size: 13px;
+  background: var(--sable-clair);
+  border: 1px solid var(--ligne);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(31, 26, 23, 0.1);
+  font-size: 12px;
 }
 
 .infobulle b {
@@ -296,10 +278,6 @@
   background: repeating-linear-gradient(90deg, var(--encre) 0 5px, transparent 5px 8px);
 }
 
-.legende i.pointille--seuil {
-  background: repeating-linear-gradient(90deg, var(--terracotta) 0 2px, transparent 2px 5px);
-}
-
 .legende i.bande {
   height: 10px;
   background: rgba(184, 80, 42, 0.18);
@@ -352,9 +330,8 @@
 
 .tableau thead th {
   vertical-align: bottom;
-  background: transparent;
-  border-bottom: 1.5px solid var(--encre);
-  font-size: 12.5px;
+  background: var(--sable-fonce);
+  font-size: 12px;
   font-weight: 600;
   color: var(--encre);
 }
@@ -467,4 +444,8 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--encre-2);
+}
+
+.legende i.pointille--seuil {
+  background: repeating-linear-gradient(90deg, var(--terracotta) 0 2px, transparent 2px 5px);
 }

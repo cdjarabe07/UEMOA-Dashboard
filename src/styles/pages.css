@@ -5,62 +5,63 @@
 /* ---------- Bandeau de page ---------- */
 
 .bandeau {
-  background: var(--sable);
-  color: var(--encre);
-  border-bottom: 1px solid var(--ligne);
+  background: var(--indigo);
+  color: #fff;
 }
 
 .bandeau-grille {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: 40px;
-  padding-top: 28px;
-  padding-bottom: 32px;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 48px;
+  padding-top: 40px;
+  padding-bottom: 44px;
 }
 
 .bandeau-fil {
-  margin-bottom: 18px;
-  font-size: 13.5px;
-  color: var(--gris);
+  margin-bottom: 22px;
+  font-size: 13px;
+  color: #b9c1dd;
 }
 
 .bandeau-fil a {
-  color: var(--encre-2);
+  color: #dfe3f1;
 }
 
 .bandeau-surtitre {
-  margin: 0 0 8px;
-  font-size: 12.5px;
+  margin: 0 0 10px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gris);
+  color: var(--ocre);
 }
 
 .bandeau h1 {
   margin: 0;
-  font-size: clamp(30px, 3.6vw, 40px);
+  font-size: clamp(32px, 4vw, 50px);
   font-weight: 700;
-  line-height: 1.12;
-  color: var(--encre);
-  max-width: 26ch;
+  line-height: 1.06;
+  color: #fff;
+  max-width: 22ch;
 }
 
 .bandeau-sous-titre {
-  margin: 12px 0 0;
+  margin: 16px 0 0;
   font-size: 17px;
   line-height: 1.55;
-  color: var(--encre-2);
+  color: #dfe3f1;
   max-width: 62ch;
 }
 
 .bandeau-cote {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   align-self: end;
-  padding: 2px 0 2px 18px;
-  border-left: 1px solid var(--ligne);
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid var(--ocre);
+  border-radius: 0 var(--rayon) var(--rayon) 0;
 }
 
 .bandeau-cote dl {
@@ -70,17 +71,17 @@
 }
 
 .bandeau-cote dt {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gris);
+  color: #b9c1dd;
 }
 
 .bandeau-cote dd {
-  margin: 1px 0 0;
+  margin: 2px 0 0;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .bouton--clair {
@@ -104,21 +105,21 @@
 }
 
 .selecteur select {
-  padding: 8px 10px;
-  border: 1px solid #c9c4b9;
-  border-radius: var(--rayon);
-  background: #fff;
+  padding: 9px 12px;
+  border: 1px solid var(--ligne);
+  border-radius: 8px;
+  background: var(--sable-clair);
   color: var(--encre);
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
 }
 
 .selecteur--clair {
-  color: var(--gris);
-  letter-spacing: 0.06em;
+  color: #b9c1dd;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .selecteur--clair select {
@@ -196,12 +197,14 @@
 /* ---------- Bloc de visualisation ---------- */
 
 .visu {
-  padding: 18px 0 0;
-  border-top: 1.5px solid var(--encre);
+  padding: 28px;
+  background: var(--sable-clair);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
 }
 
 .section--claire .visu {
-  background: none;
+  background: #fff;
 }
 
 .visu-tete {
@@ -209,15 +212,17 @@
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  gap: 14px 24px;
-  margin-bottom: 20px;
+  gap: 16px 24px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--ligne);
 }
 
 .visu-tete h2 {
   margin: 0;
-  font-size: clamp(21px, 2.2vw, 24px);
+  font-size: clamp(22px, 2.4vw, 28px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .visu-tete p {
@@ -236,31 +241,26 @@
 .bascule {
   display: inline-flex;
   flex-wrap: wrap;
-  border: 1px solid #c9c4b9;
-  border-radius: var(--rayon);
-  overflow: hidden;
-  background: #fff;
+  padding: 3px;
+  border: 1px solid var(--ligne);
+  border-radius: 999px;
+  background: var(--sable);
 }
 
 .bascule button {
   border: none;
-  border-left: 1px solid #c9c4b9;
   background: none;
-  padding: 6px 12px;
-  font-size: 13.5px;
-  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--encre-2);
   cursor: pointer;
   white-space: nowrap;
-  transition: background var(--t-court) var(--ease-out), color var(--t-court) var(--ease-out);
-}
-
-.bascule button:first-child {
-  border-left: 0;
 }
 
 .bascule button[aria-pressed="true"] {
-  background: var(--encre);
+  background: var(--indigo);
   color: #fff;
 }
 
@@ -294,46 +294,228 @@
   margin-top: 16px;
 }
 
-/* ---------- Chiffres clés (profil pays) ---------- */
+/* ---------- Accueil ---------- */
 
+/* Grand visuel : photo de Dakar sous un voile indigo */
+.heros {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: clamp(540px, 80vh, 760px);
+  padding: 72px 0 150px;
+  background:
+    linear-gradient(90deg, rgba(24, 37, 79, 0.94) 0%, rgba(24, 37, 79, 0.78) 38%, rgba(24, 37, 79, 0.2) 72%, rgba(24, 37, 79, 0.05) 100%),
+    url("../assets/dakar.jpg") center 60% / cover no-repeat;
+  color: #fff;
+}
+
+.heros::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  background: var(--motif) repeat-x;
+  background-size: auto 8px;
+}
+
+.heros-contenu > * {
+  max-width: 620px;
+}
+
+.heros-surtitre {
+  margin: 0 0 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocre);
+}
+
+.heros h1 {
+  margin: 0;
+  font-size: clamp(40px, 5.4vw, 70px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.heros-phrase {
+  margin: 22px 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #dfe3f1;
+}
+
+.heros-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+/* L'Union en chiffres : bande posée sur le bas du visuel */
+.chiffres-union {
+  position: relative;
+  z-index: 2;
+  margin-top: -92px;
+}
+
+.chiffres-union-cadre {
+  padding: 26px 30px 30px;
+  background: var(--sable-clair);
+  border: 1px solid var(--ligne);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(24, 37, 79, 0.14);
+}
+
+.chiffres-union-titre {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 18px;
+  font-family: var(--f-titre);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.chiffres-union-titre a {
+  font-family: var(--f-texte);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--indigo);
+  text-decoration: none;
+}
+
+.chiffres-union dl,
 .chiffres-cles {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   margin: 0;
 }
 
+.chiffres-union dl > div,
 .chiffres-cles > div {
   padding: 4px 22px;
 }
 
+.chiffres-union dl > div:first-child,
 .chiffres-cles > div:first-child {
   padding-left: 0;
 }
 
+.chiffres-union dl > div + div,
 .chiffres-cles > div + div {
   border-left: 1px solid var(--ligne);
 }
 
+.chiffres-union dt,
 .chiffres-cles dt {
   font-size: 14px;
   color: var(--encre-2);
 }
 
+.chiffres-union dd,
 .chiffres-cles dd {
   margin: 6px 0 4px;
   font-family: var(--f-titre);
-  font-size: clamp(26px, 2.6vw, 30px);
+  font-size: clamp(30px, 3.2vw, 42px);
   font-weight: 700;
-  line-height: 1.1;
-  color: var(--encre);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--indigo);
 }
 
+.chiffres-union span,
 .chiffres-cles span {
   font-size: 12px;
   color: var(--gris);
 }
 
+/* Accès aux rubriques */
+.acces-grille {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.acces-bloc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 24px 54px;
+  background: var(--sable-clair);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+  color: var(--encre);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.acces-bloc:hover {
+  border-color: var(--terracotta);
+  transform: translateY(-2px);
+}
+
+.acces-icone {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--indigo);
+  color: #fff;
+}
+
+.acces-nom {
+  font-family: var(--f-titre);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.acces-texte {
+  font-size: 14px;
+  color: var(--encre-2);
+}
+
+.acces-fleche {
+  position: absolute;
+  left: 24px;
+  bottom: 20px;
+  color: var(--terracotta);
+}
+
 /* Un point à la une */
+.une {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.une-texte h2 {
+  margin: 0 0 14px;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.une-texte p:not(.surtitre) {
+  margin: 0 0 22px;
+  font-size: 16px;
+  color: var(--encre-2);
+}
+
+.une-graphique {
+  margin: 0;
+  padding: 22px 22px 14px;
+  background: #fff;
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+}
 
 /* ---------- Onglets ---------- */
 
@@ -383,6 +565,47 @@
 
 /* ---------- Catalogue d'indicateurs ---------- */
 
+.catalogue {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 48px;
+}
+
+.catalogue-famille h2 {
+  margin: 0 0 6px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--terracotta);
+  font-size: 20px;
+}
+
+.catalogue-famille ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.catalogue-famille a {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--ligne);
+  color: var(--encre);
+  text-decoration: none;
+}
+
+.catalogue-famille a:hover b {
+  color: var(--terracotta);
+}
+
+.catalogue-famille b {
+  font-weight: 600;
+}
+
+.catalogue-famille span {
+  font-size: 13px;
+  color: var(--gris);
+}
+
 .liste-liens {
   list-style: none;
   margin: 0;
@@ -400,6 +623,10 @@
 
 .liste-liens li a:hover {
   color: var(--terracotta);
+}
+
+.fiche-pied--fin {
+  padding-top: 0;
 }
 
 /* ---------- Pays ---------- */
@@ -447,20 +674,58 @@
   align-items: center;
   gap: 16px;
   margin-top: 24px;
-  padding: 14px 4px;
-  border-top: 1px solid var(--ligne);
-  border-bottom: 1px solid var(--ligne);
+  padding: 18px 22px;
+  border: 1px solid var(--terracotta);
+  border-left-width: 5px;
+  border-radius: var(--rayon);
   color: var(--encre);
   text-decoration: none;
-  transition: background var(--t-court) var(--ease-out);
 }
 
 .encart-lien:hover {
-  background: var(--sable-fonce);
+  background: #f6e3d8;
 }
 
 /* ---------- Fiche indicateur ---------- */
 
+.fiche-zones {
+  margin-bottom: 18px;
+}
+
+.puce-zone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.puce-zone i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.puce-zone[aria-pressed="false"] {
+  opacity: 0.5;
+}
+
+.puce-zone[aria-pressed="true"] {
+  background: #fff;
+  border-color: var(--encre);
+  color: var(--encre);
+}
+
+.fiche-pied {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 56px;
+}
+
+.fiche-pied h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.fiche-pied code,
 .meth code {
   font-size: 12px;
   padding: 2px 6px;
@@ -660,6 +925,7 @@
   margin-top: 28px;
 }
 
+
 /* ---------- Cartes d'accès aux pays ---------- */
 
 .cartes-pays {
@@ -676,16 +942,25 @@
   flex-direction: column;
   gap: 6px;
   height: 100%;
-  padding: 14px 0 12px;
-  border-top: 1.5px solid var(--encre);
+  padding: 20px 20px 18px;
+  background: #fff;
+  border: 1px solid var(--ligne);
+  border-top: 5px solid var(--couleur-pays, var(--indigo));
+  border-radius: var(--rayon);
   color: var(--encre);
   text-decoration: none;
-  transition: background var(--t-court) var(--ease-out);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.carte-pays:hover .carte-pays-nom {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.section:not(.section--claire) .carte-pays {
+  background: var(--sable-clair);
+}
+
+.carte-pays:hover {
+  transform: translateY(-2px);
+  border-color: var(--encre-2);
+  border-top-color: var(--couleur-pays, var(--indigo));
+  box-shadow: 0 10px 22px rgba(24, 37, 79, 0.08);
 }
 
 .carte-pays-iso {
@@ -719,7 +994,7 @@
   padding-top: 10px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--indigo);
+  color: var(--terracotta);
 }
 
 /* Lignes de tableau cliquables */
@@ -736,12 +1011,12 @@
   align-items: center;
   gap: 4px;
   font-weight: 600;
-  color: var(--indigo);
+  color: var(--terracotta);
   text-decoration: none;
   white-space: nowrap;
 }
 
-/* ---------- Renvois (Conjoncture) ---------- */
+/* ---------- En bref ---------- */
 
 .renvois {
   display: grid;
@@ -752,24 +1027,28 @@
 .renvoi {
   display: flex;
   flex-direction: column;
-  padding: 16px 0 4px;
-  border-top: 1.5px solid var(--encre);
+  padding: 28px;
+  background: #fff;
+  border: 1px solid var(--ligne);
+  border-top: 4px solid var(--indigo);
+  border-radius: var(--rayon);
   color: var(--encre);
   text-decoration: none;
+  transition: border-color 0.15s ease;
 }
 
-.renvoi:hover .lien-fleche {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.renvoi:hover {
+  border-color: var(--encre-2);
+  border-top-color: var(--terracotta);
 }
 
 .renvoi-chiffre {
-  margin: 2px 0 6px;
+  margin: 4px 0 8px;
   font-family: var(--f-titre);
-  font-size: 28px;
+  font-size: 44px;
   font-weight: 700;
-  line-height: 1.1;
-  color: var(--encre);
+  line-height: 1;
+  color: var(--indigo);
 }
 
 .renvoi-texte {
@@ -797,15 +1076,22 @@
 
 @media (max-width: 960px) {
   .bandeau-grille,
-  .conv-pays {
+  .une,
+  .conv-pays,
+  .fiche-pied {
     grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
-
+  .acces-grille,
+  .catalogue {
+    grid-template-columns: 1fr 1fr;
+  }
+  .chiffres-union dl,
   .chiffres-cles {
     grid-template-columns: 1fr 1fr;
     row-gap: 20px;
   }
+  .chiffres-union dl > div:nth-child(3),
   .chiffres-cles > div:nth-child(3) {
     padding-left: 0;
     border-left: none;
@@ -847,7 +1133,21 @@
   .tab-ind-valeur {
     font-size: 19px;
   }
-
+  .acces-grille,
+  .catalogue {
+    grid-template-columns: 1fr;
+  }
+  .heros {
+    min-height: 0;
+    padding: 56px 0 130px;
+    background:
+      linear-gradient(180deg, rgba(24, 37, 79, 0.9) 0%, rgba(24, 37, 79, 0.8) 100%),
+      url("../assets/dakar.jpg") 70% center / cover no-repeat;
+  }
+  .chiffres-union-cadre {
+    padding: 20px;
+  }
+  .chiffres-union dl > div,
   .chiffres-cles > div {
     padding: 4px 12px;
   }
@@ -876,9 +1176,9 @@ fiche série) et Conjoncture
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 14px;
+  padding: 0 16px;
   background: #fff;
-  border: 1px solid #c9c4b9;
+  border: 1.5px solid var(--ligne);
   border-radius: var(--rayon);
   color: var(--gris);
   transition: border-color var(--t-court) var(--ease-out), box-shadow var(--t-court) var(--ease-out);
@@ -1068,8 +1368,8 @@ fiche série) et Conjoncture
 .explo-serie-titre {
   font-family: var(--f-titre);
   font-size: 18px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .explo-serie-lien:hover .explo-serie-titre {
@@ -1124,6 +1424,7 @@ fiche série) et Conjoncture
 /* ---------- Fiche série ---------- */
 
 .serie-zones {
+  background: var(--sable-clair);
   border-bottom: 1px solid var(--ligne);
 }
 
@@ -1178,10 +1479,10 @@ fiche série) et Conjoncture
 
 .serie-valeur-chiffre {
   font-family: var(--f-titre);
-  font-size: 32px;
+  font-size: clamp(40px, 5vw, 56px);
   font-weight: 700;
-  line-height: 1.15;
-  color: var(--encre);
+  line-height: 1.05;
+  color: var(--indigo);
 }
 
 .serie-contexte {
@@ -1218,14 +1519,16 @@ fiche série) et Conjoncture
 .serie-historique {
   max-height: 380px;
   overflow-y: auto;
-  border-top: 1.5px solid var(--encre);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+  background: #fff;
 }
 
 .serie-historique thead th {
   position: sticky;
   top: 0;
   z-index: 1;
-  background: var(--sable);
+  background: #fff;
 }
 
 .serie-notes {
@@ -1572,7 +1875,7 @@ fiche série) et Conjoncture
 }
 
 .acc-section--sable {
-  background: var(--sable-fonce);
+  background: var(--sable-clair);
 }
 
 .acc-tete {
@@ -1623,7 +1926,7 @@ fiche série) et Conjoncture
   gap: 18px;
 }
 
-.acc-intro h1 {
+.acc-intro h2 {
   margin: 0;
   font-size: clamp(32px, 3.8vw, 42px);
   line-height: 1.1;
@@ -1744,14 +2047,14 @@ fiche série) et Conjoncture
 }
 
 .carte-voisin {
-  fill: #e9e4da;
+  fill: var(--sable-fonce);
   stroke: var(--sable);
   stroke-width: 2;
 }
 
 .acc-section--sable .carte-voisin {
-  fill: #e3dccd;
-  stroke: var(--sable-fonce);
+  fill: var(--sable-fonce);
+  stroke: var(--sable-clair);
 }
 
 .carte-uemoa-pays {
@@ -1764,7 +2067,7 @@ fiche série) et Conjoncture
 }
 
 .acc-section--sable .carte-uemoa-pays {
-  stroke: var(--sable-fonce);
+  stroke: var(--sable-clair);
 }
 
 .carte-uemoa-pays.sans-valeur {
@@ -1783,7 +2086,7 @@ fiche série) et Conjoncture
   fill: var(--encre);
   pointer-events: none;
   paint-order: stroke;
-  stroke: rgba(251, 250, 247, 0.85);
+  stroke: rgba(244, 237, 226, 0.85);
   stroke-width: 6px;
 }
 
@@ -2105,7 +2408,7 @@ fiche série) et Conjoncture
 
 .acc-methode > div + div {
   padding-left: 24px;
-  border-left: 1px solid #d6cfc0;
+  border-left: 1px solid var(--ligne);
 }
 
 .acc-methode h3 {
@@ -2199,7 +2502,7 @@ fiche série) et Conjoncture
   .acc-methode > div + div {
     padding-left: 0;
     border-left: 0;
-    border-top: 1px solid #d6cfc0;
+    border-top: 1px solid var(--ligne);
   }
 }
 

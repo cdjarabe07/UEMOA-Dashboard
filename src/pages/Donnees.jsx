@@ -494,7 +494,7 @@ export function FicheSerie() {
             <div className="visu-corps">
               <GraphiqueSeries series={series} unite={unite} noms={noms} hauteur={340} zero={pct} seuil={seuil} animer={!reduit} rupture={anRupture} />
               <p className="legende">
-                <span><i style={{ background: "#24346b" }} /> {nomZone(zone)}</span>
+                <span><i style={{ background: "#263a7a" }} /> {nomZone(zone)}</span>
                 {avecUnion && <span><i className="pointille pointille--encre" /> {t("zone_uemoa")}</span>}
                 {seuil && <span><i className="pointille pointille--seuil" /> {seuil.libelle}</span>}
                 {anRupture && <span><i className="trait-rupture" /> {t("rupture_graph", { annee: anRupture })}</span>}
@@ -590,7 +590,7 @@ export function FicheSerie() {
                   union={comparableUnion(ind) ? valeur(ind.id, UNION.id, dernier.annee) : null}
                   libelleUnion={t("zone_uemoa")}
                   seuil={seuil}
-                  couleur={(d) => (d.id === zone ? "#b4532e" : "#24346b")}
+                  couleur={(d) => (d.id === zone ? "#b8502a" : "#263a7a")}
                 />
               </div>
               {zone !== "uemoa" && (

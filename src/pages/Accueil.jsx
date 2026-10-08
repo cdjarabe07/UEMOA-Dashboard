@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { PAYS, UNION, INDICATEURS, FAMILLES, getIndicateur, serie, valeur, derniereAnnee, anneeRupture, ruptureDe } from "../data/portail.js";
 import { CRITERES, respecte } from "../lib/convergence.js";
@@ -155,11 +156,31 @@ export default function Accueil() {
 
   return (
     <>
+      {/* Grand visuel */}
+      <section className="heros">
+        <div className="conteneur heros-contenu">
+          <p className="heros-surtitre">{t("acc_surtitre")}</p>
+          <h1>{t("acc_titre")}</h1>
+          <p className="heros-phrase">{t("mission")}</p>
+          <div className="heros-actions">
+            <Link to="/donnees" className="bouton bouton--plein">
+              {t("acc_cta_donnees")} <ArrowRight size={16} />
+            </Link>
+            <Link to="/pays" className="bouton bouton--clair">
+              {t("acc_cta_pays")}
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* A. L'Observatoire */}
       <section className="acc-section acc-intro">
         <div className="conteneur acc-intro-grille">
           <div className="acc-intro-texte">
-            <h1>{t("marque")}</h1>
+            <div>
+              <p className="surtitre">{t("acc_q_observatoire")}</p>
+              <h2>{t("marque")}</h2>
+            </div>
             <p className="acc-chapeau">{t("acc_presentation")}</p>
             <ul className="acc-fonctions">
               <li><Link to="/conjoncture">{t("acc_fn_conjoncture")}</Link></li>

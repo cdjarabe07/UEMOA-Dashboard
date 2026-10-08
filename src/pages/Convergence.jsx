@@ -150,7 +150,7 @@ export default function Convergence() {
                           union={valeur(critere.indicateur, UNION.id, annee)}
                           libelleUnion={t("zone_uemoa")}
                           seuil={ncCritere ? null : { valeur: critere.seuil, libelle: t("conv_seuil_libelle", { seuil: fmtValeur(critere.seuil, indCritere.unite) }) }}
-                          couleur={(d) => (ncCritere ? "#8a8f98" : respecte(critere, d.valeur, annee) ? "#4f6b35" : "#b4532e")}
+                          couleur={(d) => (ncCritere ? "#8a8f98" : respecte(critere, d.valeur, annee) ? "#4f7a2e" : "#b8502a")}
                         />
                       }
                       notes={{

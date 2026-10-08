@@ -562,6 +562,12 @@ const fr = {
   meth_attention_r2: "solde budgétaire : nombre de pays qui respectent le critère de −3 % du PIB, et pays dont le déficit est le plus élevé ;",
   meth_attention_r3: "inflation : pays dont l'inflation a le plus augmenté sur un an, si au moins un pays est en hausse ;",
   meth_attention_r4: "pression fiscale : pays dont la dernière valeur dépasse toutes les précédentes (au moins 10 années), et mention du seuil de 20 % du PIB.",
+  // Grand visuel de l'accueil
+  acc_surtitre: "Union économique et monétaire ouest-africaine · 8 pays",
+  acc_titre: "L'économie de l'UEMOA, en données ouvertes.",
+  acc_cta_donnees: "Explorer les données",
+  acc_cta_pays: "Les pays de l'Union",
+  acc_q_observatoire: "Qu'est-ce que l'Observatoire ?",
 };
 
 const en = {
@@ -1109,6 +1115,12 @@ const en = {
   meth_attention_r2: "fiscal balance: number of countries meeting the −3% of GDP criterion, and the country with the largest deficit;",
   meth_attention_r3: "inflation: the country whose inflation rose most over one year, if at least one country rose;",
   meth_attention_r4: "tax burden: countries whose latest value exceeds every earlier value (at least 10 years), with a note on the 20% of GDP threshold.",
+  // Home hero
+  acc_surtitre: "West African Economic and Monetary Union · 8 countries",
+  acc_titre: "The UEMOA economy, in open data.",
+  acc_cta_donnees: "Explore the data",
+  acc_cta_pays: "The Union's countries",
+  acc_q_observatoire: "What is the Observatory?",
 };
 
 i18n.use(initReactI18next).init({

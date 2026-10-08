@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import carte from "../data/carte_uemoa.json";
 import { fmtCourt } from "../lib/format.js";
 
-export const RAMPE = ["#e3e6f0", "#b9c1db", "#8c99c0", "#5c6ca1", "#24346b"];
+export const RAMPE = ["#e3e6f0", "#b9c1db", "#8c99c0", "#5c6ca1", "#263a7a"];
 
 // Décalage des étiquettes (pixels de la carte) pour les petits pays et le littoral.
-const DECALAGE = { guinee_bissau: [-30, 52], togo: [-4, 70], benin: [26, 40], senegal: [-24, -6], cote_ivoire: [0, 6], mali: [10, 40] };
+const DECALAGE = { guinee_bissau: [-4, 52], togo: [-4, 70], benin: [26, 40], senegal: [-24, -6], cote_ivoire: [0, 6], mali: [10, 40] };
 const COURT = { guinee_bissau: "zone_court_guinee_bissau", cote_ivoire: "zone_court_cote_ivoire", burkina: "zone_court_burkina" };
 
 export const classeDe = (v, min, max) => (v == null ? null : Math.min(4, Math.floor(((v - min) / (max - min || 1)) * 5)));
