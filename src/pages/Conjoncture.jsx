@@ -5,6 +5,8 @@ import { PERIODE_PREVISION } from "../data/catalogue.js";
 import { CRITERES, respecte, evaluerConvergence } from "../lib/convergence.js";
 import { fmtCourt, fmtValeur, fmtVariation, libelleUnite } from "../lib/format.js";
 import Bandeau from "../components/Bandeau.jsx";
+import MatieresPremieres, { NoteMatieres } from "../components/MatieresPremieres.jsx";
+import ProjectionsFMI from "../components/ProjectionsFMI.jsx";
 
 // Indicateurs de la vue d'ensemble, dans l'ordre de lecture.
 const SYNTHESE = ["croissance_reelle", "inflation", "solde_budgetaire_pib", "dette_pib", "pression_fiscale", "balance_courante_pib"];
@@ -142,6 +144,33 @@ export default function Conjoncture() {
             </table>
           </div>
           <p className="note">{t("conj_pays_note")} {t("source_bceao")}</p>
+        </div>
+      </section>
+
+      <section className="section" id="international">
+        <div className="conteneur">
+          <div className="section-tete">
+            <div>
+              <p className="surtitre">{t("conj_international_surtitre")}</p>
+              <h2>{t("conj_international_titre")}</h2>
+              <p>{t("conj_international_chapeau")}</p>
+            </div>
+          </div>
+          <MatieresPremieres />
+          <NoteMatieres />
+        </div>
+      </section>
+
+      <section className="section section--claire" id="projections">
+        <div className="conteneur">
+          <div className="section-tete">
+            <div>
+              <p className="surtitre">{t("conj_projections_surtitre")}</p>
+              <h2>{t("conj_projections_titre")}</h2>
+              <p>{t("conj_projections_chapeau")}</p>
+            </div>
+          </div>
+          <ProjectionsFMI />
         </div>
       </section>
 

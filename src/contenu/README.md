@@ -12,7 +12,7 @@ Aucun contenu fictif : pas d'analyse d'exemple, pas de publication non vérifié
 
 ## Publier une analyse
 
-Ajouter un fichier `analyses/<id>.json`. Aucune modification de code n'est nécessaire :
+Rédiger d'abord le fichier dans `analyses/brouillons/<id>.json` (statut `"brouillon"`) : il n'est intégré au site que dans une construction lancée avec `VITE_APERCU_BROUILLONS=1`, jamais en production. Après validation, renseigner `validation`, passer le statut à `"publiee"` et déplacer le fichier dans `analyses/<id>.json`. Aucune modification de code n'est nécessaire :
 le fichier est chargé automatiquement, validé, puis affiché dans la rubrique Analyses,
 dans son dossier thématique et sur la page d'accueil.
 
@@ -41,7 +41,8 @@ console du navigateur (mode développement).
     { "type": "graphique", "indicateur": "inflation", "zones": ["uemoa", "niger"], "debut": 2015, "fin": 2024,
       "titre": { "fr": "…", "en": "…" } },
     { "type": "tableau", "indicateur": "inflation", "zones": ["uemoa", "niger"], "annees": [2022, 2023, 2024],
-      "titre": { "fr": "…", "en": "…" } }
+      "titre": { "fr": "…", "en": "…" } },
+    { "type": "prix", "produits": ["ble", "petrole"], "depuis": "2019-01", "titre": { "fr": "…", "en": "…" } }
   ],
   "observations": [{ "fr": "…", "en": "…" }],
   "limites": [{ "fr": "…", "en": "…" }],
@@ -50,6 +51,8 @@ console du navigateur (mode développement).
 }
 ```
 
+- Les blocs `prix` affichent les prix mensuels du FMI (`src/data/fmi.json`) ; identifiants :
+  `petrole`, `cacao`, `coton`, `or`, `uranium`, `arachide`, `riz`, `ble`.
 - Les graphiques et tableaux sont **toujours** tracés à partir de `src/data/portail.json` :
   on ne colle jamais d'image ni de chiffre recopié. Les ruptures de série déclarées
   y sont appliquées automatiquement.

@@ -1,2 +1,4 @@
 node_modules/
 dist/
+# Analyses non validées : jamais publiées ni versionnées
+src/contenu/analyses/brouillons/

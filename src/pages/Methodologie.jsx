@@ -45,6 +45,8 @@ export default function Methodologie() {
               {t("meth_sources_p2")} <code>{SOURCE}</code>.{" "}
               {DATE_GENERATION && t("meth_sources_date", { date: fmtDate(DATE_GENERATION) })}
             </p>
+            <p>{t("meth_sources_fmi")}</p>
+            <p>{t("meth_sources_fmi_ecart")}</p>
           </section>
 
           <section id="preparation">

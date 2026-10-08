@@ -3,6 +3,7 @@
 import publicationsData from "./publications.json";
 import { INDICATEURS, ZONES, FAMILLES, getIndicateur, GENERATED_AT } from "../data/portail.js";
 import { CRITERES } from "../lib/convergence.js";
+import { getProduit } from "../data/fmi.js";
 
 // ---------------------------------------------------------------------------
 // Dossiers thématiques : un par famille d'indicateurs, plus la convergence.
@@ -54,7 +55,7 @@ export const publicationsDuDossier = (id) => PUBLICATIONS.filter((p) => (p.dossi
 
 const APERCU_BROUILLONS = import.meta.env.VITE_APERCU_BROUILLONS === "1";
 const ZONES_IDS = new Set(ZONES.map((z) => z.id));
-const TYPES_BLOCS = new Set(["texte", "graphique", "tableau"]);
+const TYPES_BLOCS = new Set(["texte", "graphique", "tableau", "prix"]);
 const bilingue = (v) => v && typeof v.fr === "string" && v.fr.trim() && typeof v.en === "string";
 const dateIso = (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v);
 
@@ -74,15 +75,24 @@ export function problemesAnalyse(a) {
   if (!Array.isArray(a.blocs) || !a.blocs.length) p.push("aucun bloc");
   (a.blocs || []).forEach((b, n) => {
     if (!TYPES_BLOCS.has(b.type)) p.push(`bloc ${n} : type inconnu`);
-    if (b.type !== "texte" && !getIndicateur(b.indicateur)) p.push(`bloc ${n} : indicateur inconnu`);
-    if (b.type !== "texte" && !(b.zones || []).every((z) => ZONES_IDS.has(z))) p.push(`bloc ${n} : zone inconnue`);
+    if ((b.type === "graphique" || b.type === "tableau") && !getIndicateur(b.indicateur)) p.push(`bloc ${n} : indicateur inconnu`);
+    if ((b.type === "graphique" || b.type === "tableau") && !(b.zones || []).every((z) => ZONES_IDS.has(z))) p.push(`bloc ${n} : zone inconnue`);
+    if (b.type === "prix" && !(b.produits || []).every((x) => getProduit(x))) p.push(`bloc ${n} : produit inconnu`);
   });
   if (!Array.isArray(a.sources) || !a.sources.length) p.push("sources manquantes");
   for (const id of a.publications || []) if (!getPublication(id)) p.push(`publication inconnue : ${id}`);
   return p;
 }
 
-const fichiers = import.meta.glob("./analyses/*.json", { eager: true, import: "default" });
+// Analyses publiées : analyses/*.json. Brouillons : analyses/brouillons/*.json, intégrés
+// au site uniquement en mode aperçu (VITE_APERCU_BROUILLONS=1) ; sinon, la branche
+// est éliminée à la construction et aucun texte non validé n'est publié.
+const fichiers = {
+  ...import.meta.glob("./analyses/*.json", { eager: true, import: "default" }),
+  ...(import.meta.env.VITE_APERCU_BROUILLONS === "1"
+    ? import.meta.glob("./analyses/brouillons/*.json", { eager: true, import: "default" })
+    : {}),
+};
 
 export const ANALYSES = Object.entries(fichiers)
   .map(([chemin, a]) => {

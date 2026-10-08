@@ -20,6 +20,7 @@ import {
 import { GraphiqueSeries, COULEUR_ZONE } from "../components/Graphiques.jsx";
 import Bandeau from "../components/Bandeau.jsx";
 import Apercu from "../components/Apercu.jsx";
+import MatieresPremieres, { NoteMatieres } from "../components/MatieresPremieres.jsx";
 import Introuvable from "./Introuvable.jsx";
 
 // Texte bilingue d'un contenu : { fr, en } -> langue active (repli sur le français).
@@ -414,6 +415,15 @@ export function Analyse() {
           {a.blocs.map((b, n) => {
             if (b.type === "graphique") return <BlocGraphique key={n} b={b} />;
             if (b.type === "tableau") return <BlocTableau key={n} b={b} />;
+            if (b.type === "prix") {
+              return (
+                <figure key={n} className="analyse-figure">
+                  {b.titre && <figcaption className="analyse-figure-titre">{loc(b.titre)}</figcaption>}
+                  <MatieresPremieres produits={b.produits} depuis={b.depuis || "2019-01"} />
+                  <NoteMatieres />
+                </figure>
+              );
+            }
             const paragraphes = loc(b.contenu);
             return (
               <section key={n} className="analyse-texte">

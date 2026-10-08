@@ -13,6 +13,9 @@ import Visualisation from "../components/Visualisation.jsx";
 import Onglets from "../components/Onglets.jsx";
 import CartesPays from "../components/CartesPays.jsx";
 import Exports from "../components/Exports.jsx";
+import MatieresPremieres, { NoteMatieres } from "../components/MatieresPremieres.jsx";
+import ProjectionsFMI from "../components/ProjectionsFMI.jsx";
+import { produitsDuPays, ANNEES_PROJECTION } from "../data/fmi.js";
 import Introuvable from "./Introuvable.jsx";
 
 // Chiffres clés affichés en tête de fiche.
@@ -265,6 +268,29 @@ export default function ProfilPays() {
             </tbody>
           </table>
           </div>
+        </div>
+      </section>
+
+      {/* Environnement international : prix suivis et projections du FMI */}
+      <section className="section">
+        <div className="conteneur">
+          <div className="section-tete">
+            <div>
+              <p className="surtitre">{t("conj_international_surtitre")}</p>
+              <h2>{t("profil_international_titre", { pays: nom })}</h2>
+              <p>{t("profil_international_chapeau")}</p>
+            </div>
+          </div>
+          {produitsDuPays(pays.id).length > 0 && (
+            <>
+              <h3 className="titre-colonne">{t("profil_produits_titre")}</h3>
+              <MatieresPremieres produits={produitsDuPays(pays.id).map((p) => p.id)} />
+              <NoteMatieres />
+            </>
+          )}
+          <h3 className="titre-colonne profil-projections-titre">{t("profil_projections_titre", { debut: ANNEES_PROJECTION[0], fin: ANNEES_PROJECTION[2] })}</h3>
+          <ProjectionsFMI zones={[pays.id]} compact />
+          <p className="note">{t("profil_projections_note")} <Link to="/conjoncture#projections">{t("profil_projections_lien")}</Link></p>
         </div>
       </section>
 

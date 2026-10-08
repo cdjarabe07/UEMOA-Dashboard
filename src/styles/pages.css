@@ -2534,3 +2534,86 @@ fiche série) et Conjoncture
     font-size: 30px;
   }
 }
+
+/* ---------- Matières premières et projections du FMI ---------- */
+
+.mp-grille {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mp-carte {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 16px 12px;
+  background: var(--sable-clair);
+  border: 1px solid var(--ligne);
+  border-top: 3px solid var(--ocre);
+  border-radius: var(--rayon);
+}
+
+.section--claire .mp-carte {
+  background: #fff;
+}
+
+.mp-nom {
+  margin: 0;
+  font-weight: 600;
+}
+
+.mp-valeur {
+  margin: 0;
+  font-family: var(--f-titre);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--indigo);
+}
+
+.mp-valeur span {
+  font-family: var(--f-texte);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gris);
+}
+
+.mp-variation,
+.mp-pays {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--gris);
+}
+
+.mp-bornes {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.profil-projections-titre {
+  margin-top: 28px;
+}
+
+.acc-renvoi-international {
+  margin: 8px 0 0;
+}
+
+@media (max-width: 960px) {
+  .mp-grille {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .mp-grille {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.acc-renvoi-international .lien-fleche {
+  white-space: normal;
+}

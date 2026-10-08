@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import journal from "../data/journal.json";
 import { getIndicateur } from "../data/portail.js";
 import { fmtDate, fmtNombre } from "../lib/format.js";
+import { fmtMois } from "./MatieresPremieres.jsx";
 
 export const JOURNAL = Array.isArray(journal) ? journal : [];
 
@@ -13,12 +14,18 @@ const date = (iso) => fmtDate(new Date(iso.length === 10 ? `${iso}T00:00:00Z` : 
 
 function texte(e, t) {
   const nomZones = (zs) => zs.map((z) => t(`zone_${z}`)).join(", ");
+  if (e.type === "donnees" && e.details.jeu === "pcps") {
+    return t("journal_fmi_pcps", { n: e.indicateurs.length, mois: fmtMois(e.details.dernier_mois) });
+  }
+  if (e.type === "donnees" && e.details.jeu === "weo") {
+    return t("journal_fmi_weo", { edition: e.details.edition, debut: e.details.premiere_annee, fin: e.details.derniere_annee, pays: e.zones.length });
+  }
   if (e.type === "donnees") {
     const pays = e.zones.filter((z) => z !== "uemoa").length;
     return t("journal_donnees", { n: e.indicateurs.length, pays, fin: e.details.derniere_annee, obs: fmtNombre(e.details.observations) });
   }
   if (e.type === "previsions") {
-    return t("journal_previsions", { zones: nomZones(e.zones), n: e.indicateurs.length, debut: e.details.premiere_annee, fin: e.details.derniere_annee, obs: e.details.derniere_observation });
+    return t("journal_previsions", { zones: nomZones(e.zones), count: e.zones.length, n: e.indicateurs.length, debut: e.details.premiere_annee, fin: e.details.derniere_annee, obs: e.details.derniere_observation });
   }
   if (e.type === "methode" && e.details.nature === "rupture") {
     const ind = getIndicateur(e.indicateurs[0]);
@@ -29,7 +36,7 @@ function texte(e, t) {
 }
 
 const lien = (e) =>
-  e.type === "methode" ? "/methodologie#ruptures" : e.type === "previsions" ? "/conjoncture/previsions" : e.type === "donnees" ? "/donnees" : null;
+  e.details?.jeu ? `/conjoncture#${e.details.jeu === "pcps" ? "international" : "projections"}` : e.type === "methode" ? "/methodologie#ruptures" : e.type === "previsions" ? "/conjoncture/previsions" : e.type === "donnees" ? "/donnees" : null;
 
 export default function Journal({ limite = 5 }) {
   const { t } = useTranslation();

@@ -75,6 +75,7 @@ function texteAttention(p, t) {
     return {
       texte: t("att_solde", {
         annee: p.annee,
+        count: p.conformes.length,
         n: p.conformes.length,
         total: p.total,
         liste: p.conformes.length ? ` (${p.conformes.map((x) => nom(x.id)).join(", ")})` : "",
@@ -262,6 +263,9 @@ export default function Accueil() {
             </table>
           </div>
           <p className="note">{t("acc_conjoncture_source", { date: DATE_GENERATION ? fmtDate(DATE_GENERATION) : "—" })}</p>
+          <p className="acc-renvoi-international">
+            <Link to="/conjoncture#international" className="lien-fleche">{t("acc_international_lien")} <span className="fleche">→</span></Link>
+          </p>
         </div>
       </section>
 
