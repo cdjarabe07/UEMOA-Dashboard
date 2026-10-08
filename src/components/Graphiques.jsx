@@ -21,20 +21,21 @@ import { fmtNombre, fmtValeur, fmtIntervalle } from "../lib/format.js";
 export const COULEUR_ZONE = {
   benin: "#d39b2a",
   burkina: "#5e7d3a",
-  cote_ivoire: "#b8502a",
+  cote_ivoire: "#b4532e",
   guinee_bissau: "#7a3e6b",
   mali: "#2e7f7a",
   niger: "#8a5a3b",
-  senegal: "#263a7a",
+  senegal: "#24346b",
   togo: "#5b7db1",
-  uemoa: "#1f1a17",
+  uemoa: "#1c1f24",
 };
 
-const AXE = { fontFamily: "Inter", fontSize: 11, fill: "#7a6f66" };
-const GRILLE = "#e6dccb";
+const AXE = { fontFamily: "Source Sans 3, sans-serif", fontSize: 11, fill: "#6b7079" };
+const GRILLE = "#e4e0d7";
 
 function Infobulle({ active, payload, label, unite, noms }) {
-  if (!active || !payload?.length) return null;
+  // Le point intercalé à la rupture (année non entière) n'a pas d'infobulle.
+  if (!active || !payload?.length || !Number.isInteger(label)) return null;
   const points = payload.filter((p) => p.value != null && !Array.isArray(p.value)).sort((a, b) => b.value - a.value);
   return (
     <div className="infobulle">
@@ -49,8 +50,15 @@ function Infobulle({ active, payload, label, unite, noms }) {
   );
 }
 
-/** Séries annuelles de plusieurs zones : series = { zoneId: [{annee, valeur}] }. */
-export function GraphiqueSeries({ series, unite, noms, hauteur = 340, zero = false }) {
+/**
+ * Séries annuelles de plusieurs zones : series = { zoneId: [{annee, valeur}] }.
+ * seuil = { valeur, libelle } (ligne de référence), animer = tracé à l'entrée
+ * puis transition au changement de données (désactivé si mouvement réduit).
+ * rupture = première année d'un nouveau périmètre : le tracé s'interrompt et un
+ * repère vertical la signale (valeurs inchangées).
+ */
+export function GraphiqueSeries({ series, unite, noms, hauteur = 340, zero = false, seuil = null, animer = false, rupture = null }) {
+  const { t } = useTranslation();
   const annees = new Set();
   Object.values(series).forEach((s) => s.forEach((p) => annees.add(p.annee)));
   const data = [...annees]
@@ -63,24 +71,41 @@ export function GraphiqueSeries({ series, unite, noms, hauteur = 340, zero = fal
       }
       return ligne;
     });
+  // Point vide intercalé avant la rupture : avec connectNulls={false}, la ligne s'interrompt.
+  const avecRupture = rupture != null && data.some((d) => d.annee < rupture) && data.some((d) => d.annee >= rupture);
+  if (avecRupture) {
+    const i = data.findIndex((d) => d.annee >= rupture);
+    data.splice(i, 0, { annee: rupture - 0.5 });
+  }
   return (
     <ResponsiveContainer width="100%" height={hauteur}>
-      <LineChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
+      <LineChart data={data} margin={{ top: avecRupture ? 22 : 8, right: 12, bottom: 0, left: 0 }}>
         <CartesianGrid stroke={GRILLE} vertical={false} />
         <XAxis dataKey="annee" type="number" domain={["dataMin", "dataMax"]} allowDecimals={false} tickCount={8} tick={AXE} axisLine={{ stroke: GRILLE }} tickLine={false} />
         <YAxis tick={AXE} axisLine={false} tickLine={false} width={52} tickFormatter={(v) => fmtNombre(v)} />
-        {zero && <ReferenceLine y={0} stroke="#b9ab95" />}
-        <Tooltip content={<Infobulle unite={unite} noms={noms} />} cursor={{ stroke: "#b9ab95" }} />
+        {zero && <ReferenceLine y={0} stroke="#b5b0a6" />}
+        {seuil && <ReferenceLine y={seuil.valeur} stroke="#b4532e" strokeWidth={1.5} strokeDasharray="2 3" ifOverflow="extendDomain" />}
+        {avecRupture && (
+          <ReferenceLine
+            x={rupture - 0.5}
+            stroke="#b4532e"
+            strokeDasharray="4 3"
+            label={{ value: t("rupture_graph", { annee: rupture }), position: "top", fill: "#b4532e", fontSize: 12, fontFamily: "Source Sans 3, sans-serif" }}
+          />
+        )}
+        <Tooltip content={<Infobulle unite={unite} noms={noms} />} cursor={{ stroke: "#b5b0a6" }} />
         {Object.keys(series).map((z) => (
           <Line
             key={z}
             dataKey={z}
             stroke={COULEUR_ZONE[z] || "#4a403a"}
             strokeWidth={z === "uemoa" ? 2.5 : 1.75}
-            strokeDasharray={z === "uemoa" ? "6 4" : undefined}
+            strokeDasharray={z === "uemoa" && Object.keys(series).length > 1 ? "6 4" : undefined}
             dot={false}
             connectNulls={false}
-            isAnimationActive={false}
+            isAnimationActive={animer}
+            animationDuration={600}
+            animationEasing="ease-out"
           />
         ))}
       </LineChart>
@@ -88,11 +113,13 @@ export function GraphiqueSeries({ series, unite, noms, hauteur = 340, zero = fal
   );
 }
 
-/** Mini-courbe sans axes (cartes pays). */
-export function MiniCourbe({ points, couleur = "#263a7a", hauteur = 44 }) {
+/** Mini-courbe sans axes ; rupture = première année d'un nouveau périmètre (tracé interrompu). */
+export function MiniCourbe({ points, couleur = "#24346b", hauteur = 44, rupture = null }) {
+  const i = rupture != null ? points.findIndex((p) => p.annee >= rupture) : -1;
+  const data = i > 0 ? [...points.slice(0, i), { annee: rupture - 0.5, valeur: null }, ...points.slice(i)] : points;
   return (
     <ResponsiveContainer width="100%" height={hauteur}>
-      <LineChart data={points} margin={{ top: 4, right: 2, bottom: 4, left: 2 }}>
+      <LineChart data={data} margin={{ top: 4, right: 2, bottom: 4, left: 2 }}>
         <YAxis hide domain={["auto", "auto"]} />
         <Line dataKey="valeur" stroke={couleur} strokeWidth={2} dot={false} isAnimationActive={false} />
       </LineChart>
@@ -147,14 +174,14 @@ export function GraphiquePrevision({ data, unite, hauteur = 340 }) {
           <CartesianGrid stroke={GRILLE} vertical={false} />
           <XAxis dataKey="annee" type="number" domain={["dataMin", "dataMax"]} allowDecimals={false} tickCount={8} tick={AXE} axisLine={{ stroke: GRILLE }} tickLine={false} />
           <YAxis tick={AXE} axisLine={false} tickLine={false} width={56} tickFormatter={(v) => fmtNombre(v)} />
-          <Tooltip content={<InfobullePrevision unite={unite} />} cursor={{ stroke: "#b9ab95" }} />
+          <Tooltip content={<InfobullePrevision unite={unite} />} cursor={{ stroke: "#b5b0a6" }} />
           <Area dataKey="ic" stroke="none" fill="rgba(184,80,42,0.16)" connectNulls isAnimationActive={false} />
-          <Line dataKey="obs" stroke="#263a7a" strokeWidth={2.25} dot={false} isAnimationActive={false} />
-          <Line dataKey="prev" stroke="#b8502a" strokeWidth={2.25} strokeDasharray="6 4" dot={{ r: 3.5, fill: "#b8502a", stroke: "#b8502a" }} connectNulls isAnimationActive={false} />
+          <Line dataKey="obs" stroke="#24346b" strokeWidth={2.25} dot={false} isAnimationActive={false} />
+          <Line dataKey="prev" stroke="#b4532e" strokeWidth={2.25} strokeDasharray="6 4" dot={{ r: 3.5, fill: "#b4532e", stroke: "#b4532e" }} connectNulls isAnimationActive={false} />
         </ComposedChart>
       </ResponsiveContainer>
       <p className="legende">
-        <span><i style={{ background: "#263a7a" }} /> {t("leg_observe")}</span>
+        <span><i style={{ background: "#24346b" }} /> {t("leg_observe")}</span>
         {avecPrevision && (
           <>
             <span><i className="pointille" /> {t("leg_prevision")}</span>
@@ -185,7 +212,7 @@ export function BarresPays({ donnees, unite, union, libelleUnion, seuil, couleur
   const arrondi = (v) => {
     if (v <= 0) return 0;
     const p = 10 ** Math.floor(Math.log10(v));
-    return [1, 2, 2.5, 5, 10].find((m) => m * p >= v) * p;
+    return [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find((m) => m * p >= v) * p;
   };
   const domaine = [min < 0 ? -arrondi(-min + marge) : 0, max > 0 ? arrondi(max + marge) : 0];
 
@@ -201,8 +228,8 @@ export function BarresPays({ donnees, unite, union, libelleUnion, seuil, couleur
         dy="0.35em"
         textAnchor={negatif ? "end" : "start"}
         fontSize={12}
-        fontFamily="Inter"
-        fill="#1f1a17"
+        fontFamily="Source Sans 3, sans-serif"
+        fill="#1c1f24"
       >
         {fmtValeur(value, unite, undefined, true)}
       </text>
@@ -212,16 +239,16 @@ export function BarresPays({ donnees, unite, union, libelleUnion, seuil, couleur
   return (
     <div>
       <ResponsiveContainer width="100%" height={hauteur}>
-        <BarChart data={lignes} layout="vertical" margin={{ top: 4, right: 16, bottom: 4, left: 8 }} barCategoryGap={10}>
+        <BarChart data={lignes} layout="vertical" margin={{ top: 4, right: 44, bottom: 4, left: 8 }} barCategoryGap={10}>
           <CartesianGrid stroke={GRILLE} horizontal={false} />
           <XAxis type="number" domain={domaine} tick={AXE} axisLine={false} tickLine={false} tickFormatter={(v) => fmtNombre(v)} />
-          <YAxis type="category" dataKey="nom" tick={{ ...AXE, fontSize: 13, fill: "#1f1a17" }} axisLine={false} tickLine={false} width={118} />
-          <ReferenceLine x={0} stroke="#b9ab95" />
-          {union != null && <ReferenceLine x={union} stroke="#1f1a17" strokeDasharray="5 4" strokeWidth={1.5} />}
-          {seuil && <ReferenceLine x={seuil.valeur} stroke="#b8502a" strokeWidth={2} />}
+          <YAxis type="category" dataKey="nom" tick={{ ...AXE, fontSize: 13, fill: "#1c1f24" }} axisLine={false} tickLine={false} width={118} />
+          <ReferenceLine x={0} stroke="#b5b0a6" />
+          {union != null && <ReferenceLine x={union} stroke="#1c1f24" strokeDasharray="5 4" strokeWidth={1.5} />}
+          {seuil && <ReferenceLine x={seuil.valeur} stroke="#b4532e" strokeWidth={2} />}
           <Bar dataKey="valeur" isAnimationActive={false} radius={3} label={etiquette}>
             {lignes.map((l) => (
-              <Cell key={l.id} fill={couleur ? couleur(l) : "#263a7a"} />
+              <Cell key={l.id} fill={couleur ? couleur(l) : "#24346b"} />
             ))}
           </Bar>
         </BarChart>
@@ -234,7 +261,7 @@ export function BarresPays({ donnees, unite, union, libelleUnion, seuil, couleur
         )}
         {seuil && (
           <span>
-            <i style={{ background: "#b8502a" }} /> {seuil.libelle}
+            <i style={{ background: "#b4532e" }} /> {seuil.libelle}
           </span>
         )}
         {manquants.length > 0 && <span>{t("nd")} : {manquants.map((m) => m.nom).join(", ")}</span>}

@@ -1,10 +1,9 @@
 import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { TriangleAlert } from "lucide-react";
 import { INDICATEURS, PERIODE_PREVISION, ANNEES_PREVISION } from "../data/catalogue.js";
 import { calculerSignaux, texteSignal } from "../lib/signaux.js";
-import { fmtValeur, fmtCourt, fmtIntervalle, fmtNombre, fmtPeriode, libelleUnite } from "../lib/format.js";
+import { fmtValeur, fmtCourt, fmtIntervalle, fmtPeriode, fmtDate, libelleUnite } from "../lib/format.js";
 import { GraphiquePrevision, serieAvecPrevision } from "../components/Graphiques.jsx";
 import Bandeau from "../components/Bandeau.jsx";
 import Visualisation from "../components/Visualisation.jsx";
@@ -22,9 +21,9 @@ export default function Previsions() {
   const derniere = ind.previsions[ind.previsions.length - 1];
   const avecPrevision = INDICATEURS.filter((i) => i.previsions.length > 0);
   const signaux = calculerSignaux();
-  // Période et modèle(s) déduits des données exportées par le pipeline.
+  // Période et date de calcul lues dans les fichiers exportés par le pipeline.
   const periode = fmtPeriode(PERIODE_PREVISION);
-  const modeles = [...new Set(INDICATEURS.map((i) => i.modele?.type).filter(Boolean))].join(", ") || "—";
+  const dateCalcul = INDICATEURS.map((i) => i.modele?.dateEntrainement).find(Boolean);
 
   // Tableau de la visualisation : 5 dernières observations + prévisions.
   const lignesVue = [
@@ -59,15 +58,15 @@ export default function Previsions() {
   return (
     <>
       <Bandeau
-        fil={[{ to: "/", label: t("accueil") }, { label: t("nav_previsions") }]}
+        fil={[{ to: "/", label: t("accueil") }, { to: "/conjoncture", label: t("nav_conjoncture") }, { label: t("nav_previsions") }]}
         surtitre={t("prev_surtitre")}
         titre={t("prev_titre", { periode: periode })}
         sousTitre={t("prev_chapeau")}
         meta={[
           { label: t("prev_meta_zone"), valeur: t("zone_senegal") },
           { label: t("prev_meta_horizon"), valeur: periode },
-          { label: t("prev_modele"), valeur: modeles },
           { label: t("prev_meta_incertitude"), valeur: t("leg_ic") },
+          ...(dateCalcul ? [{ label: t("meta_maj"), valeur: fmtDate(new Date(dateCalcul)) }] : []),
         ]}
       />
 
@@ -131,16 +130,6 @@ export default function Previsions() {
 
           <dl className="fiche-modele">
             <div>
-              <dt>{t("prev_modele")}</dt>
-              <dd>{ind.modele ? `${ind.modele.type} ${ind.modele.ordre}` : t("prev_modele_nd")}</dd>
-            </div>
-            <div>
-              <dt>{t("prev_mae")}</dt>
-              <dd className="nombre">
-                {ind.modele ? `${fmtNombre(ind.modele.mae, 2)} ${ind.unite === "%" ? "pt" : libelleUnite(ind.unite)}` : t("prev_modele_nd")}
-              </dd>
-            </div>
-            <div>
               <dt>{t("prev_historique")}</dt>
               <dd className="nombre">{ind.periodeHistorique ? fmtPeriode(ind.periodeHistorique) : t("prev_historique_nd")}</dd>
             </div>
@@ -148,7 +137,25 @@ export default function Previsions() {
               <dt>{t("prev_meta_horizon")}</dt>
               <dd className="nombre">{ind.periodePrevision ? fmtPeriode(ind.periodePrevision) : t("prev_aucune_court")}</dd>
             </div>
+            <div>
+              <dt>{t("prev_donnees_jusqua")}</dt>
+              <dd className="nombre">{ind.modele?.derniereObservation ?? "—"}</dd>
+            </div>
+            <div>
+              <dt>{t("meta_maj")}</dt>
+              <dd className="nombre">{ind.modele?.dateEntrainement ? fmtDate(new Date(ind.modele.dateEntrainement)) : "—"}</dd>
+            </div>
           </dl>
+
+          <div className="prev-limites">
+            <h2>{t("prev_limites_titre")}</h2>
+            <ul>
+              <li>{t("prev_limites_l1")}</li>
+              <li>{t("prev_limites_l2")}</li>
+              <li>{t("prev_limites_l3")}</li>
+            </ul>
+            <Link to="/methodologie#previsions" className="lien-fleche">{t("prev_methode_lien")} <span className="fleche">→</span></Link>
+          </div>
         </div>
       </section>
 
@@ -221,7 +228,6 @@ export default function Previsions() {
                         const { titre, detail } = texteSignal(s, t);
                         return (
                           <li key={i}>
-                            <TriangleAlert size={18} aria-hidden="true" />
                             <span>
                               <b>{titre}</b>
                               {detail}

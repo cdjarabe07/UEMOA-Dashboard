@@ -1,0 +1,32 @@
+[
+  {
+    "id": "bceao-rapport-annuel-2023",
+    "institution": "BCEAO",
+    "type": "rapport",
+    "titre": "Rapport annuel 2023",
+    "edition": "2023",
+    "langue": "fr",
+    "format": "PDF",
+    "url": "https://www.bceao.int/sites/default/files/2024-09/Rapport_Annuel_2023_BCEAO_20092024.pdf",
+    "mise_en_ligne": "2024-09",
+    "verifie_le": "2026-10-08",
+    "dossiers": ["croissance", "inflation", "finances-publiques", "echanges", "monnaie"],
+    "zones": ["uemoa"],
+    "couverture": null
+  },
+  {
+    "id": "bceao-rpm-2023-03",
+    "institution": "BCEAO",
+    "type": "rapport",
+    "titre": "Rapport sur la politique monétaire dans l'UMOA",
+    "edition": "mars 2023",
+    "langue": "fr",
+    "format": "PDF",
+    "url": "https://www.bceao.int/sites/default/files/2023-05/BCEAO%20-%20Rapport%20sur%20la%20politique%20mone%CC%81taire_Umoa_Mars_2023.pdf",
+    "mise_en_ligne": "2023-05",
+    "verifie_le": "2026-10-08",
+    "dossiers": ["inflation", "finances-publiques", "echanges", "monnaie"],
+    "zones": ["uemoa"],
+    "couverture": null
+  }
+]

@@ -3,7 +3,7 @@
 //
 // Seuls les critères calculables avec les séries exportées sont évalués :
 // le critère « masse salariale / recettes fiscales ≤ 35 % » n'est pas couvert.
-import { PAYS, UNION, valeur } from "../data/portail.js";
+import { PAYS, UNION, valeur, evaluable } from "../data/portail.js";
 
 export const CRITERES = [
   { id: "solde", indicateur: "solde_budgetaire_pib", rang: 1, sens: ">=", seuil: -3 },
@@ -12,15 +12,20 @@ export const CRITERES = [
   { id: "pression_fiscale", indicateur: "pression_fiscale", rang: 2, sens: ">=", seuil: 20 },
 ];
 
-export const respecte = (critere, v) =>
-  v == null ? null : critere.sens === "<=" ? v <= critere.seuil : v >= critere.seuil;
+// Critère évaluable une année donnée : faux si la série a changé de périmètre
+// depuis (ex. dette publique avant 2022, voir RUPTURES dans portail.json).
+export const nonComparable = (critere, annee) => annee != null && !evaluable(critere.indicateur, annee);
+
+// true / false, ou null si la valeur manque ou si l'année n'est pas comparable.
+export const respecte = (critere, v, annee = null) =>
+  v == null || nonComparable(critere, annee) ? null : critere.sens === "<=" ? v <= critere.seuil : v >= critere.seuil;
 
 // Tableau d'évaluation pour une année : une ligne par pays, puis l'Union.
 export function evaluerConvergence(annee) {
   return [...PAYS, UNION].map((zone) => {
     const resultats = CRITERES.map((c) => {
       const v = valeur(c.indicateur, zone.id, annee);
-      return { critere: c, valeur: v, respecte: respecte(c, v) };
+      return { critere: c, valeur: v, respecte: respecte(c, v, annee), nonComparable: nonComparable(c, annee) };
     });
     return {
       zone,

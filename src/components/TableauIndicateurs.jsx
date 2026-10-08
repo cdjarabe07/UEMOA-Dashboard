@@ -6,7 +6,7 @@ import { MiniCourbe } from "./Graphiques.jsx";
  * lignes = [{ id, libelle, unite, lien, valeur, annee, comparaison, points }]
  * colonnes = { valeur, comparaison?, tendance }  (en-têtes)
  */
-export default function TableauIndicateurs({ titre, lignes, colonnes, couleur = "#263a7a" }) {
+export default function TableauIndicateurs({ titre, lignes, colonnes, couleur = "#24346b" }) {
   return (
     <section className="tab-ind">
       {titre && <h3 className="tab-ind-titre">{titre}</h3>}
@@ -35,7 +35,7 @@ export default function TableauIndicateurs({ titre, lignes, colonnes, couleur = 
                 <td className="tab-ind-tendance">
                   {l.points.length > 1 ? (
                     <>
-                      <MiniCourbe points={l.points} couleur={couleur} hauteur={38} />
+                      <MiniCourbe points={l.points} couleur={couleur} hauteur={38} rupture={l.rupture} />
                       <span className="tab-ind-bornes nombre">
                         <span>{l.points[0].annee}</span>
                         <span>{l.points[l.points.length - 1].annee}</span>

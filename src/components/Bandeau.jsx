@@ -42,7 +42,6 @@ export default function Bandeau({ fil = [], surtitre, titre, sousTitre, meta = [
           </aside>
         )}
       </div>
-      <div className="motif motif--fin" />
     </header>
   );
 }

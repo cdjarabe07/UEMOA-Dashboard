@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import Bandeau from "../components/Bandeau.jsx";
 import { useTranslation } from "react-i18next";
-import { INDICATEURS as REGIONAUX, PAYS, SOURCE } from "../data/portail.js";
+import { INDICATEURS as REGIONAUX, PAYS, UNION, SOURCE, RUPTURES, valeur, getIndicateur } from "../data/portail.js";
 import { INDICATEURS as PREVISIONNELS, PERIODE_PREVISION } from "../data/catalogue.js";
 import { CRITERES } from "../lib/convergence.js";
 import { SEUIL_VARIATION } from "../lib/signaux.js";
 import { DATE_GENERATION } from "../lib/meta.js";
-import { fmtDate, fmtNombre, fmtPeriode, libelleUnite } from "../lib/format.js";
+import { fmtDate, fmtNombre, fmtPeriode, fmtValeur, libelleUnite } from "../lib/format.js";
 
-const SECTIONS = ["sources", "preparation", "indicateurs", "convergence", "previsions", "signaux", "limites"];
+const SECTIONS = ["sources", "preparation", "ruptures", "indicateurs", "convergence", "previsions", "signaux", "attention", "limites"];
 
 export default function Methodologie() {
   const { t } = useTranslation();
@@ -57,6 +57,73 @@ export default function Methodologie() {
             </ul>
           </section>
 
+          <section id="ruptures">
+            <h2>{t("meth_ruptures_titre")}</h2>
+            <p>{t("meth_ruptures_p1")}</p>
+            {RUPTURES.map((r) => {
+              const an = r.premiere_annee;
+              const ind = getIndicateur(r.indicateurs[0]);
+              const totale = r.etabli.find((e) => e.grandeur === "dette_publique_totale");
+              const ext = r.etabli.find((e) => e.grandeur === "dette_publique_exterieure");
+              return (
+                <div key={r.id} className="meth-rupture">
+                  <h3>{t("rupture_titre", { annee: an })} · {t(ind.libelle)}</h3>
+                  <p>{t("rupture_resume", { annee: an })}</p>
+                  <h4>{t("rupture_etabli_titre")}</h4>
+                  <ul>
+                    {totale && (
+                      <li>
+                        {t("rupture_etabli_total", {
+                          annee: totale.annee,
+                          zone: t(`zone_${totale.zone}`),
+                          montant: fmtValeur(totale.montant_mds_fcfa, "Mds FCFA", 1),
+                          pct: fmtValeur(totale.pct_pib, "% du PIB"),
+                        })}{" "}
+                        <a href={totale.url} target="_blank" rel="noreferrer">{totale.source}</a>, {totale.reference}.{" "}
+                        {t("meth_ruptures_imeco", { annee: totale.annee, pct: fmtValeur(valeur(ind.id, UNION.id, totale.annee), "% du PIB") })}
+                      </li>
+                    )}
+                    {ext && (
+                      <li>
+                        {t("meth_ruptures_ext", { annee: ext.annee })}{" "}
+                        <a href={ext.url} target="_blank" rel="noreferrer">{ext.source}</a>, {ext.reference}.
+                      </li>
+                    )}
+                  </ul>
+                  {ext && (
+                    <div className="defilant">
+                      <table className="tableau">
+                        <caption>{t("meth_ruptures_tableau", { avant: an - 1, annee: an })}</caption>
+                        <thead>
+                          <tr>
+                            <th scope="col">{t("col_pays")}</th>
+                            <th scope="col" className="num">{t("meth_ruptures_col_serie", { annee: an - 1 })}</th>
+                            <th scope="col" className="num">{t("meth_ruptures_col_ext", { annee: an })}</th>
+                            <th scope="col" className="num">{t("meth_ruptures_col_serie", { annee: an })}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {[...PAYS, UNION].map((z) => (
+                            <tr key={z.id} className={z.id === "uemoa" ? "ligne-union" : undefined}>
+                              <th scope="row">{t(`zone_${z.id}`)}</th>
+                              <td className="num nombre">{fmtNombre(valeur(ind.id, z.id, an - 1), 1, true)}</td>
+                              <td className="num nombre">{fmtNombre(ext.pct_pib[z.id], 1, true)}</td>
+                              <td className="num nombre">{fmtNombre(valeur(ind.id, z.id, an), 1, true)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                  <h4>{t("rupture_deduit_titre")}</h4>
+                  <p>{t("rupture_deduit", { avant: an - 1, annee: an })} {t("meth_ruptures_controle")}</p>
+                  <p>{t("rupture_consequence", { annee: an })}</p>
+                  <p className="texte-secondaire">{t("meth_ruptures_verifie", { date: fmtDate(new Date(r.verifie_le)) })}</p>
+                </div>
+              );
+            })}
+          </section>
+
           <section id="indicateurs">
             <h2>{t("meth_indicateurs_titre")}</h2>
             <div className="defilant">
@@ -72,7 +139,7 @@ export default function Methodologie() {
                 <tbody>
                   {REGIONAUX.map((i) => (
                     <tr key={i.id}>
-                      <th scope="row"><Link to={`/indicateurs/${i.id}`}>{t(i.libelle)}</Link></th>
+                      <th scope="row"><Link to={`/donnees/${i.id}`}>{t(i.libelle)}</Link></th>
                       <td>{libelleUnite(i.unite)}</td>
                       <td className="nombre">{fmtPeriode(i.periode)}</td>
                       <td><code>{i.serie_bceao}</code></td>
@@ -106,7 +173,8 @@ export default function Methodologie() {
                     <th scope="col">{t("col_indicateur")}</th>
                     <th scope="col">{t("prev_modele")}</th>
                     <th scope="col" className="num">{t("prev_mae")}</th>
-                    <th scope="col">{t("meth_statut")}</th>
+                    <th scope="col" className="num">{t("meth_mae_naif")}</th>
+                    <th scope="col">{t("meth_publication")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -115,13 +183,24 @@ export default function Methodologie() {
                       <th scope="row">{t(i.libelle)}</th>
                       <td>{i.modele ? `${i.modele.type} ${i.modele.ordre}` : t("prev_modele_nd")}</td>
                       <td className="num nombre">{i.modele ? fmtNombre(i.modele.mae, 2) : "—"}</td>
-                      <td>{t(`statut_${i.statut}`)}</td>
+                      <td className="num nombre">{i.modele ? fmtNombre(i.modele.maeNaif, 2) : "—"}</td>
+                      <td>{i.previsions.length ? t("meth_publiee") : t("meth_non_publiee")}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            <p className="texte-secondaire">{t("meth_previsions_unites")}</p>
+            <p>{t("meth_previsions_validation", {
+              n: PREVISIONNELS.find((i) => i.modele)?.modele.nbAnneesValidation ?? "—",
+              h: PREVISIONNELS.find((i) => i.modele)?.modele.horizonValidation ?? "—",
+            })}</p>
             <p>{t("meth_previsions_p2", { periode: fmtPeriode(PERIODE_PREVISION) })}</p>
+            {PREVISIONNELS.find((i) => i.modele?.dateEntrainement) && (
+              <p className="texte-secondaire">
+                {t("meth_previsions_date", { date: fmtDate(new Date(PREVISIONNELS.find((i) => i.modele?.dateEntrainement).modele.dateEntrainement)) })}
+              </p>
+            )}
           </section>
 
           <section id="signaux">
@@ -131,6 +210,17 @@ export default function Methodologie() {
               <li>{t("meth_signaux_r1")}</li>
               <li>{t("meth_signaux_r2", { seuil: fmtNombre(SEUIL_VARIATION * 100) })}</li>
               <li>{t("meth_signaux_r3")}</li>
+            </ol>
+          </section>
+
+          <section id="attention">
+            <h2>{t("meth_attention_titre")}</h2>
+            <p>{t("meth_attention_p1")}</p>
+            <ol>
+              <li>{t("meth_attention_r1")}</li>
+              <li>{t("meth_attention_r2")}</li>
+              <li>{t("meth_attention_r3")}</li>
+              <li>{t("meth_attention_r4")}</li>
             </ol>
           </section>
 

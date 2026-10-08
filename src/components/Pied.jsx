@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Logo } from "./Entete.jsx";
 import { DATE_GENERATION, SOURCES } from "../lib/meta.js";
 import { fmtDate } from "../lib/format.js";
 import { PAYS } from "../data/portail.js";
@@ -9,10 +8,8 @@ export default function Pied() {
   const { t } = useTranslation();
   return (
     <footer className="pied">
-      <div className="motif" />
       <div className="conteneur pied-grille">
         <div className="pied-marque">
-          <Logo />
           <p>
             <b>{t("marque")}</b>
             <br />
@@ -21,10 +18,13 @@ export default function Pied() {
         </div>
         <div>
           <p className="pied-titre">{t("pied_explorer")}</p>
+          <Link to="/conjoncture">{t("nav_conjoncture")}</Link>
+          <Link to="/conjoncture/convergence">{t("nav_convergence")}</Link>
+          <Link to="/conjoncture/previsions">{t("nav_previsions")}</Link>
+          <Link to="/analyses">{t("nav_analyses")}</Link>
           <Link to="/pays">{t("nav_pays")}</Link>
-          <Link to="/indicateurs">{t("nav_indicateurs")}</Link>
-          <Link to="/convergence">{t("nav_convergence")}</Link>
-          <Link to="/previsions">{t("nav_previsions")}</Link>
+          <Link to="/donnees">{t("nav_donnees")}</Link>
+          <Link to="/publications">{t("nav_publications")}</Link>
           <Link to="/methodologie">{t("nav_methodologie")}</Link>
         </div>
         <div>

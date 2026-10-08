@@ -71,3 +71,49 @@ export const famillesDisponibles = () =>
   FAMILLES.map((f) => ({ id: f, indicateurs: INDICATEURS.filter((i) => i.famille === f) })).filter(
     (f) => f.indicateurs.length > 0
   );
+
+// Provenance (miroir de previsions-macro-uemoa/export_portail.py, sans aucune valeur) :
+// ratios « % du PIB » recalculés à partir de leur série en niveau à chaque export
+// (l'export s'arrête si l'écart médian dépasse SEUIL_ECART_MEDIAN point).
+export const RATIOS_CONTROLES = new Set([
+  "dette_pib",
+  "solde_budgetaire_pib",
+  "pression_fiscale",
+  "balance_courante_pib",
+  "credit_economie_pib",
+]);
+export const SEUIL_ECART_MEDIAN = 1;
+
+// Zéros de remplissage écartés par l'export (valeur publiée à 0 alors que la
+// série en niveau est non nulle) : indicateur -> zones concernées.
+export const ZEROS_ECARTES = {
+  solde_budgetaire_pib: ["benin", "burkina", "cote_ivoire"],
+};
+
+// Code complet de la série source pour une zone (ex. BCEAO/IMECO/KKKFP3054A0FA).
+export const codeSerie = (ind, zoneId) => {
+  const zone = ZONES.find((z) => z.id === zoneId);
+  return zone ? ind.serie_bceao.replace("<zone>", zone.code_bceao) : ind.serie_bceao;
+};
+
+// Zones couvertes par un indicateur (8 pays + Union, ou Union seule).
+export const zonesDe = (indicateurId) => ZONES.filter((z) => ((portail.series[indicateurId] || {})[z.id] || []).length > 0);
+
+// Ruptures de série déclarées par l'export (export_portail.py, RUPTURES).
+// Les valeurs ne sont jamais modifiées : le portail interrompt les tracés,
+// ne calcule pas de variation et n'évalue pas de critère à travers une rupture.
+export const RUPTURES = portail.ruptures || [];
+export const ruptureDe = (indicateurId) => RUPTURES.find((r) => r.indicateurs.includes(indicateurId)) || null;
+export const anneeRupture = (indicateurId) => ruptureDe(indicateurId)?.premiere_annee ?? null;
+
+// Deux années sont comparables si elles sont du même côté de la rupture.
+export const comparables = (indicateurId, a, b) => {
+  const r = anneeRupture(indicateurId);
+  return r == null || a >= r === b >= r;
+};
+
+// Une année est évaluable (critère, classement) si elle suit la rupture.
+export const evaluable = (indicateurId, annee) => {
+  const r = anneeRupture(indicateurId);
+  return r == null || annee >= r;
+};

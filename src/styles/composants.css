@@ -2,10 +2,10 @@
 
 .entete {
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: 50;
-  background: var(--sable-clair);
-  border-bottom: 1px solid var(--ligne);
+  background: var(--sable);
+  border-bottom: 1px solid var(--encre);
 }
 
 .entete-barre {
@@ -38,7 +38,7 @@
 }
 
 .marque-texte b {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 700;
 }
 
@@ -53,22 +53,44 @@
 }
 
 .entete-lien {
+  position: relative;
   padding: 8px 14px;
-  border-radius: 999px;
   color: var(--encre-2);
   font-weight: 500;
   text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: color var(--t-court) var(--ease-out);
+}
+
+/* Soulignement qui se déploie au survol, fixe sur la rubrique active. */
+.entete-lien::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--encre);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-base) var(--ease-out);
 }
 
 .entete-lien:hover {
-  background: var(--sable-fonce);
   color: var(--encre);
 }
 
+.entete-lien:hover::after {
+  transform: scaleX(1);
+}
+
 .entete-lien.active {
-  background: var(--indigo);
-  color: #fff;
+  color: var(--indigo);
+  font-weight: 600;
+}
+
+.entete-lien.active::after {
+  background: var(--terracotta);
+  transform: scaleX(1);
 }
 
 .entete-outils {
@@ -79,20 +101,20 @@
 
 .langue {
   display: flex;
-  border: 1px solid var(--ligne);
-  border-radius: 999px;
-  padding: 2px;
+  border: 1px solid #c9c4b9;
+  border-radius: var(--rayon);
+  overflow: hidden;
 }
 
 .langue button {
   border: none;
   background: none;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 12px;
+  padding: 4px 9px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--gris);
   cursor: pointer;
+  transition: background var(--t-court) var(--ease-out), color var(--t-court) var(--ease-out);
 }
 
 .langue button[aria-pressed="true"] {
@@ -142,8 +164,8 @@
 
 .pied {
   margin-top: 0;
-  background: var(--indigo-fonce);
-  color: #cfd5e8;
+  background: var(--encre);
+  color: #d6d8dc;
   font-size: 14px;
 }
 
@@ -176,16 +198,16 @@
   margin: 0 0 12px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ocre);
+  color: #9ea3ab;
 }
 
 .pied a,
 .pied span {
   display: block;
   margin-bottom: 7px;
-  color: #cfd5e8;
+  color: #d6d8dc;
   text-decoration: none;
 }
 
@@ -196,7 +218,7 @@
 .pied .pied-note {
   margin-top: 12px;
   font-size: 12px;
-  color: #9aa3c4;
+  color: #9ea3ab;
 }
 
 @media (max-width: 860px) {
@@ -213,14 +235,12 @@
 .infobulle {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  min-width: 160px;
+  gap: 4px;
   padding: 10px 12px;
-  background: var(--sable-clair);
-  border: 1px solid var(--ligne);
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(31, 26, 23, 0.1);
-  font-size: 12px;
+  background: #fff;
+  border: 1px solid var(--encre);
+  border-radius: var(--rayon);
+  font-size: 13px;
 }
 
 .infobulle b {
@@ -276,6 +296,10 @@
   background: repeating-linear-gradient(90deg, var(--encre) 0 5px, transparent 5px 8px);
 }
 
+.legende i.pointille--seuil {
+  background: repeating-linear-gradient(90deg, var(--terracotta) 0 2px, transparent 2px 5px);
+}
+
 .legende i.bande {
   height: 10px;
   background: rgba(184, 80, 42, 0.18);
@@ -328,8 +352,9 @@
 
 .tableau thead th {
   vertical-align: bottom;
-  background: var(--sable-fonce);
-  font-size: 12px;
+  background: transparent;
+  border-bottom: 1.5px solid var(--encre);
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--encre);
 }

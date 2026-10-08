@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowRight } from "lucide-react";
 import { PAYS, valeur, derniereAnnee } from "../data/portail.js";
 import { fmtCourt } from "../lib/format.js";
 import { COULEUR_ZONE } from "./Graphiques.jsx";
@@ -21,7 +20,7 @@ export default function CartesPays() {
               <b className="nombre">{fmtCourt(valeur("croissance_reelle", p.id, an), "%")}</b>
             </span>
             <span className="carte-pays-lien">
-              {t("pays_voir_profil")} <ArrowRight size={15} />
+              {t("pays_voir_profil")} <span className="fleche">→</span>
             </span>
           </Link>
         </li>

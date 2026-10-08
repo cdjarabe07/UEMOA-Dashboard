@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Check, X, ArrowRight } from "lucide-react";
-import { PAYS, UNION, INDICATEURS, valeur, serie, derniereAnnee, getIndicateur, famillesDisponibles } from "../data/portail.js";
+import { Check, X } from "lucide-react";
+import { PAYS, UNION, INDICATEURS, valeur, serie, derniereAnnee, getIndicateur, famillesDisponibles, anneeRupture } from "../data/portail.js";
 import { CRITERES, respecte } from "../lib/convergence.js";
 import { fmtValeur, fmtCourt, fmtPeriode, libelleUnite } from "../lib/format.js";
 import { PERIODE_PREVISION } from "../data/catalogue.js";
@@ -97,7 +97,7 @@ export function ListePays() {
                     <td className="cellule-profil">
                       {p.id !== "uemoa" && (
                         <Link to={`/pays/${p.id}`} onClick={(e) => e.stopPropagation()}>
-                          {t("pays_profil_court")} <ArrowRight size={14} />
+                          {t("pays_profil_court")} <span className="fleche">→</span>
                         </Link>
                       )}
                     </td>
@@ -211,11 +211,12 @@ export default function ProfilPays() {
                         id: i.id,
                         libelle: t(i.libelle),
                         unite: libelleUnite(i.unite),
-                        lien: `/indicateurs/${i.id}`,
+                        lien: `/donnees/${i.id}`,
                         valeur: der ? fmtValeur(der.valeur, i.unite, undefined, true) : "—",
                         annee: der?.annee ?? "",
                         comparaison: der ? fmtValeur(valeur(i.id, UNION.id, der.annee), i.unite, undefined, true) : "—",
                         points: s.filter((p) => p.annee >= 2005),
+                        rupture: anneeRupture(i.id),
                       };
                     })}
                   />
@@ -232,7 +233,7 @@ export default function ProfilPays() {
           <div>
             <h2>{t("profil_conv_titre", { annee: anConv })}</h2>
             <p className="texte-secondaire">{t("profil_conv_chapeau")}</p>
-            <Link to="/convergence" className="lien-fleche">{t("profil_conv_lien")}</Link>
+            <Link to="/conjoncture/convergence" className="lien-fleche">{t("profil_conv_lien")}</Link>
           </div>
           <div className="defilant">
           <table className="tableau tableau--aere">
@@ -247,7 +248,7 @@ export default function ProfilPays() {
             <tbody>
               {CRITERES.map((c) => {
                 const v = valeur(c.indicateur, pays.id, anConv);
-                const ok = respecte(c, v);
+                const ok = respecte(c, v, anConv);
                 return (
                   <tr key={c.id}>
                     <th scope="row">{t(`conv_${c.id}`)}</th>
@@ -291,6 +292,7 @@ export default function ProfilPays() {
                   noms={{ [pays.id]: nom, uemoa: t("zone_uemoa") }}
                   hauteur={360}
                   zero={ig.unite !== "Mds FCFA"}
+                  rupture={anneeRupture(indGraph)}
                 />
                 <p className="legende">
                   <span><i style={{ background: COULEUR_ZONE[pays.id] }} /> {nom}</span>
@@ -304,14 +306,14 @@ export default function ProfilPays() {
                   <thead>
                     <tr>
                       <th scope="col">{t("col_annee")}</th>
-                      {anneesGraph.map((a) => <th key={a} scope="col" className="num nombre">{a}</th>)}
+                      {anneesGraph.map((a) => <th key={a} scope="col" className={`num nombre${a === anneeRupture(indGraph) ? " apres-rupture" : ""}`}>{a}</th>)}
                     </tr>
                   </thead>
                   <tbody>
                     {Object.keys(seriesGraph).map((z) => (
                       <tr key={z} className={z === "uemoa" ? "ligne-union" : undefined}>
                         <th scope="row">{t(`zone_${z}`)}</th>
-                        {anneesGraph.map((a) => <td key={a} className="num nombre">{fmtCourt(valeur(indGraph, z, a), ig.unite)}</td>)}
+                        {anneesGraph.map((a) => <td key={a} className={`num nombre${a === anneeRupture(indGraph) ? " apres-rupture" : ""}`}>{fmtCourt(valeur(indGraph, z, a), ig.unite)}</td>)}
                       </tr>
                     ))}
                   </tbody>
@@ -319,16 +321,17 @@ export default function ProfilPays() {
               </div>
             }
             notes={{
+              lecture: anneeRupture(indGraph) ? t("rupture_resume", { annee: anneeRupture(indGraph) }) : null,
               champ: ig.unite !== "Mds FCFA" ? t("champ_pays_union", { pays: nom }) : nom,
               source: t("source_bceao"),
             }}
           />
           {pays.id === "senegal" && (
-            <Link to="/previsions" className="encart-lien">
+            <Link to="/conjoncture/previsions" className="encart-lien">
               <span>
                 <b>{t("profil_prev_titre", { periode: fmtPeriode(PERIODE_PREVISION) })}</b> {t("profil_prev_texte")}
               </span>
-              <ArrowRight size={18} />
+              <span className="fleche" aria-hidden="true">→</span>
             </Link>
           )}
         </div>

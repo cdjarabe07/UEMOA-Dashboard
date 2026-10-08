@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Check, X } from "lucide-react";
-import { PAYS, UNION, getIndicateur, valeur, derniereAnnee, anneesDisponibles } from "../data/portail.js";
-import { CRITERES, respecte, evaluerConvergence } from "../lib/convergence.js";
+import { PAYS, UNION, getIndicateur, valeur, derniereAnnee, anneesDisponibles, anneeRupture } from "../data/portail.js";
+import { CRITERES, respecte, nonComparable, evaluerConvergence } from "../lib/convergence.js";
 import { fmtCourt, fmtValeur, libelleUnite } from "../lib/format.js";
 import { BarresPays } from "../components/Graphiques.jsx";
 import Bandeau from "../components/Bandeau.jsx";
@@ -25,7 +25,10 @@ export default function Convergence() {
 
   // Nombre de pays respectant chaque critère, sur les dix dernières années.
   const dixAns = ANNEES.slice(-10);
-  const conformes = (c, a) => PAYS.filter((p) => respecte(c, valeur(c.indicateur, p.id, a)) === true).length;
+  const conformes = (c, a) => PAYS.filter((p) => respecte(c, valeur(c.indicateur, p.id, a), a) === true).length;
+  // Critères non évaluables l'année choisie (rupture de périmètre de la série).
+  const ncAnnee = CRITERES.filter((c) => nonComparable(c, annee));
+  const ncCritere = nonComparable(critere, annee);
 
   const colonnesExport = [
     { cle: "pays", titre: t("col_pays") },
@@ -34,7 +37,7 @@ export default function Convergence() {
   ];
   const lignesExport = tableau.map((l) => ({
     pays: t(`zone_${l.zone.id}`),
-    ...Object.fromEntries(l.resultats.map((r) => [r.critere.id, r.valeur])),
+    ...Object.fromEntries(l.resultats.map((r) => [r.critere.id, r.nonComparable ? t("non_comparable") : r.valeur])),
     total: `${l.nbRespectes}/${l.nbEvalues}`,
   }));
 
@@ -43,7 +46,7 @@ export default function Convergence() {
   return (
     <>
       <Bandeau
-        fil={[{ to: "/", label: t("accueil") }, { label: t("nav_convergence") }]}
+        fil={[{ to: "/", label: t("accueil") }, { to: "/conjoncture", label: t("nav_conjoncture") }, { label: t("nav_convergence") }]}
         surtitre={t("conv_surtitre")}
         titre={t("conv_titre")}
         sousTitre={t("conv_chapeau")}
@@ -97,10 +100,11 @@ export default function Convergence() {
                                     {l.zone.id === "uemoa" ? t("zone_uemoa") : <Link to={`/pays/${l.zone.id}`}>{t(`zone_${l.zone.id}`)}</Link>}
                                   </th>
                                   {l.resultats.map((r) => (
-                                    <td key={r.critere.id} className={`num ${r.respecte === true ? "ok" : r.respecte === false ? "ko" : ""}`}>
+                                    <td key={r.critere.id} className={`num ${r.respecte === true ? "ok" : r.respecte === false ? "ko" : ""}${r.nonComparable ? " nc" : ""}`}>
                                       <span className="nombre">{fmtCourt(r.valeur, getIndicateur(r.critere.indicateur).unite)}</span>
                                       {r.respecte === true && <Check size={15} aria-label={t("conv_ok")} />}
                                       {r.respecte === false && <X size={15} aria-label={t("conv_ko")} />}
+                                      {r.nonComparable && r.valeur != null && <small className="nc-mention">{t("non_comparable")}</small>}
                                     </td>
                                   ))}
                                   <td className="num nombre total">{l.nbRespectes}/{l.nbEvalues}</td>
@@ -111,7 +115,9 @@ export default function Convergence() {
                         </div>
                       }
                       notes={{
-                        lecture: t("conv_lecture"),
+                        lecture: ncAnnee.length
+                          ? `${t("conv_lecture")} ${t("conv_nc_note", { critere: t(`conv_${ncAnnee[0].id}`), annee: anneeRupture(ncAnnee[0].indicateur) })}`
+                          : t("conv_lecture"),
                         champ: t("champ_uemoa", { n: PAYS.length }),
                         source: t("conv_source"),
                       }}
@@ -143,14 +149,16 @@ export default function Convergence() {
                           unite={indCritere.unite}
                           union={valeur(critere.indicateur, UNION.id, annee)}
                           libelleUnion={t("zone_uemoa")}
-                          seuil={{ valeur: critere.seuil, libelle: t("conv_seuil_libelle", { seuil: fmtValeur(critere.seuil, indCritere.unite) }) }}
-                          couleur={(d) => (respecte(critere, d.valeur) ? "#4f7a2e" : "#b8502a")}
+                          seuil={ncCritere ? null : { valeur: critere.seuil, libelle: t("conv_seuil_libelle", { seuil: fmtValeur(critere.seuil, indCritere.unite) }) }}
+                          couleur={(d) => (ncCritere ? "#8a8f98" : respecte(critere, d.valeur, annee) ? "#4f6b35" : "#b4532e")}
                         />
                       }
                       notes={{
-                        lecture: t(critere.sens === ">=" ? "conv_lecture_min" : "conv_lecture_max", {
-                          seuil: fmtValeur(critere.seuil, indCritere.unite),
-                        }),
+                        lecture: ncCritere
+                          ? t("conv_nc_note", { critere: t(`conv_${critere.id}`), annee: anneeRupture(critere.indicateur) })
+                          : t(critere.sens === ">=" ? "conv_lecture_min" : "conv_lecture_max", {
+                              seuil: fmtValeur(critere.seuil, indCritere.unite),
+                            }),
                         source: t("source_bceao"),
                       }}
                     />
@@ -181,6 +189,13 @@ export default function Convergence() {
                                     {t(`conv_${c.id}`)} <small>{t(`conv_${c.id}_seuil`)}</small>
                                   </th>
                                   {dixAns.map((a) => {
+                                    if (nonComparable(c, a)) {
+                                      return (
+                                        <td key={a} className="num nc">
+                                          <abbr title={t("non_comparable")}>{t("nc_court")}</abbr>
+                                        </td>
+                                      );
+                                    }
                                     const n = conformes(c, a);
                                     return (
                                       <td key={a} className="num">
@@ -197,7 +212,9 @@ export default function Convergence() {
                         </div>
                       }
                       notes={{
-                        lecture: t("conv_temps_lecture", { n: PAYS.length }),
+                        lecture: CRITERES.some((c) => dixAns.some((a) => nonComparable(c, a)))
+                          ? `${t("conv_temps_lecture", { n: PAYS.length })} ${t("conv_nc_note", { critere: t("conv_dette"), annee: anneeRupture("dette_pib") })}`
+                          : t("conv_temps_lecture", { n: PAYS.length }),
                         source: t("source_bceao"),
                       }}
                     />

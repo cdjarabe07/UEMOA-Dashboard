@@ -1,36 +1,46 @@
 /* ==========================================================================
-   Observatoire économique de l'UEMOA — thème « Afrique de l'Ouest »
-   Sable, indigo, terracotta, ocre, vert sahel. Titres Bricolage Grotesque,
-   texte Inter. Signature : motif géométrique inspiré des textiles.
+   Observatoire économique de l'UEMOA — système visuel éditorial
+   Papier, encre et filets ; indigo pour l'action et la série principale,
+   terracotta réservée aux seuils, ruptures et critères non respectés.
+   Titres Source Serif 4, texte, tableaux et chiffres Source Sans 3.
    ========================================================================== */
 
 :root {
-  --sable: #f4ede2;
-  --sable-clair: #fbf8f2;
-  --sable-fonce: #e9dcc7;
-  --ligne: #e1d4bf;
+  /* --sable : fond des pages (papier) ; --sable-clair : surfaces ;
+     --sable-fonce : sable ponctuel (une section, survols). */
+  --sable: #fbfaf7;
+  --sable-clair: #ffffff;
+  --sable-fonce: #f1ebe0;
+  --ligne: #dcd8cf;
 
-  --encre: #1f1a17;
-  --encre-2: #4a403a;
-  --gris: #7a6f66;
+  --encre: #1c1f24;
+  --encre-2: #454b55;
+  --gris: #6b7079;
 
-  --indigo: #263a7a;
-  --indigo-fonce: #18254f;
-  --terracotta: #b8502a;
-  --ocre: #d39b2a;
-  --sahel: #5e7d3a;
+  --indigo: #24346b;
+  --indigo-fonce: #1a2753;
+  --terracotta: #b4532e;
+  --ocre: #c08a2b;
+  --sahel: #4f6b35;
 
-  --ok: #4f7a2e;
-  --ko: #b8502a;
+  --ok: #4f6b35;
+  --ko: #b4532e;
 
-  --f-titre: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-texte: "Inter", "Segoe UI", system-ui, sans-serif;
+  --f-titre: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-texte: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 
-  --rayon: 10px;
+  /* Mouvement : survol, changement d'état, entrée de section (voir pages.css). */
+  --t-court: 140ms;
+  --t-base: 220ms;
+  --t-entree: 320ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-io: cubic-bezier(0.45, 0, 0.25, 1);
+
+  --rayon: 3px;
   --largeur: 1200px;
   --marge: 28px;
 
-  --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='12' viewBox='0 0 36 12'%3E%3Crect width='36' height='12' fill='%23b8502a'/%3E%3Cpath d='M0 12L9 0l9 12z' fill='%23263a7a'/%3E%3Cpath d='M18 12L27 0l9 12z' fill='%23d39b2a'/%3E%3Ccircle cx='18' cy='4' r='1.7' fill='%23f4ede2'/%3E%3Ccircle cx='0' cy='4' r='1.7' fill='%23f4ede2'/%3E%3Ccircle cx='36' cy='4' r='1.7' fill='%23f4ede2'/%3E%3C/svg%3E");
+  --motif-retire: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='12' viewBox='0 0 36 12'%3E%3Crect width='36' height='12' fill='%23b8502a'/%3E%3Cpath d='M0 12L9 0l9 12z' fill='%23263a7a'/%3E%3Cpath d='M18 12L27 0l9 12z' fill='%23d39b2a'/%3E%3Ccircle cx='18' cy='4' r='1.7' fill='%23f4ede2'/%3E%3Ccircle cx='0' cy='4' r='1.7' fill='%23f4ede2'/%3E%3Ccircle cx='36' cy='4' r='1.7' fill='%23f4ede2'/%3E%3C/svg%3E");
 }
 
 @media (max-width: 640px) {
@@ -50,8 +60,8 @@ body {
   background: var(--sable);
   color: var(--encre);
   font-family: var(--f-texte);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -60,7 +70,7 @@ h2,
 h3 {
   font-family: var(--f-titre);
   color: var(--encre);
-  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 a {
@@ -74,7 +84,7 @@ select {
 }
 
 :focus-visible {
-  outline: 2px solid var(--terracotta);
+  outline: 2px solid var(--indigo);
   outline-offset: 2px;
 }
 
@@ -97,32 +107,22 @@ img {
   font-feature-settings: "tnum";
 }
 
-.motif {
-  height: 10px;
-  background: var(--motif) repeat-x;
-  background-size: auto 10px;
-}
-
-.motif--fin {
-  height: 6px;
-  background-size: auto 6px;
-}
 
 .surtitre {
-  margin: 0 0 10px;
-  font-size: 12px;
+  margin: 0 0 8px;
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--terracotta);
+  color: var(--gris);
 }
 
 .section {
-  padding: 72px 0;
+  padding: 56px 0;
 }
 
 .section--claire {
-  background: var(--sable-clair);
+  background: var(--sable-fonce);
 }
 
 .section-tete {
@@ -136,10 +136,10 @@ img {
 
 .section-tete h2 {
   margin: 0;
-  font-size: clamp(26px, 3vw, 36px);
+  font-size: clamp(24px, 2.6vw, 30px);
   font-weight: 700;
-  line-height: 1.1;
-  max-width: 22ch;
+  line-height: 1.2;
+  max-width: 30ch;
 }
 
 .section-tete p {
@@ -156,45 +156,46 @@ img {
 }
 
 .lien-fleche:hover {
-  color: var(--terracotta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .bouton {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 22px;
-  border-radius: 999px;
-  border: 1.5px solid var(--encre);
+  padding: 10px 16px;
+  border-radius: var(--rayon);
+  border: 1px solid #c9c4b9;
   background: transparent;
   color: var(--encre);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 14.5px;
+  line-height: 1.1;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background var(--t-court) var(--ease-out), color var(--t-court) var(--ease-out), border-color var(--t-court) var(--ease-out);
 }
 
 .bouton:hover {
-  background: var(--encre);
-  color: var(--sable-clair);
+  border-color: var(--encre);
 }
 
 .bouton--plein {
-  background: var(--terracotta);
-  border-color: var(--terracotta);
+  background: var(--indigo);
+  border-color: var(--indigo);
   color: #fff;
 }
 
 .bouton--plein:hover {
-  background: #9c4223;
-  border-color: #9c4223;
+  background: var(--indigo-fonce);
+  border-color: var(--indigo-fonce);
   color: #fff;
 }
 
 .bouton--petit {
-  padding: 7px 14px;
-  font-size: 13px;
+  padding: 7px 12px;
+  font-size: 13.5px;
 }
 
 .note {
@@ -209,10 +210,10 @@ img {
 
 .page-tete h1 {
   margin: 0;
-  font-size: clamp(34px, 4.6vw, 56px);
+  font-size: clamp(30px, 3.6vw, 40px);
   font-weight: 700;
-  line-height: 1.04;
-  max-width: 20ch;
+  line-height: 1.12;
+  max-width: 24ch;
 }
 
 .page-tete .chapeau {
@@ -229,17 +230,17 @@ img {
 }
 
 .puce {
-  padding: 7px 14px;
-  border-radius: 999px;
+  padding: 6px 12px;
+  border-radius: var(--rayon);
   border: 1px solid var(--ligne);
   background: var(--sable-clair);
   color: var(--encre-2);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
-  transition: all 0.15s ease;
+  transition: border-color var(--t-court) var(--ease-out), color var(--t-court) var(--ease-out);
 }
 
 .puce:hover {
@@ -249,7 +250,67 @@ img {
 
 .puce[aria-pressed="true"],
 .puce.active {
-  background: var(--indigo);
-  border-color: var(--indigo);
+  background: var(--encre);
+  border-color: var(--encre);
   color: #fff;
+}
+
+/* ---------- Mouvement ----------
+   Opacité et transformation uniquement ; contenu lisible au repos.
+   « Réduire les animations » : toutes les durées tombent à zéro. */
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fondu {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Entrée de page : chaque bloc une fois, décalage limité à 6 éléments. */
+main > * {
+  animation: apparition var(--t-entree) var(--ease-out) both;
+}
+main > :nth-child(2) { animation-delay: 40ms; }
+main > :nth-child(3) { animation-delay: 80ms; }
+main > :nth-child(4) { animation-delay: 120ms; }
+main > :nth-child(5) { animation-delay: 160ms; }
+main > :nth-child(n + 6) { animation-delay: 200ms; }
+
+.fleche {
+  display: inline-block;
+  transition: transform var(--t-court) var(--ease-out);
+}
+
+a:hover .fleche,
+.lien-fleche:hover .fleche {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-court: 0ms;
+    --t-base: 0ms;
+    --t-entree: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
