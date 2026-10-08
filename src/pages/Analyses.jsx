@@ -232,7 +232,19 @@ export function Dossier() {
                 <h2>{t("dossier_graph_titre", { indicateur: t(ind.libelle) })}</h2>
                 <p>{t("zone_uemoa")} · {libelleUnite(ind.unite)}</p>
               </div>
-              {indicateurs.length > 1 && (
+              {indicateurs.length > 5 && (
+                <div className="visu-outils">
+                  <label className="selecteur">
+                    <span className="visuellement-cache">{t("col_indicateur")}</span>
+                    <select value={ind.id} onChange={(e) => setIndChoisi(e.target.value)}>
+                      {indicateurs.map((i) => (
+                        <option key={i.id} value={i.id}>{t(i.court)}</option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              )}
+              {indicateurs.length > 1 && indicateurs.length <= 5 && (
                 <div className="visu-outils">
                   <div className="bascule" role="group" aria-label={t("col_indicateur")}>
                     {indicateurs.map((i) => (

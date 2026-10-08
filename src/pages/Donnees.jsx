@@ -30,7 +30,7 @@ import Bandeau from "../components/Bandeau.jsx";
 import Apercu from "../components/Apercu.jsx";
 import Introuvable from "./Introuvable.jsx";
 
-const estPourcentage = (unite) => unite === "%" || unite === "% du PIB";
+const estPourcentage = (unite) => unite === "%" || unite === "% du PIB" || unite === "points de %";
 // Les niveaux en milliards de FCFA ne se comparent pas à l'agrégat de l'Union.
 const comparableUnion = (ind) => ind.unite !== "Mds FCFA";
 
@@ -562,6 +562,7 @@ export function FicheSerie() {
               {RATIOS_CONTROLES.has(ind.id) && <li>{t("serie_note_ratio", { seuil: SEUIL_ECART_MEDIAN })}</li>}
               {!ind.parPays && <li>{t("serie_note_union")}</li>}
               {zerosEcartes && <li>{t("serie_note_zeros", { zone: nomZone(zone), debut: debutIndicateur, fin: debutZone - 1 })}</li>}
+              {ind.debut_retenu && <li>{t(`serie_note_debut_${ind.id}`, { annee: ind.debut_retenu })}</li>}
               {!zerosEcartes && debutZone > debutIndicateur && <li>{t("serie_note_debut", { zone: nomZone(zone), annee: debutZone })}</li>}
             </ul>
             <dl className="serie-code">

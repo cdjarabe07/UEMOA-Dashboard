@@ -21,7 +21,7 @@ export default function ProjectionsFMI({ zones = null, compact = false }) {
     const z = lignes[0] || zones?.[0];
     return (
       <div className="defilant">
-        <table className="tableau">
+        <table className="tableau tableau-bm">
           <thead>
             <tr>
               <th scope="col">{t("col_indicateur")}</th>

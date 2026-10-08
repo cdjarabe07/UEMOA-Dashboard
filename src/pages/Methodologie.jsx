@@ -47,6 +47,7 @@ export default function Methodologie() {
             </p>
             <p>{t("meth_sources_fmi")}</p>
             <p>{t("meth_sources_fmi_ecart")}</p>
+            <p>{t("meth_sources_bm")}</p>
           </section>
 
           <section id="preparation">
@@ -56,6 +57,7 @@ export default function Methodologie() {
               <li>{t("meth_preparation_l1")}</li>
               <li>{t("meth_preparation_l2")}</li>
               <li>{t("meth_preparation_l3")}</li>
+              <li>{t("meth_preparation_l4")}</li>
             </ul>
           </section>
 

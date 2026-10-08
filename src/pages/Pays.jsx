@@ -16,6 +16,7 @@ import Exports from "../components/Exports.jsx";
 import MatieresPremieres, { NoteMatieres } from "../components/MatieresPremieres.jsx";
 import ProjectionsFMI from "../components/ProjectionsFMI.jsx";
 import { produitsDuPays, ANNEES_PROJECTION } from "../data/fmi.js";
+import ConditionsDeVie from "../components/ConditionsDeVie.jsx";
 import Introuvable from "./Introuvable.jsx";
 
 // Chiffres clés affichés en tête de fiche.
@@ -268,6 +269,20 @@ export default function ProfilPays() {
             </tbody>
           </table>
           </div>
+        </div>
+      </section>
+
+      {/* Population et conditions de vie (Banque mondiale) */}
+      <section className="section section--claire">
+        <div className="conteneur">
+          <div className="section-tete">
+            <div>
+              <p className="surtitre">{t("bm_surtitre")}</p>
+              <h2>{t("bm_titre", { pays: nom })}</h2>
+              <p>{t("bm_chapeau")}</p>
+            </div>
+          </div>
+          <ConditionsDeVie zone={pays.id} />
         </div>
       </section>
 

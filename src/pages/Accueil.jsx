@@ -6,7 +6,8 @@ import { PAYS, UNION, INDICATEURS, FAMILLES, getIndicateur, serie, valeur, derni
 import { CRITERES, respecte } from "../lib/convergence.js";
 import { pointsAttention } from "../lib/attention.js";
 import { DATE_GENERATION } from "../lib/meta.js";
-import { fmtCourt, fmtDate, fmtPeriode, fmtValeur, libelleUnite } from "../lib/format.js";
+import { fmtCourt, fmtDate, fmtNombre, fmtPeriode, fmtValeur, libelleUnite } from "../lib/format.js";
+import { populationUnion } from "../data/banque_mondiale.js";
 import { exporterCSV } from "../lib/export.js";
 import { ANALYSES, PUBLICATIONS } from "../contenu/index.js";
 import CarteUEMOA, { LegendeCarte } from "../components/CarteUEMOA.jsx";
@@ -144,6 +145,7 @@ export default function Accueil() {
   const debut = Math.min(...INDICATEURS.map((i) => i.periode[0]));
   const fin = Math.max(...INDICATEURS.map((i) => i.periode[1]));
   const analyses = ANALYSES.filter((a) => a.statut === "publiee").slice(0, 3);
+  const popUnion = populationUnion();
 
   const lancerRecherche = (e) => {
     e.preventDefault();
@@ -193,6 +195,12 @@ export default function Accueil() {
             </ul>
             <dl className="acc-perimetre">
               <div><dt>{t("acc_per_pays")}</dt><dd>{t("acc_meta_couverture", { n: PAYS.length })}</dd></div>
+              {popUnion && (
+                <div>
+                  <dt>{t("acc_per_population", { annee: popUnion.annee })}</dt>
+                  <dd className="nombre">{t("acc_population_val", { n: fmtNombre(popUnion.total / 1e6, 1, true) })}</dd>
+                </div>
+              )}
               <div><dt>{t("acc_per_indicateurs")}</dt><dd className="nombre">{INDICATEURS.length} · {t("acc_per_themes", { n: FAMILLES.length })}</dd></div>
               <div><dt>{t("meta_periode")}</dt><dd className="nombre">{fmtPeriode([debut, fin])}</dd></div>
               <div><dt>{t("note_source")}</dt><dd>BCEAO · DBnomics</dd></div>

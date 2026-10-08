@@ -15,13 +15,13 @@ export const fmtNombre = (v, decimales = 0, fixe = false) =>
 // Libellé d'unité traduit ("Mds FCFA" -> "FCFA bn" en anglais).
 export const libelleUnite = (unite) => i18n.t(`unite_${uniteCle(unite)}`, { defaultValue: unite });
 const uniteCle = (unite) =>
-  ({ "%": "pct", "% du PIB": "pct_pib", "Mds FCFA": "mds_fcfa", FCFA: "fcfa", "FCFA pour 1 USD": "fcfa_usd" }[unite] ||
+  ({ "%": "pct", "% du PIB": "pct_pib", "Mds FCFA": "mds_fcfa", FCFA: "fcfa", "FCFA pour 1 USD": "fcfa_usd", "points de %": "pts" }[unite] ||
   unite);
 
 const estPourcentage = (unite) => unite === "%" || unite === "% du PIB";
 
 // Précision par défaut selon l'unité : 1 décimale pour les %, 0 sinon.
-const decimalesPour = (unite) => (estPourcentage(unite) ? 1 : 0);
+const decimalesPour = (unite) => (estPourcentage(unite) || unite === "points de %" ? 1 : 0);
 
 // Espace fine insécable avant « % » en français : le symbole ne passe jamais seul à la ligne.
 const pct = (n) => (locale() === "fr-FR" ? `${n} %` : `${n}%`);
@@ -33,6 +33,7 @@ export function fmtValeur(v, unite, decimales = decimalesPour(unite), court = fa
   const n = fmtNombre(v, decimales, estPourcentage(unite));
   if (unite === "%") return pct(n);
   if (unite === "% du PIB") return court ? pct(n) : `${pct(n)} ${i18n.t("unite_du_pib")}`;
+  if (unite === "points de %") return `${fmtNombre(v, decimales, true)} pt`;
   return court ? n : `${n} ${libelleUnite(unite)}`;
 }
 

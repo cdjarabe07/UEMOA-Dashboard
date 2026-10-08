@@ -2617,3 +2617,25 @@ fiche série) et Conjoncture
 .acc-renvoi-international .lien-fleche {
   white-space: normal;
 }
+
+/* ---------- Population et conditions de vie ---------- */
+
+.tableau-bm tbody th small {
+  display: block;
+  font-weight: 400;
+  font-size: 12.5px;
+  color: var(--gris);
+}
+
+.tableau-bm td small {
+  color: var(--gris);
+  font-size: 12px;
+}
+
+.tableau-bm td small.bm-ancien {
+  color: var(--terracotta);
+}
+
+.tableau-bm .apercu {
+  display: block;
+}

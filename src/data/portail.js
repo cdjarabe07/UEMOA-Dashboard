@@ -75,19 +75,16 @@ export const famillesDisponibles = () =>
 // Provenance (miroir de previsions-macro-uemoa/export_portail.py, sans aucune valeur) :
 // ratios « % du PIB » recalculés à partir de leur série en niveau à chaque export
 // (l'export s'arrête si l'écart médian dépasse SEUIL_ECART_MEDIAN point).
-export const RATIOS_CONTROLES = new Set([
-  "dette_pib",
-  "solde_budgetaire_pib",
-  "pression_fiscale",
-  "balance_courante_pib",
-  "credit_economie_pib",
-]);
+export const RATIOS_CONTROLES = new Set(portail.indicateurs.filter((i) => i.ratio_controle).map((i) => i.id));
 export const SEUIL_ECART_MEDIAN = 1;
 
 // Zéros de remplissage écartés par l'export (valeur publiée à 0 alors que la
 // série en niveau est non nulle) : indicateur -> zones concernées.
 export const ZEROS_ECARTES = {
   solde_budgetaire_pib: ["benin", "burkina", "cote_ivoire"],
+  contribution_primaire: ["uemoa"],
+  contribution_secondaire: ["uemoa"],
+  contribution_tertiaire: ["uemoa"],
 };
 
 // Code complet de la série source pour une zone (ex. BCEAO/IMECO/KKKFP3054A0FA).

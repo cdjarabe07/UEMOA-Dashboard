@@ -17,6 +17,9 @@ function texte(e, t) {
   if (e.type === "donnees" && e.details.jeu === "pcps") {
     return t("journal_fmi_pcps", { n: e.indicateurs.length, mois: fmtMois(e.details.dernier_mois) });
   }
+  if (e.type === "donnees" && e.details.jeu === "bm") {
+    return t("journal_bm", { n: e.indicateurs.length, pays: e.zones.length });
+  }
   if (e.type === "donnees" && e.details.jeu === "weo") {
     return t("journal_fmi_weo", { edition: e.details.edition, debut: e.details.premiere_annee, fin: e.details.derniere_annee, pays: e.zones.length });
   }
@@ -36,7 +39,7 @@ function texte(e, t) {
 }
 
 const lien = (e) =>
-  e.details?.jeu ? `/conjoncture#${e.details.jeu === "pcps" ? "international" : "projections"}` : e.type === "methode" ? "/methodologie#ruptures" : e.type === "previsions" ? "/conjoncture/previsions" : e.type === "donnees" ? "/donnees" : null;
+  e.details?.jeu === "bm" ? "/pays" : e.details?.jeu ? `/conjoncture#${e.details.jeu === "pcps" ? "international" : "projections"}` : e.type === "methode" ? "/methodologie#ruptures" : e.type === "previsions" ? "/conjoncture/previsions" : e.type === "donnees" ? "/donnees" : null;
 
 export default function Journal({ limite = 5 }) {
   const { t } = useTranslation();
