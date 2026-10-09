@@ -8,6 +8,7 @@ import { DOSSIERS } from "../contenu/index.js";
 import { PHOTOS } from "../contenu/photos.js";
 import { OUVRIR_RECHERCHE } from "./Recherche.jsx";
 import { DATE_GENERATION } from "../lib/meta.js";
+import { PROJECTIONS } from "../data/fmi.js";
 import { fmtDate } from "../lib/format.js";
 
 const LIENS = [
@@ -82,7 +83,7 @@ function MegaMenu() {
             <div>
               <p className="mega-titre">{t("conj_international_surtitre")}</p>
               <LienPanneau to="/conjoncture#international" titre={t("conj_international_titre")} texte={t("mega_matieres_desc")} />
-              <LienPanneau to="/conjoncture#projections" titre={t("conj_projections_titre")} texte={t("mega_projections_desc")} />
+              <LienPanneau to="/conjoncture#projections" titre={t("conj_projections_titre")} texte={t("mega_projections_desc", { fin: PROJECTIONS.derniere_annee })} />
             </div>
           </div>
         </Rubrique>

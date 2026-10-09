@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PAYS } from "../data/portail.js";
 import { PROJECTIONS, ANNEES_PROJECTION, projection } from "../data/fmi.js";
-import { fmtCourt, fmtMois, libelleUnite } from "../lib/format.js";
+import { fmtCourt, fmtDate, fmtMois, libelleUnite } from "../lib/format.js";
 import Fondu from "./Fondu.jsx";
 
 /** zones = liste de pays (tous par défaut) ; compact = 3 premières années seulement. */
@@ -15,6 +15,10 @@ export default function ProjectionsFMI({ zones = null, compact = false }) {
   const meta = PROJECTIONS.indicateurs.find((i) => i.id === ind);
   const annees = compact ? ANNEES_PROJECTION.slice(0, 3) : ANNEES_PROJECTION;
   const lignes = (zones || PAYS.map((p) => p.id)).filter((z) => PROJECTIONS.series[ind]?.[z]);
+  // Dates de mise à jour des pays par le FMI (exportées par le pipeline).
+  const dates = Object.values(PROJECTIONS.mise_a_jour_pays || {}).sort();
+  const jour = (d) => fmtDate(new Date(`${d}T00:00:00Z`));
+  const majPays = dates.length ? { debut: jour(dates[0]), fin: jour(dates.at(-1)) } : null;
 
   if (compact) {
     // Profil pays : tous les indicateurs pour un pays, années en colonnes.
@@ -86,7 +90,10 @@ export default function ProjectionsFMI({ zones = null, compact = false }) {
         </div>
         <div>
           <dt>{t("note_source")}</dt>
-          <dd>{PROJECTIONS.source}.</dd>
+          <dd>
+            {t("fmi_source", { edition: fmtMois(PROJECTIONS.edition) })}
+            {majPays && ` ${t("fmi_maj_pays", majPays)}`}
+          </dd>
         </div>
       </dl>
     </section>

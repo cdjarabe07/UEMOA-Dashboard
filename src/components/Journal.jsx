@@ -7,7 +7,12 @@ import journal from "../data/journal.json";
 import { getIndicateur } from "../data/portail.js";
 import { fmtDate, fmtMois, fmtNombre } from "../lib/format.js";
 
-export const JOURNAL = Array.isArray(journal) ? journal : [];
+// Plusieurs exports d'un même jeu le même jour : seul le plus récent est affiché
+// (le journal complet est conservé dans le pipeline).
+const cleAffichage = (e) => `${e.date.slice(0, 10)}|${e.type}|${e.details?.jeu || e.details?.analyse || e.id}`;
+export const JOURNAL = (Array.isArray(journal) ? journal : []).filter(
+  (e, i, tous) => tous.findIndex((x) => cleAffichage(x) === cleAffichage(e)) === i
+);
 
 const date = (iso) => fmtDate(new Date(iso.length === 10 ? `${iso}T00:00:00Z` : iso));
 
@@ -26,7 +31,7 @@ function texte(e, t, en) {
     return t("journal_bm", { n: e.indicateurs.length, pays: e.zones.length });
   }
   if (e.type === "donnees" && e.details.jeu === "weo") {
-    return t("journal_fmi_weo", { edition: e.details.edition, debut: e.details.premiere_annee, fin: e.details.derniere_annee, pays: e.zones.length });
+    return t("journal_fmi_weo", { edition: fmtMois(e.details.edition), debut: e.details.premiere_annee, fin: e.details.derniere_annee, pays: e.zones.length });
   }
   if (e.type === "donnees") {
     const pays = e.zones.filter((z) => z !== "uemoa").length;
