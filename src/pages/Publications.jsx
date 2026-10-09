@@ -16,7 +16,7 @@ export default function Publications() {
         sousTitre={t("pub_chapeau")}
         meta={[
           { label: t("pub_meta_documents"), valeur: String(PUBLICATIONS.length) },
-          { label: t("pub_meta_institutions"), valeur: institutions.join(" · ") || "—" },
+          { label: t("pub_meta_institutions"), valeur: institutions.map((i) => t(`institution_${i}`, { defaultValue: i })).join(" · ") || "—" },
         ]}
       />
       <section className="section section--compacte section--fin">

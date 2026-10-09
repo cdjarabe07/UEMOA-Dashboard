@@ -11,10 +11,16 @@ export const JOURNAL = Array.isArray(journal) ? journal : [];
 
 const date = (iso) => fmtDate(new Date(iso.length === 10 ? `${iso}T00:00:00Z` : iso));
 
-function texte(e, t) {
+function texte(e, t, en) {
+  if (e.type === "analyse" && e.details?.titre) {
+    return t("journal_analyse", { titre: (en && e.details.titre.en) || e.details.titre.fr });
+  }
   const nomZones = (zs) => zs.map((z) => t(`zone_${z}`)).join(", ");
   if (e.type === "donnees" && e.details.jeu === "pcps") {
     return t("journal_fmi_pcps", { n: e.indicateurs.length, mois: fmtMois(e.details.dernier_mois) });
+  }
+  if (e.type === "donnees" && e.details.jeu === "cpi") {
+    return t("journal_fmi_cpi", { pays: e.zones.length, mois: fmtMois(e.details.dernier_mois) });
   }
   if (e.type === "donnees" && e.details.jeu === "bm") {
     return t("journal_bm", { n: e.indicateurs.length, pays: e.zones.length });
@@ -38,10 +44,11 @@ function texte(e, t) {
 }
 
 const lien = (e) =>
-  e.details?.jeu === "bm" ? "/pays" : e.details?.jeu ? `/conjoncture#${e.details.jeu === "pcps" ? "international" : "projections"}` : e.type === "methode" ? "/methodologie#ruptures" : e.type === "previsions" ? "/conjoncture/previsions" : e.type === "donnees" ? "/donnees" : null;
+  e.type === "analyse" ? `/analyses/${e.details.analyse}` : e.details?.jeu === "bm" ? "/pays" : e.details?.jeu ? `/conjoncture#${{ pcps: "international", cpi: "inflation-mensuelle" }[e.details.jeu] || "projections"}` : e.type === "methode" ? "/methodologie#ruptures" : e.type === "previsions" ? "/conjoncture/previsions" : e.type === "donnees" ? "/donnees" : null;
 
 export default function Journal({ limite = 5 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const en = i18n.language?.startsWith("en");
   if (!JOURNAL.length) return null;
   return (
     <ol className="journal">
@@ -50,7 +57,7 @@ export default function Journal({ limite = 5 }) {
           <time dateTime={e.date}>{date(e.date)}</time>
           <span>
             <span className="journal-type">{t(`journal_type_${e.type}`)}</span>
-            {lien(e) ? <Link to={lien(e)}>{texte(e, t)}</Link> : texte(e, t)}
+            {lien(e) ? <Link to={lien(e)}>{texte(e, t, en)}</Link> : texte(e, t, en)}
           </span>
         </li>
       ))}

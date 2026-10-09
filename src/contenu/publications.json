@@ -10,8 +10,16 @@
     "url": "https://www.bceao.int/sites/default/files/2024-09/Rapport_Annuel_2023_BCEAO_20092024.pdf",
     "mise_en_ligne": "2024-09",
     "verifie_le": "2026-10-08",
-    "dossiers": ["croissance", "inflation", "finances-publiques", "echanges", "monnaie"],
-    "zones": ["uemoa"],
+    "dossiers": [
+      "croissance",
+      "inflation",
+      "finances-publiques",
+      "echanges",
+      "monnaie"
+    ],
+    "zones": [
+      "uemoa"
+    ],
     "couverture": null
   },
   {
@@ -25,8 +33,207 @@
     "url": "https://www.bceao.int/sites/default/files/2023-05/BCEAO%20-%20Rapport%20sur%20la%20politique%20mone%CC%81taire_Umoa_Mars_2023.pdf",
     "mise_en_ligne": "2023-05",
     "verifie_le": "2026-10-08",
-    "dossiers": ["inflation", "finances-publiques", "echanges", "monnaie"],
-    "zones": ["uemoa"],
+    "dossiers": [
+      "inflation",
+      "finances-publiques",
+      "echanges",
+      "monnaie"
+    ],
+    "zones": [
+      "uemoa"
+    ],
+    "couverture": null
+  },
+  {
+    "id": "bceao-rpm-2026-09",
+    "institution": "BCEAO",
+    "type": "rapport",
+    "titre": "Rapport sur la politique monétaire dans l'UMOA",
+    "edition": "septembre 2026",
+    "langue": "fr",
+    "format": "PDF",
+    "url": "https://www.bceao.int/sites/default/files/2026-09/RAPPORT%20SUR%20LA%20POLITIQUE%20MONETAIRE%20DANS%20L%27UMOA%20-%20SEPTEMBRE%202026%20.pdf",
+    "mise_en_ligne": "2026-09",
+    "verifie_le": "2026-10-09",
+    "dossiers": [
+      "inflation",
+      "monnaie",
+      "croissance",
+      "echanges",
+      "finances-publiques"
+    ],
+    "zones": [
+      "uemoa"
+    ],
+    "couverture": null
+  },
+  {
+    "id": "bceao-note-conjoncture-2026-08",
+    "institution": "BCEAO",
+    "type": "note",
+    "titre": "Note mensuelle de conjoncture économique dans les pays de l'UEMOA",
+    "edition": "août 2026",
+    "langue": "fr",
+    "format": "PDF",
+    "url": "https://www.bceao.int/sites/default/files/2026-10/Note_de_conjoncture_%C3%A9conomique_des_pays_de_l-UEMOA_Ao%C3%BBt_2026.pdf",
+    "mise_en_ligne": "2026-10",
+    "verifie_le": "2026-10-09",
+    "dossiers": [
+      "croissance",
+      "inflation"
+    ],
+    "zones": [
+      "uemoa",
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "couverture": null
+  },
+  {
+    "id": "bceao-conditions-banque-2025",
+    "institution": "BCEAO",
+    "type": "rapport",
+    "titre": "Rapport annuel sur les conditions de banque dans l'UEMOA",
+    "edition": "2025",
+    "langue": "fr",
+    "format": "PDF",
+    "url": "https://www.bceao.int/sites/default/files/2026-09/Rapport%20annuel%20Conditions%20de%20banque%20-%202025.pdf",
+    "mise_en_ligne": "2026-09",
+    "verifie_le": "2026-10-09",
+    "dossiers": [
+      "monnaie"
+    ],
+    "zones": [
+      "uemoa",
+      "benin",
+      "burkina",
+      "cote_ivoire",
+      "guinee_bissau",
+      "mali",
+      "niger",
+      "senegal",
+      "togo"
+    ],
+    "couverture": null
+  },
+  {
+    "id": "bceao-annual-report-2025",
+    "institution": "BCEAO",
+    "type": "rapport",
+    "titre": "BCEAO Annual Report 2025",
+    "edition": "2025",
+    "langue": "en",
+    "format": "PDF",
+    "url": "https://downloads.bceao.int/sites/default/files/2026-08/BCEAO_ANNUAL_REPORT_2025.pdf",
+    "mise_en_ligne": "2026-08",
+    "verifie_le": "2026-10-09",
+    "dossiers": [
+      "croissance",
+      "inflation",
+      "finances-publiques",
+      "echanges",
+      "monnaie"
+    ],
+    "zones": [
+      "uemoa"
+    ],
+    "couverture": null
+  },
+  {
+    "id": "bceao-rapport-annuel-2024",
+    "institution": "BCEAO",
+    "type": "rapport",
+    "titre": "Rapport annuel 2024",
+    "edition": "2024",
+    "langue": "fr",
+    "format": "PDF",
+    "url": "https://www.bceao.int/sites/default/files/2026-06/Rapport_Annuel_2024_BCEAO_INTERACTIF_compressed.pdf",
+    "mise_en_ligne": "2026-06",
+    "verifie_le": "2026-10-09",
+    "dossiers": [
+      "croissance",
+      "inflation",
+      "finances-publiques",
+      "echanges",
+      "monnaie"
+    ],
+    "zones": [
+      "uemoa"
+    ],
+    "couverture": null
+  },
+  {
+    "id": "fmi-uemoa-politiques-communes-2026",
+    "institution": "FMI",
+    "type": "rapport",
+    "titre": "West African Economic and Monetary Union: Staff Report for the 2026 Discussions on Common Policies of Member Countries",
+    "edition": "IMF Country Report No. 26/154",
+    "langue": "en",
+    "format": "PDF",
+    "url": "https://www.elibrary.imf.org/view/journals/002/2026/154/002.2026.issue-154-en.xml",
+    "mise_en_ligne": "2026-06",
+    "verifie_le": "2026-10-09",
+    "dossiers": [
+      "croissance",
+      "inflation",
+      "finances-publiques",
+      "echanges",
+      "monnaie",
+      "convergence"
+    ],
+    "zones": [
+      "uemoa"
+    ],
+    "couverture": null
+  },
+  {
+    "id": "fmi-uemoa-politiques-communes-2025",
+    "institution": "FMI",
+    "type": "rapport",
+    "titre": "West African Economic and Monetary Union: Staff Report on Common Policies for Member Countries",
+    "edition": "IMF Country Report No. 25/110",
+    "langue": "en",
+    "format": "PDF",
+    "url": "https://www.elibrary.imf.org/view/journals/002/2025/110/002.2025.issue-110-en.xml",
+    "mise_en_ligne": "2025-05",
+    "verifie_le": "2026-10-09",
+    "dossiers": [
+      "croissance",
+      "inflation",
+      "finances-publiques",
+      "echanges",
+      "monnaie",
+      "convergence"
+    ],
+    "zones": [
+      "uemoa"
+    ],
+    "couverture": null
+  },
+  {
+    "id": "bm-africa-economic-update-33",
+    "institution": "Banque mondiale",
+    "type": "rapport",
+    "titre": "Africa Economic Update, No. 33: Making Industrial Policy Work in Africa",
+    "edition": "avril 2026",
+    "langue": "en",
+    "format": "PDF",
+    "url": "https://openknowledge.worldbank.org/handle/10986/44533",
+    "mise_en_ligne": "2026-04",
+    "verifie_le": "2026-10-09",
+    "dossiers": [
+      "croissance",
+      "echanges"
+    ],
+    "zones": [
+      "uemoa"
+    ],
     "couverture": null
   }
 ]

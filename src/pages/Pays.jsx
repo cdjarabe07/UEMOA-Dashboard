@@ -17,6 +17,9 @@ import MatieresPremieres, { NoteMatieres } from "../components/MatieresPremieres
 import ProjectionsFMI from "../components/ProjectionsFMI.jsx";
 import { produitsDuPays, ANNEES_PROJECTION } from "../data/fmi.js";
 import ConditionsDeVie from "../components/ConditionsDeVie.jsx";
+import { INDICATEURS_BM } from "../data/banque_mondiale.js";
+import InflationMensuelle from "../components/InflationMensuelle.jsx";
+import { INFLATION_MENSUELLE } from "../data/fmi.js";
 import { PhotoPays } from "../components/HerosPhotos.jsx";
 import { photoDe } from "../contenu/photos.js";
 import Introuvable from "./Introuvable.jsx";
@@ -278,6 +281,15 @@ export default function ProfilPays() {
         </div>
       </section>
 
+      {/* Inflation mensuelle (FMI) : plus récente que la série annuelle BCEAO */}
+      {INFLATION_MENSUELLE.pays[pays.id] && (
+        <section className="section" id="inflation-mensuelle">
+          <div className="conteneur">
+            <InflationMensuelle zone={pays.id} />
+          </div>
+        </section>
+      )}
+
       {/* Population et conditions de vie (Banque mondiale) */}
       <section className="section section--claire">
         <div className="conteneur">
@@ -289,6 +301,13 @@ export default function ProfilPays() {
             </div>
           </div>
           <ConditionsDeVie zone={pays.id} />
+          {INDICATEURS_BM.some((i) => i.groupe === "financement") && (
+            <>
+              <h3 className="titre-colonne profil-financement-titre" id="financement">{t("bm_financement_titre")}</h3>
+              <p className="texte-sobre">{t("bm_financement_chapeau")}</p>
+              <ConditionsDeVie zone={pays.id} groupe="financement" />
+            </>
+          )}
         </div>
       </section>
 

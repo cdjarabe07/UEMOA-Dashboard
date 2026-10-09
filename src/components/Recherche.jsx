@@ -25,6 +25,7 @@ const PAGES = [
   ["/conjoncture/previsions", "nav_previsions"],
   ["/conjoncture#international", "conj_international_titre"],
   ["/conjoncture#projections", "conj_projections_titre"],
+  ["/conjoncture#inflation-mensuelle", "im_section_titre"],
   ["/analyses", "nav_analyses"],
   ["/pays", "nav_pays"],
   ["/donnees", "explo_titre"],
@@ -135,13 +136,13 @@ export default function Recherche() {
           {PUBLICATIONS.map((p) => (
             <Command.Item
               key={p.id}
-              value={`publication ${p.institution} ${p.titre} ${p.edition}`}
+              value={`publication ${p.institution} ${t(`institution_${p.institution}`, { defaultValue: p.institution })} ${p.titre} ${p.edition}`}
               onSelect={() => {
                 setOuvert(false);
                 window.open(p.url, "_blank", "noopener");
               }}
             >
-              {p.institution} · {p.titre} <span className="recherche-type">↗</span>
+              {t(`institution_${p.institution}`, { defaultValue: p.institution })} · {p.titre} <span className="recherche-type">↗</span>
             </Command.Item>
           ))}
         </Command.Group>

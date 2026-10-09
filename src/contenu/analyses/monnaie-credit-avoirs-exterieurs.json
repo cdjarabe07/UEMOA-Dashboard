@@ -1,0 +1,188 @@
+{
+  "id": "monnaie-credit-avoirs-exterieurs",
+  "statut": "publiee",
+  "date_publication": "2026-10-09",
+  "auteurs": [
+    "Observatoire économique de l'UEMOA"
+  ],
+  "validation": {
+    "par": "Caleb Djarabé",
+    "le": "2026-10-09"
+  },
+  "dossier": "monnaie",
+  "donnees_au": "2026-10-08",
+  "titre": {
+    "fr": "Monnaie et crédit : un crédit qui plafonne, des avoirs extérieurs qui ont fondu puis se redressent",
+    "en": "Money and credit: credit levels off, foreign assets shrink then recover"
+  },
+  "resume": {
+    "fr": "Le crédit à l'économie de l'Union passe de 11,6 % du PIB en 2005 à 27,9 % en 2023, puis recule à 26,7 % en 2024. Les avoirs extérieurs nets de l'Union baissent de 7 747 milliards de FCFA en 2021 à 1 149 milliards en 2023, avant de remonter à 4 814 milliards en 2024.",
+    "en": "Credit to the economy in the Union rises from 11.6% of GDP in 2005 to 27.9% in 2023, then falls back to 26.7% in 2024. The Union's net foreign assets fall from 7,747 billion CFA francs in 2021 to 1,149 billion in 2023, before rising to 4,814 billion in 2024."
+  },
+  "question": {
+    "fr": "Comment ont évolué le crédit, la masse monétaire et les avoirs extérieurs de l'Union ?",
+    "en": "How have credit, money supply and the Union's foreign assets changed?"
+  },
+  "indicateurs": [
+    "credit_economie_pib",
+    "masse_monetaire",
+    "actifs_exterieurs_nets",
+    "taux_change_usd"
+  ],
+  "zones": [
+    "uemoa",
+    "benin",
+    "burkina",
+    "cote_ivoire",
+    "guinee_bissau",
+    "mali",
+    "niger",
+    "senegal",
+    "togo"
+  ],
+  "blocs": [
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Le crédit à l'économie : une progression qui s'arrête",
+        "en": "Credit to the economy: growth comes to a halt"
+      },
+      "contenu": {
+        "fr": [
+          "Les créances du système monétaire sur l'économie (hors administrations publiques) représentent 11,6 % du PIB de l'Union en 2005, 24,3 % en 2015 et 27,9 % en 2023. En 2024, elles reculent à 26,7 %, et baissent dans six pays sur huit.",
+          "Les niveaux restent très différents d'un pays à l'autre : en 2024, le crédit atteint 33,0 % du PIB au Sénégal, 31,5 % au Burkina Faso et 30,1 % au Togo, mais 11,5 % au Niger et 11,4 % en Guinée-Bissau."
+        ],
+        "en": [
+          "Monetary system claims on the economy (excluding general government) represent 11.6% of the Union's GDP in 2005, 24.3% in 2015 and 27.9% in 2023. In 2024 they fall back to 26.7%, and decline in six of the eight countries.",
+          "Levels remain very different across countries: in 2024, credit reaches 33.0% of GDP in Senegal, 31.5% in Burkina Faso and 30.1% in Togo, but 11.5% in Niger and 11.4% in Guinea-Bissau."
+        ]
+      }
+    },
+    {
+      "type": "graphique",
+      "indicateur": "credit_economie_pib",
+      "zones": [
+        "uemoa",
+        "senegal",
+        "niger",
+        "cote_ivoire"
+      ],
+      "debut": 2005,
+      "fin": 2024,
+      "titre": {
+        "fr": "Crédit à l'économie, 2005–2024 (% du PIB)",
+        "en": "Credit to the economy, 2005–2024 (% of GDP)"
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "credit_economie_pib",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2015,
+        2023,
+        2024
+      ],
+      "titre": {
+        "fr": "Crédit à l'économie par pays (% du PIB)",
+        "en": "Credit to the economy by country (% of GDP)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "La masse monétaire continue de croître",
+        "en": "Money supply keeps growing"
+      },
+      "contenu": {
+        "fr": [
+          "La masse monétaire (M2) de l'Union passe de 20 531 milliards de FCFA en 2015 à 52 014 milliards en 2024, soit 2,5 fois plus. Elle progresse plus vite que l'activité : rapportée au PIB nominal, elle passe de 29,2 % en 2015 à 38,6 % en 2024. En 2024, elle augmente de 8,8 %."
+        ],
+        "en": [
+          "The Union's money supply (M2) rises from 20,531 billion CFA francs in 2015 to 52,014 billion in 2024, 2.5 times more. It grows faster than activity: relative to nominal GDP, it rises from 29.2% in 2015 to 38.6% in 2024. In 2024 it increases by 8.8%."
+        ]
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Les avoirs extérieurs nets : une chute en 2022–2023",
+        "en": "Net foreign assets: a fall in 2022–2023"
+      },
+      "contenu": {
+        "fr": [
+          "Les avoirs extérieurs nets de l'Union, qui mesurent ce que le système monétaire détient sur le reste du monde moins ce qu'il lui doit, atteignent 7 747 milliards de FCFA en 2021. Ils tombent à 4 458 milliards en 2022 puis à 1 149 milliards en 2023, avant de remonter à 4 814 milliards en 2024.",
+          "Cette baisse intervient pendant les années où le déficit courant de l'Union est le plus élevé (9,9 % du PIB en 2022, 9,4 % en 2023), et où le dollar s'apprécie face au franc CFA : 554,5 FCFA pour un dollar en moyenne en 2021, 623,8 en 2022."
+        ],
+        "en": [
+          "The Union's net foreign assets, which measure what the monetary system holds on the rest of the world minus what it owes, stand at 7,747 billion CFA francs in 2021. They fall to 4,458 billion in 2022 and 1,149 billion in 2023, before rising to 4,814 billion in 2024.",
+          "This fall takes place in the years when the Union's current account deficit is highest (9.9% of GDP in 2022, 9.4% in 2023), and when the dollar appreciates against the CFA franc: 554.5 CFA francs per dollar on average in 2021, 623.8 in 2022."
+        ]
+      }
+    },
+    {
+      "type": "graphique",
+      "indicateur": "actifs_exterieurs_nets",
+      "zones": [
+        "uemoa"
+      ],
+      "debut": 2010,
+      "fin": 2024,
+      "titre": {
+        "fr": "Avoirs extérieurs nets de l'Union, 2010–2024 (milliards de FCFA)",
+        "en": "Net foreign assets of the Union, 2010–2024 (billion CFA francs)"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "fr": "Le crédit à l'économie recule en 2024 (26,7 % du PIB) après deux décennies de hausse.",
+      "en": "Credit to the economy falls in 2024 (26.7% of GDP) after two decades of growth."
+    },
+    {
+      "fr": "La masse monétaire représente 38,6 % du PIB en 2024, contre 29,2 % en 2015.",
+      "en": "Money supply represents 38.6% of GDP in 2024, against 29.2% in 2015."
+    },
+    {
+      "fr": "Les avoirs extérieurs nets de l'Union ont baissé de 85 % entre 2021 et 2023, puis se sont redressés en 2024.",
+      "en": "The Union's net foreign assets fell by 85% between 2021 and 2023, then recovered in 2024."
+    }
+  ],
+  "limites": [
+    {
+      "fr": "Les avoirs extérieurs nets de l'Union ne sont pas la somme de ceux des pays : l'agrégat de la BCEAO inclut des éléments communs à l'Union. Les deux niveaux ne doivent pas être additionnés.",
+      "en": "The Union's net foreign assets are not the sum of those of the countries: the BCEAO aggregate includes items common to the Union. The two levels should not be added up."
+    },
+    {
+      "fr": "La concordance avec le déficit courant et le taux de change n'établit pas une relation de cause à effet ; les flux financiers (emprunts, investissements) ne sont pas mesurés ici.",
+      "en": "The match with the current account deficit and the exchange rate does not establish cause and effect; financial flows (borrowing, investment) are not measured here."
+    },
+    {
+      "fr": "Les encours sont des valeurs annuelles : ils ne montrent pas les variations à l'intérieur de l'année.",
+      "en": "Stocks are annual values: they do not show movements within the year."
+    },
+    {
+      "fr": "Les données de 2024 peuvent être révisées par la BCEAO.",
+      "en": "2024 data may be revised by the BCEAO."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "BCEAO, principaux indicateurs macroéconomiques (IMECO), via DBnomics",
+      "url": "https://db.nomics.world/BCEAO/IMECO"
+    }
+  ],
+  "publications": [
+    "bceao-rapport-annuel-2023"
+  ]
+}

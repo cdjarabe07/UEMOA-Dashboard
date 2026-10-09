@@ -77,6 +77,7 @@ function MegaMenu() {
               <LienPanneau to="/conjoncture" titre={t("mega_vue_ensemble")} texte={t("mega_conjoncture_desc")} />
               <LienPanneau to="/conjoncture/convergence" titre={t("nav_convergence")} texte={t("mega_convergence_desc")} />
               <LienPanneau to="/conjoncture/previsions" titre={t("nav_previsions")} texte={t("mega_previsions_desc")} />
+              <LienPanneau to="/conjoncture#inflation-mensuelle" titre={t("im_section_titre")} texte={t("mega_im_desc")} />
             </div>
             <div>
               <p className="mega-titre">{t("conj_international_surtitre")}</p>

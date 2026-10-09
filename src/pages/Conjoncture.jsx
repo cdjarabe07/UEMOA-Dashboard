@@ -7,6 +7,7 @@ import { fmtCourt, fmtValeur, fmtVariation, libelleUnite } from "../lib/format.j
 import Bandeau from "../components/Bandeau.jsx";
 import MatieresPremieres, { NoteMatieres } from "../components/MatieresPremieres.jsx";
 import ProjectionsFMI from "../components/ProjectionsFMI.jsx";
+import InflationMensuelle from "../components/InflationMensuelle.jsx";
 
 // Indicateurs de la vue d'ensemble, dans l'ordre de lecture.
 const SYNTHESE = ["croissance_reelle", "inflation", "solde_budgetaire_pib", "dette_pib", "pression_fiscale", "balance_courante_pib"];
@@ -144,6 +145,19 @@ export default function Conjoncture() {
             </table>
           </div>
           <p className="note">{t("conj_pays_note")} {t("source_bceao")}</p>
+        </div>
+      </section>
+
+      <section className="section section--claire" id="inflation-mensuelle">
+        <div className="conteneur">
+          <div className="section-tete">
+            <div>
+              <p className="surtitre">{t("im_surtitre")}</p>
+              <h2>{t("im_section_titre")}</h2>
+              <p>{t("im_chapeau")}</p>
+            </div>
+          </div>
+          <InflationMensuelle />
         </div>
       </section>
 

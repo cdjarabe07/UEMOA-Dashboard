@@ -187,7 +187,7 @@ export default function Accueil() {
               <>
                 <p className="heros-une-rubrique">{t("une_publication")}</p>
                 <a className="heros-une-publication" href={PUBLICATIONS[0].url} target="_blank" rel="noreferrer">
-                  <b>{PUBLICATIONS[0].institution} · {PUBLICATIONS[0].titre}</b>
+                  <b>{t(`institution_${PUBLICATIONS[0].institution}`, { defaultValue: PUBLICATIONS[0].institution })} · {PUBLICATIONS[0].titre}</b>
                   <span className="nombre">{PUBLICATIONS[0].format} · {fmtMois(PUBLICATIONS[0].mise_en_ligne)}</span>
                 </a>
               </>

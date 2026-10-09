@@ -1,0 +1,212 @@
+{
+  "id": "croissance-moteurs-sectoriels",
+  "statut": "publiee",
+  "date_publication": "2026-10-09",
+  "auteurs": [
+    "Observatoire économique de l'UEMOA"
+  ],
+  "validation": {
+    "par": "Caleb Djarabé",
+    "le": "2026-10-09"
+  },
+  "dossier": "croissance",
+  "donnees_au": "2026-10-08",
+  "titre": {
+    "fr": "Croissance de l'UEMOA : les services en moteur, le secteur primaire en balancier",
+    "en": "WAEMU growth: services as the engine, the primary sector as the swing factor"
+  },
+  "resume": {
+    "fr": "La croissance de l'Union atteint 6,2 % en 2024. Le secteur tertiaire en apporte 3,3 points et plus de la moitié de la croissance chaque année depuis 2022. Le secteur primaire, plus irrégulier, explique l'essentiel des écarts d'une année à l'autre, en particulier au Niger.",
+    "en": "Growth in the Union reaches 6.2% in 2024. The tertiary sector contributes 3.3 points, and more than half of growth every year since 2022. The more irregular primary sector accounts for most year-to-year swings, especially in Niger."
+  },
+  "question": {
+    "fr": "Quels secteurs portent la croissance de l'Union, et pourquoi varie-t-elle autant d'un pays et d'une année à l'autre ?",
+    "en": "Which sectors drive growth in the Union, and why does it vary so much across countries and years?"
+  },
+  "indicateurs": [
+    "croissance_reelle",
+    "contribution_primaire",
+    "contribution_secondaire",
+    "contribution_tertiaire",
+    "poids_primaire"
+  ],
+  "zones": [
+    "uemoa",
+    "benin",
+    "burkina",
+    "cote_ivoire",
+    "guinee_bissau",
+    "mali",
+    "niger",
+    "senegal",
+    "togo"
+  ],
+  "blocs": [
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Une croissance revenue à son rythme d'avant 2020",
+        "en": "Growth back to its pre-2020 pace"
+      },
+      "contenu": {
+        "fr": [
+          "La croissance réelle de l'Union est en moyenne de 6,1 % par an entre 2015 et 2019. Elle tombe à 1,3 % en 2020, puis s'établit à 5,9 % en 2021, 5,5 % en 2022, 5,3 % en 2023 et 6,2 % en 2024.",
+          "Les écarts entre pays restent importants. Sur 2020–2024, la croissance moyenne va de 3,0 % par an au Mali à 6,1 % au Bénin. Le Bénin et le Togo croissent plus vite qu'en 2015–2019 ; le Mali, le Burkina Faso, le Sénégal, la Côte d'Ivoire et la Guinée-Bissau moins vite."
+        ],
+        "en": [
+          "Real growth in the Union averages 6.1% a year between 2015 and 2019. It falls to 1.3% in 2020, then stands at 5.9% in 2021, 5.5% in 2022, 5.3% in 2023 and 6.2% in 2024.",
+          "Differences between countries remain large. Over 2020–2024, average growth ranges from 3.0% a year in Mali to 6.1% in Benin. Benin and Togo grow faster than in 2015–2019; Mali, Burkina Faso, Senegal, Côte d'Ivoire and Guinea-Bissau more slowly."
+        ]
+      }
+    },
+    {
+      "type": "graphique",
+      "indicateur": "croissance_reelle",
+      "zones": [
+        "uemoa",
+        "niger",
+        "benin",
+        "mali"
+      ],
+      "debut": 2015,
+      "fin": 2024,
+      "titre": {
+        "fr": "Croissance du PIB réel, 2015–2024 (%)",
+        "en": "Real GDP growth, 2015–2024 (%)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Le tertiaire, contributeur le plus régulier",
+        "en": "The tertiary sector, the steadiest contributor"
+      },
+      "contenu": {
+        "fr": [
+          "La BCEAO décompose la croissance en contributions des trois grands secteurs, exprimées en points : leur somme donne la croissance de l'année. Pour l'Union, le tertiaire (commerce, transports, services, administration) apporte 3,6 points en 2022, 3,7 en 2023 et 3,3 en 2024, soit plus de la moitié de la croissance chaque année.",
+          "En 2024, le primaire apporte 1,5 point et le secondaire 1,4 point. Au Sénégal et au Niger, le secondaire pèse nettement plus cette année-là : 3,5 points sur 6,7 % au Sénégal, 3,3 points sur 8,8 % au Niger."
+        ],
+        "en": [
+          "The BCEAO breaks growth down into the contributions of the three main sectors, in points: they add up to the year's growth. For the Union, the tertiary sector (trade, transport, services, administration) contributes 3.6 points in 2022, 3.7 in 2023 and 3.3 in 2024, more than half of growth each year.",
+          "In 2024, the primary sector contributes 1.5 points and the secondary sector 1.4 points. In Senegal and Niger, the secondary sector weighs much more that year: 3.5 points out of 6.7% in Senegal, 3.3 points out of 8.8% in Niger."
+        ]
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "contribution_tertiaire",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2020,
+        2022,
+        2023,
+        2024
+      ],
+      "titre": {
+        "fr": "Contribution du secteur tertiaire à la croissance (points)",
+        "en": "Contribution of the tertiary sector to growth (points)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Le primaire, source des à-coups",
+        "en": "The primary sector, source of the swings"
+      },
+      "contenu": {
+        "fr": [
+          "Le secteur primaire fait varier la croissance d'une année à l'autre. Au Niger, la croissance passe de 1,4 % en 2021 à 11,9 % en 2022, dont 8,8 points venus du primaire, puis retombe à 2,5 % en 2023. En Côte d'Ivoire, le primaire retire 1,0 point à la croissance en 2023 et en ajoute 1,2 en 2024.",
+          "Ces à-coups pèsent d'autant plus que le primaire occupe une grande place dans l'économie : il représente 42,5 % du PIB en Guinée-Bissau et 41,8 % au Niger en 2024, contre 14,9 % en Côte d'Ivoire et 21,9 % pour l'ensemble de l'Union."
+        ],
+        "en": [
+          "The primary sector makes growth vary from year to year. In Niger, growth rises from 1.4% in 2021 to 11.9% in 2022, 8.8 points of which come from the primary sector, then drops to 2.5% in 2023. In Côte d'Ivoire, the primary sector takes 1.0 point off growth in 2023 and adds 1.2 in 2024.",
+          "These swings matter more where the primary sector is large: it accounts for 42.5% of GDP in Guinea-Bissau and 41.8% in Niger in 2024, against 14.9% in Côte d'Ivoire and 21.9% for the Union as a whole."
+        ]
+      }
+    },
+    {
+      "type": "graphique",
+      "indicateur": "contribution_primaire",
+      "zones": [
+        "niger",
+        "cote_ivoire",
+        "uemoa"
+      ],
+      "debut": 2015,
+      "fin": 2024,
+      "titre": {
+        "fr": "Contribution du secteur primaire à la croissance, 2015–2024 (points)",
+        "en": "Contribution of the primary sector to growth, 2015–2024 (points)"
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "poids_primaire",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2001,
+        2015,
+        2024
+      ],
+      "titre": {
+        "fr": "Poids du secteur primaire dans le PIB (%)",
+        "en": "Share of the primary sector in GDP (%)"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "fr": "La croissance de l'Union est revenue à 6,2 % en 2024, au niveau de sa moyenne 2015–2019 (6,1 %).",
+      "en": "Union growth returned to 6.2% in 2024, in line with its 2015–2019 average (6.1%)."
+    },
+    {
+      "fr": "Le tertiaire apporte plus de la moitié de la croissance de l'Union chaque année depuis 2022.",
+      "en": "The tertiary sector has contributed more than half of Union growth every year since 2022."
+    },
+    {
+      "fr": "Le primaire explique l'essentiel des écarts d'une année à l'autre, surtout là où il dépasse 40 % du PIB (Niger, Guinée-Bissau).",
+      "en": "The primary sector explains most year-to-year swings, especially where it exceeds 40% of GDP (Niger, Guinea-Bissau)."
+    }
+  ],
+  "limites": [
+    {
+      "fr": "Les contributions sont publiées par grand secteur seulement : elles ne permettent pas d'identifier les branches (cultures, mines, hydrocarbures, bâtiment) à l'origine d'une hausse.",
+      "en": "Contributions are published by broad sector only: they do not identify the branches (crops, mining, hydrocarbons, construction) behind an increase."
+    },
+    {
+      "fr": "Les causes des variations (pluviométrie, sécurité, mise en production de gisements) ne sont pas mesurées ici.",
+      "en": "The causes of the swings (rainfall, security, start of production at new fields) are not measured here."
+    },
+    {
+      "fr": "Les données de 2024 peuvent être révisées par la BCEAO.",
+      "en": "2024 data may be revised by the BCEAO."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "BCEAO, principaux indicateurs macroéconomiques (IMECO), via DBnomics",
+      "url": "https://db.nomics.world/BCEAO/IMECO"
+    }
+  ],
+  "publications": []
+}

@@ -1,0 +1,238 @@
+{
+  "id": "convergence-bilan-2024",
+  "statut": "publiee",
+  "date_publication": "2026-10-09",
+  "auteurs": [
+    "Observatoire économique de l'UEMOA"
+  ],
+  "validation": {
+    "par": "Caleb Djarabé",
+    "le": "2026-10-09"
+  },
+  "dossier": "convergence",
+  "donnees_au": "2026-10-08",
+  "titre": {
+    "fr": "Convergence en 2024 : aucun pays ne respecte les trois critères de premier rang",
+    "en": "Convergence in 2024: no country meets all three first-rank criteria"
+  },
+  "resume": {
+    "fr": "En 2024, aucun des huit pays ne respecte à la fois les critères de solde budgétaire, d'inflation et de dette. Le Bénin, le Mali et le Togo en respectent deux. Le critère de pression fiscale de 20 % du PIB n'a été atteint par aucun pays depuis le début de la série en 2001.",
+    "en": "In 2024, none of the eight countries meets the budget balance, inflation and debt criteria at the same time. Benin, Mali and Togo meet two of them. The 20% of GDP tax burden criterion has not been reached by any country since the series began in 2001."
+  },
+  "question": {
+    "fr": "Où en sont les pays de l'Union au regard des critères du Pacte de convergence ?",
+    "en": "Where do Union countries stand against the Convergence Pact criteria?"
+  },
+  "indicateurs": [
+    "solde_budgetaire_pib",
+    "inflation",
+    "dette_pib",
+    "pression_fiscale"
+  ],
+  "zones": [
+    "uemoa",
+    "benin",
+    "burkina",
+    "cote_ivoire",
+    "guinee_bissau",
+    "mali",
+    "niger",
+    "senegal",
+    "togo"
+  ],
+  "blocs": [
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Les critères examinés",
+        "en": "The criteria examined"
+      },
+      "contenu": {
+        "fr": [
+          "Le Pacte de convergence de l'UEMOA fixe trois critères de premier rang mesurables avec les séries de la BCEAO : un solde budgétaire global, dons compris, d'au moins −3 % du PIB ; une inflation annuelle moyenne d'au plus 3 % ; une dette publique d'au plus 70 % du PIB. Il retient aussi un critère de second rang : une pression fiscale d'au moins 20 % du PIB.",
+          "Le critère de masse salariale (au plus 35 % des recettes fiscales) n'est pas examiné ici, faute de série correspondante dans les données utilisées. La dette n'est évaluée qu'à partir de 2022, en raison d'un changement de périmètre de la série."
+        ],
+        "en": [
+          "The WAEMU Convergence Pact sets three first-rank criteria measurable with BCEAO series: an overall budget balance, including grants, of at least −3% of GDP; average annual inflation of at most 3%; public debt of at most 70% of GDP. It also sets a second-rank criterion: a tax burden of at least 20% of GDP.",
+          "The wage bill criterion (at most 35% of tax revenue) is not examined here, as no matching series is available in the data used. Debt is assessed only from 2022 onwards, because of a change in the series' coverage."
+        ]
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "2024 : deux critères sur trois au mieux",
+        "en": "2024: two out of three criteria at best"
+      },
+      "contenu": {
+        "fr": [
+          "En 2024, le Bénin respecte les critères d'inflation (1,2 %) et de dette (53,7 % du PIB), mais pas celui de solde (−3,7 %). Le Mali respecte ceux de solde (−2,3 %) et de dette (41,7 %), mais son inflation atteint 3,2 %. Le Togo respecte ceux d'inflation (2,9 %) et de dette (68,2 %), avec un déficit de 6,0 % du PIB.",
+          "Le Burkina Faso, la Côte d'Ivoire et le Niger ne respectent que le critère de dette. Le Sénégal ne respecte que celui d'inflation (0,8 %), avec une dette de 103,0 % du PIB et un déficit de 11,1 %. La Guinée-Bissau n'en respecte aucun."
+        ],
+        "en": [
+          "In 2024, Benin meets the inflation (1.2%) and debt (53.7% of GDP) criteria, but not the balance criterion (−3.7%). Mali meets the balance (−2.3%) and debt (41.7%) criteria, but its inflation reaches 3.2%. Togo meets the inflation (2.9%) and debt (68.2%) criteria, with a deficit of 6.0% of GDP.",
+          "Burkina Faso, Côte d'Ivoire and Niger meet only the debt criterion. Senegal meets only the inflation criterion (0.8%), with debt at 103.0% of GDP and a deficit of 11.1%. Guinea-Bissau meets none."
+        ]
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "solde_budgetaire_pib",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2019,
+        2022,
+        2023,
+        2024
+      ],
+      "titre": {
+        "fr": "Solde budgétaire global, dons compris (% du PIB ; critère : ≥ −3 %)",
+        "en": "Overall budget balance, including grants (% of GDP; criterion: ≥ −3%)"
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "inflation",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2019,
+        2022,
+        2023,
+        2024
+      ],
+      "titre": {
+        "fr": "Inflation moyenne annuelle (% ; critère : ≤ 3 %)",
+        "en": "Average annual inflation (%; criterion: ≤ 3%)"
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "dette_pib",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2022,
+        2023,
+        2024
+      ],
+      "titre": {
+        "fr": "Encours de la dette publique (% du PIB ; critère : ≤ 70 %)",
+        "en": "Public debt outstanding (% of GDP; criterion: ≤ 70%)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Avant 2020, un critère de solde plus souvent respecté",
+        "en": "Before 2020, the balance criterion was met more often"
+      },
+      "contenu": {
+        "fr": [
+          "En 2019, cinq pays respectaient le critère de solde et les huit celui d'inflation. Depuis 2020, le critère de solde n'a été respecté que par le Mali en 2024. Le nombre de pays sous 3 % d'inflation est tombé à un seul en 2022 (le Bénin), avant de remonter à trois en 2023 (Bénin, Burkina Faso, Mali) et en 2024 (Bénin, Sénégal, Togo).",
+          "Le critère de pression fiscale reste hors d'atteinte : aucun pays n'a atteint 20 % du PIB depuis 2001. Les plus proches en 2024 sont le Burkina Faso (18,6 %), le Togo (18,3 %) et le Sénégal (17,5 %)."
+        ],
+        "en": [
+          "In 2019, five countries met the balance criterion and all eight met the inflation criterion. Since 2020, the balance criterion has only been met by Mali in 2024. The number of countries below 3% inflation fell to one in 2022 (Benin), before rising to three in 2023 (Benin, Burkina Faso, Mali) and in 2024 (Benin, Senegal, Togo).",
+          "The tax burden criterion remains out of reach: no country has reached 20% of GDP since 2001. The closest in 2024 are Burkina Faso (18.6%), Togo (18.3%) and Senegal (17.5%)."
+        ]
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "pression_fiscale",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2019,
+        2022,
+        2024
+      ],
+      "titre": {
+        "fr": "Pression fiscale (% du PIB ; critère : ≥ 20 %)",
+        "en": "Tax burden (% of GDP; criterion: ≥ 20%)"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "fr": "En 2024, aucun pays ne respecte les trois critères de premier rang ; le Bénin, le Mali et le Togo en respectent deux.",
+      "en": "In 2024, no country meets all three first-rank criteria; Benin, Mali and Togo meet two."
+    },
+    {
+      "fr": "Le critère de solde, respecté par cinq pays en 2019, ne l'est que par le Mali en 2024.",
+      "en": "The balance criterion, met by five countries in 2019, is met only by Mali in 2024."
+    },
+    {
+      "fr": "Aucun pays n'a atteint le critère de pression fiscale de 20 % du PIB depuis 2001.",
+      "en": "No country has reached the 20% of GDP tax burden criterion since 2001."
+    }
+  ],
+  "limites": [
+    {
+      "fr": "L'évaluation porte sur les valeurs publiées par la BCEAO ; la Commission de l'UEMOA peut retenir des définitions ou des millésimes différents dans ses rapports de surveillance multilatérale.",
+      "en": "The assessment uses values published by the BCEAO; the WAEMU Commission may use different definitions or vintages in its multilateral surveillance reports."
+    },
+    {
+      "fr": "Le calendrier de convergence et les éventuelles suspensions ou adaptations décidées par les instances de l'Union ne sont pas traités ici.",
+      "en": "The convergence timetable and any suspensions or adjustments decided by Union bodies are not covered here."
+    },
+    {
+      "fr": "Avant 2022, la dette n'est pas évaluée : la série ne mesure pas alors la dette totale.",
+      "en": "Before 2022, debt is not assessed: the series does not then measure total debt."
+    },
+    {
+      "fr": "Les données de 2024 peuvent être révisées par la BCEAO.",
+      "en": "2024 data may be revised by the BCEAO."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "BCEAO, principaux indicateurs macroéconomiques (IMECO), via DBnomics",
+      "url": "https://db.nomics.world/BCEAO/IMECO"
+    },
+    {
+      "titre": "UEMOA, Acte additionnel n° 01/2015/CCEG/UEMOA (Pacte de convergence)"
+    }
+  ],
+  "publications": [
+    "bceao-rapport-annuel-2023"
+  ]
+}

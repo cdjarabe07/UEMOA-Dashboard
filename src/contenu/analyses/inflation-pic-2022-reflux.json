@@ -1,0 +1,189 @@
+{
+  "id": "inflation-pic-2022-reflux",
+  "statut": "publiee",
+  "date_publication": "2026-10-09",
+  "auteurs": [
+    "Observatoire économique de l'UEMOA"
+  ],
+  "validation": {
+    "par": "Caleb Djarabé",
+    "le": "2026-10-09"
+  },
+  "dossier": "inflation",
+  "donnees_au": "2026-10-08",
+  "titre": {
+    "fr": "Inflation dans l'UEMOA : le pic de 2022 et un reflux inégal",
+    "en": "Inflation in WAEMU: the 2022 peak and an uneven decline"
+  },
+  "resume": {
+    "fr": "L'inflation moyenne de l'Union est passée de 3,6 % en 2021 à 7,4 % en 2022, avant de revenir à 3,5 % en 2024. Elle reste au-dessus du critère de convergence de 3 %, et cinq pays sur huit le dépassent encore en 2024.",
+    "en": "Average inflation in the Union rose from 3.6% in 2021 to 7.4% in 2022, then fell back to 3.5% in 2024. It remains above the 3% convergence criterion, and five of the eight countries still exceed it in 2024."
+  },
+  "question": {
+    "fr": "L'inflation est-elle revenue sous le seuil de 3 % dans l'Union, et dans quels pays reste-t-elle élevée ?",
+    "en": "Has inflation returned below the 3% threshold in the Union, and in which countries does it remain high?"
+  },
+  "indicateurs": [
+    "inflation"
+  ],
+  "zones": [
+    "uemoa",
+    "burkina",
+    "mali",
+    "niger",
+    "senegal",
+    "benin"
+  ],
+  "blocs": [
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Contexte",
+        "en": "Context"
+      },
+      "contenu": {
+        "fr": [
+          "Le Pacte de convergence de l'UEMOA fixe un plafond de 3 % au taux d'inflation annuel moyen. Entre 2015 et 2019, l'inflation moyenne de l'Union est restée nettement en dessous, entre −0,7 % et 1,2 %.",
+          "Elle atteint 2,1 % en 2020, 3,6 % en 2021, puis 7,4 % en 2022 : le même niveau qu'en 2008, le plus élevé de la série, qui commence en 1998."
+        ],
+        "en": [
+          "The WAEMU Convergence Pact caps average annual inflation at 3%. Between 2015 and 2019, average inflation in the Union stayed well below, between −0.7% and 1.2%.",
+          "It reached 2.1% in 2020, 3.6% in 2021, then 7.4% in 2022: the same level as in 2008, the highest in the series, which starts in 1998."
+        ]
+      }
+    },
+    {
+      "type": "graphique",
+      "indicateur": "inflation",
+      "zones": [
+        "uemoa",
+        "burkina",
+        "niger",
+        "senegal"
+      ],
+      "debut": 2015,
+      "fin": 2024,
+      "titre": {
+        "fr": "Inflation moyenne annuelle, 2015–2024 (%)",
+        "en": "Average annual inflation, 2015–2024 (%)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "2022 : sept pays sur huit au-dessus du seuil",
+        "en": "2022: seven of eight countries above the threshold"
+      },
+      "contenu": {
+        "fr": [
+          "En 2022, seul le Bénin reste sous le seuil de 3 % (1,4 %). L'inflation atteint 14,1 % au Burkina Faso, 9,7 % au Mali et au Sénégal, 7,9 % en Guinée-Bissau et 7,6 % au Togo.",
+          "Cette hausse coïncide avec celle des prix internationaux de l'énergie et des céréales : en moyenne annuelle, le baril de Brent passe de 70,8 dollars en 2021 à 99,0 dollars en 2022, et la tonne de blé de 265,8 à 360,2 dollars. La BCEAO relève elle aussi, pour 2022, le renchérissement des produits énergétiques et alimentaires au niveau mondial."
+        ],
+        "en": [
+          "In 2022, only Benin stays below the 3% threshold (1.4%). Inflation reaches 14.1% in Burkina Faso, 9.7% in Mali and Senegal, 7.9% in Guinea-Bissau and 7.6% in Togo.",
+          "This rise coincides with higher international energy and cereal prices: on an annual average basis, Brent crude goes from 70.8 dollars a barrel in 2021 to 99.0 dollars in 2022, and wheat from 265.8 to 360.2 dollars a tonne. The BCEAO also notes, for 2022, the rise in global energy and food prices."
+        ]
+      }
+    },
+    {
+      "type": "prix",
+      "produits": [
+        "ble",
+        "petrole",
+        "riz"
+      ],
+      "depuis": "2019-01",
+      "titre": {
+        "fr": "Prix internationaux du blé, du pétrole et du riz depuis 2019",
+        "en": "International prices of wheat, oil and rice since 2019"
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "inflation",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "titre": {
+        "fr": "Inflation moyenne annuelle par pays, 2021–2024 (%)",
+        "en": "Average annual inflation by country, 2021–2024 (%)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "2023–2024 : un reflux qui ne touche pas tous les pays",
+        "en": "2023–2024: a decline that does not reach every country"
+      },
+      "contenu": {
+        "fr": [
+          "L'inflation de l'Union redescend à 3,7 % en 2023 puis à 3,5 % en 2024, sans repasser sous le seuil. En moyenne annuelle, le blé et le pétrole reculent sur la même période (201,2 dollars la tonne de blé et 79,9 dollars le baril en 2024), mais le riz, lui, continue de monter, jusqu'à 565,2 dollars la tonne en 2024.",
+          "Les écarts entre pays restent marqués. En 2024, l'inflation est de 0,8 % au Sénégal et de 1,2 % au Bénin, mais de 9,1 % au Niger, contre 3,7 % un an plus tôt. Cinq pays sur huit dépassent encore 3 % : le Niger, le Burkina Faso (4,2 %), la Guinée-Bissau (3,7 %), la Côte d'Ivoire (3,5 %) et le Mali (3,2 %)."
+        ],
+        "en": [
+          "Inflation in the Union falls to 3.7% in 2023 and 3.5% in 2024, without returning below the threshold. On an annual average basis, wheat and oil prices fall over the same period (201.2 dollars a tonne of wheat and 79.9 dollars a barrel in 2024), but rice keeps rising, to 565.2 dollars a tonne in 2024.",
+          "Gaps between countries remain wide. In 2024, inflation is 0.8% in Senegal and 1.2% in Benin, but 9.1% in Niger, against 3.7% a year earlier. Five of the eight countries still exceed 3%: Niger, Burkina Faso (4.2%), Guinea-Bissau (3.7%), Côte d'Ivoire (3.5%) and Mali (3.2%)."
+        ]
+      }
+    }
+  ],
+  "observations": [
+    {
+      "fr": "L'inflation de l'Union a culminé à 7,4 % en 2022, au même niveau qu'en 2008, le plus élevé de la série depuis 1998.",
+      "en": "Inflation in the Union peaked at 7.4% in 2022, matching 2008 as the highest level in the series since 1998."
+    },
+    {
+      "fr": "Elle est revenue à 3,5 % en 2024, encore au-dessus du critère de 3 %.",
+      "en": "It fell back to 3.5% in 2024, still above the 3% criterion."
+    },
+    {
+      "fr": "Le reflux est inégal : cinq pays sur huit dépassent encore 3 % en 2024, et l'inflation du Niger remonte à 9,1 %.",
+      "en": "The decline is uneven: five of eight countries still exceed 3% in 2024, and Niger's inflation rises to 9.1%."
+    }
+  ],
+  "limites": [
+    {
+      "fr": "Les séries sont des moyennes annuelles : elles ne montrent ni le moment exact du pic ni les mouvements à l'intérieur de l'année.",
+      "en": "The series are annual averages: they show neither the exact timing of the peak nor movements within the year."
+    },
+    {
+      "fr": "La concordance avec les prix internationaux n'établit pas à elle seule une relation de cause à effet. Les facteurs propres à chaque pays (récoltes, sécurité, approvisionnement) ne sont pas mesurés ici.",
+      "en": "The match with international prices does not by itself establish cause and effect. Country-specific factors (harvests, security, supply) are not measured here."
+    },
+    {
+      "fr": "Les données de 2024 peuvent être révisées par la BCEAO.",
+      "en": "2024 data may be revised by the BCEAO."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "BCEAO, principaux indicateurs macroéconomiques (IMECO), via DBnomics",
+      "url": "https://db.nomics.world/BCEAO/IMECO"
+    },
+    {
+      "titre": "FMI, Primary Commodity Price System (PCPS), via DBnomics",
+      "url": "https://db.nomics.world/IMF/PCPS"
+    },
+    {
+      "titre": "BCEAO, Rapport sur la politique monétaire dans l'UMOA, mars 2023",
+      "url": "https://www.bceao.int/sites/default/files/2023-05/BCEAO%20-%20Rapport%20sur%20la%20politique%20mone%CC%81taire_Umoa_Mars_2023.pdf"
+    }
+  ],
+  "publications": [
+    "bceao-rpm-2023-03"
+  ]
+}

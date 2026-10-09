@@ -498,3 +498,69 @@ body {
     padding-bottom: 140px;
   }
 }
+
+/* ---------- Inflation mensuelle ---------- */
+
+.im-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.im-tableau th small {
+  display: block;
+  font-weight: 400;
+  color: var(--gris);
+}
+
+.im-choix {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--indigo);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.im-choix:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.im-actif th,
+.im-actif td {
+  background: var(--sable-fonce);
+}
+
+.im-actif .im-choix {
+  color: var(--encre);
+}
+
+.im-legende {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .im-grille {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profil-financement-titre {
+  margin-top: 40px;
+}
+
+/* Tableaux Banque mondiale : mêmes colonnes d'un tableau à l'autre. */
+.tableau-cdv {
+  table-layout: fixed;
+  min-width: 640px;
+}
+
+.tableau-cdv th:nth-child(1) { width: 46%; }
+.tableau-cdv th:nth-child(2) { width: 12%; }
+.tableau-cdv th:nth-child(3) { width: 20%; }

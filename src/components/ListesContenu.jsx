@@ -65,7 +65,7 @@ export function ListePublications({ publications, compacte = false }) {
       {publications.map((p) => (
         <li key={p.id}>
           <a href={p.url} target="_blank" rel="noreferrer">
-            <span className="publications-inst">{p.institution}</span>
+            <span className="publications-inst">{t(`institution_${p.institution}`, { defaultValue: p.institution })}</span>
             <span className="publications-titre">
               {p.titre}
               {p.edition && p.titre.indexOf(p.edition) === -1 ? `, ${p.edition}` : ""}

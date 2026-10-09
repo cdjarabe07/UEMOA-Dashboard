@@ -1,0 +1,194 @@
+{
+  "id": "echanges-cacao-or-2024",
+  "statut": "publiee",
+  "date_publication": "2026-10-09",
+  "auteurs": [
+    "Observatoire économique de l'UEMOA"
+  ],
+  "validation": {
+    "par": "Caleb Djarabé",
+    "le": "2026-10-09"
+  },
+  "dossier": "echanges",
+  "donnees_au": "2026-10-08",
+  "titre": {
+    "fr": "Échanges : la flambée du cacao et de l'or, et un déficit courant qui se réduit",
+    "en": "Trade: the cocoa and gold price surge, and a narrowing current account deficit"
+  },
+  "resume": {
+    "fr": "Les prix du cacao et de l'or atteignent des sommets en 2024 et 2025. Les exportations de biens de l'Union progressent de 13,4 % en 2024 et son déficit courant revient de 9,4 % à 6,4 % du PIB. La hausse des exportations n'est pas uniforme : forte en Côte d'Ivoire, au Sénégal et au Niger, elle laisse place à un recul au Mali et au Bénin.",
+    "en": "Cocoa and gold prices reach peaks in 2024 and 2025. The Union's goods exports grow by 13.4% in 2024 and its current account deficit narrows from 9.4% to 6.4% of GDP. Export growth is uneven: strong in Côte d'Ivoire, Senegal and Niger, while exports fall in Mali and Benin."
+  },
+  "question": {
+    "fr": "Comment les prix des matières premières et les exportations de l'Union ont-ils évolué depuis 2022 ?",
+    "en": "How have commodity prices and the Union's exports changed since 2022?"
+  },
+  "indicateurs": [
+    "exportations_biens",
+    "importations_biens",
+    "balance_courante_pib"
+  ],
+  "zones": [
+    "uemoa",
+    "benin",
+    "burkina",
+    "cote_ivoire",
+    "guinee_bissau",
+    "mali",
+    "niger",
+    "senegal",
+    "togo"
+  ],
+  "blocs": [
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Des prix au plus haut pour le cacao et l'or",
+        "en": "Peak prices for cocoa and gold"
+      },
+      "contenu": {
+        "fr": [
+          "En moyenne annuelle, la tonne de cacao passe de 3 258 dollars en 2023 à 7 391 dollars en 2024, soit 2,3 fois plus, puis à 9 020 dollars en moyenne sur les six premiers mois de 2025. L'once d'or passe de 1 802 dollars en 2022 à 2 387 dollars en 2024, puis à 3 075 dollars en moyenne au premier semestre 2025.",
+          "Ces deux produits comptent pour plusieurs pays de l'Union : le cacao pour la Côte d'Ivoire et le Togo, l'or pour le Mali, le Burkina Faso, la Côte d'Ivoire et le Niger. À l'inverse, le coton revient de 130,1 cents la livre en 2022 à 86,6 cents en 2024."
+        ],
+        "en": [
+          "On an annual average basis, cocoa rises from 3,258 dollars a tonne in 2023 to 7,391 dollars in 2024, 2.3 times higher, then to an average of 9,020 dollars over the first six months of 2025. Gold rises from 1,802 dollars an ounce in 2022 to 2,387 dollars in 2024, then to an average of 3,075 dollars in the first half of 2025.",
+          "Both products matter for several Union countries: cocoa for Côte d'Ivoire and Togo, gold for Mali, Burkina Faso, Côte d'Ivoire and Niger. Cotton, by contrast, falls from 130.1 cents a pound in 2022 to 86.6 cents in 2024."
+        ]
+      }
+    },
+    {
+      "type": "prix",
+      "produits": [
+        "cacao",
+        "or",
+        "coton"
+      ],
+      "depuis": "2019-01",
+      "titre": {
+        "fr": "Prix internationaux du cacao, de l'or et du coton depuis 2019",
+        "en": "International prices of cocoa, gold and cotton since 2019"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Des exportations en hausse, mais pas partout",
+        "en": "Exports up, but not everywhere"
+      },
+      "contenu": {
+        "fr": [
+          "Les exportations de biens de l'Union passent de 24 528 milliards de FCFA en 2023 à 27 817 milliards en 2024 (+13,4 %). Elles progressent de 19,8 % en Côte d'Ivoire, de 20,1 % au Sénégal et de 76,2 % au Niger, où elles passent de 602 à 1 060 milliards de FCFA.",
+          "Elles reculent en revanche de 3,0 % au Mali, malgré la hausse du prix de l'or, et de 6,9 % au Bénin. Les prix ne suffisent donc pas à expliquer les montants exportés : les volumes et la composition des ventes comptent aussi."
+        ],
+        "en": [
+          "The Union's goods exports rise from 24,528 billion CFA francs in 2023 to 27,817 billion in 2024 (+13.4%). They grow by 19.8% in Côte d'Ivoire, 20.1% in Senegal and 76.2% in Niger, where they rise from 602 to 1,060 billion CFA francs.",
+          "They fall, however, by 3.0% in Mali despite higher gold prices, and by 6.9% in Benin. Prices alone therefore do not explain export values: volumes and the mix of goods sold matter too."
+        ]
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "exportations_biens",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2019,
+        2022,
+        2023,
+        2024
+      ],
+      "titre": {
+        "fr": "Exportations de biens (milliards de FCFA)",
+        "en": "Goods exports (billion CFA francs)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Un déficit courant qui se réduit en 2024",
+        "en": "A current account deficit that narrows in 2024"
+      },
+      "contenu": {
+        "fr": [
+          "Le déficit des transactions courantes de l'Union se creuse de 4,8 % du PIB en 2019 à 9,9 % en 2022, puis revient à 9,4 % en 2023 et 6,4 % en 2024. Entre 2022 et 2024, les importations de biens de l'Union baissent légèrement (−3,3 %), pendant que les exportations augmentent.",
+          "La réduction est particulièrement nette entre 2023 et 2024 au Niger (de 14,0 % à 6,6 % du PIB), au Sénégal (de 19,7 % à 13,3 %) et en Côte d'Ivoire (de 8,3 % à 4,5 %). Le Bénin fait exception : son déficit reste proche de 8 % du PIB en 2023 et en 2024."
+        ],
+        "en": [
+          "The Union's current account deficit widens from 4.8% of GDP in 2019 to 9.9% in 2022, then narrows to 9.4% in 2023 and 6.4% in 2024. Between 2022 and 2024, the Union's goods imports edge down (−3.3%) while exports rise.",
+          "The narrowing between 2023 and 2024 is especially marked in Niger (from 14.0% to 6.6% of GDP), Senegal (from 19.7% to 13.3%) and Côte d'Ivoire (from 8.3% to 4.5%). Benin is the exception: its deficit stays close to 8% of GDP in 2023 and 2024."
+        ]
+      }
+    },
+    {
+      "type": "graphique",
+      "indicateur": "balance_courante_pib",
+      "zones": [
+        "uemoa",
+        "senegal",
+        "niger",
+        "cote_ivoire"
+      ],
+      "debut": 2015,
+      "fin": 2024,
+      "titre": {
+        "fr": "Solde des transactions courantes, 2015–2024 (% du PIB)",
+        "en": "Current account balance, 2015–2024 (% of GDP)"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "fr": "Le cacao coûte 2,3 fois plus cher en 2024 qu'en 2023, et l'or 32,5 % de plus qu'en 2022.",
+      "en": "Cocoa costs 2.3 times more in 2024 than in 2023, and gold 32.5% more than in 2022."
+    },
+    {
+      "fr": "Les exportations de biens de l'Union augmentent de 13,4 % en 2024, mais reculent au Mali et au Bénin.",
+      "en": "The Union's goods exports grow by 13.4% in 2024, but fall in Mali and Benin."
+    },
+    {
+      "fr": "Le déficit courant de l'Union revient de 9,9 % du PIB en 2022 à 6,4 % en 2024.",
+      "en": "The Union's current account deficit narrows from 9.9% of GDP in 2022 to 6.4% in 2024."
+    }
+  ],
+  "limites": [
+    {
+      "fr": "Les séries de la BCEAO donnent les exportations totales de biens, sans détail par produit : la part du cacao, de l'or ou des hydrocarbures dans la hausse n'est pas mesurée ici.",
+      "en": "BCEAO series give total goods exports with no product breakdown: the share of cocoa, gold or hydrocarbons in the increase is not measured here."
+    },
+    {
+      "fr": "Les prix du FMI sont des cours mondiaux en dollars ; les prix payés aux producteurs et le taux de change ne sont pas pris en compte.",
+      "en": "IMF prices are world prices in dollars; producer prices and the exchange rate are not taken into account."
+    },
+    {
+      "fr": "Pour 2025, seuls les prix sont disponibles, jusqu'en juin ; les exportations de 2025 ne sont pas encore publiées.",
+      "en": "For 2025, only prices are available, up to June; 2025 exports are not yet published."
+    },
+    {
+      "fr": "Les données de 2024 peuvent être révisées par la BCEAO.",
+      "en": "2024 data may be revised by the BCEAO."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "BCEAO, principaux indicateurs macroéconomiques (IMECO), via DBnomics",
+      "url": "https://db.nomics.world/BCEAO/IMECO"
+    },
+    {
+      "titre": "FMI, Primary Commodity Price System (PCPS), via DBnomics",
+      "url": "https://db.nomics.world/IMF/PCPS"
+    }
+  ],
+  "publications": [
+    "bceao-rapport-annuel-2023"
+  ]
+}

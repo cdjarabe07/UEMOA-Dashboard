@@ -1,0 +1,249 @@
+{
+  "id": "finances-publiques-deficits-depuis-2020",
+  "statut": "publiee",
+  "date_publication": "2026-10-09",
+  "auteurs": [
+    "Observatoire économique de l'UEMOA"
+  ],
+  "validation": {
+    "par": "Caleb Djarabé",
+    "le": "2026-10-09"
+  },
+  "dossier": "finances-publiques",
+  "donnees_au": "2026-10-08",
+  "titre": {
+    "fr": "Finances publiques : des déficits au-delà du critère depuis 2020",
+    "en": "Public finances: deficits beyond the criterion since 2020"
+  },
+  "resume": {
+    "fr": "Depuis 2020, le déficit budgétaire de l'Union dépasse le seuil de 3 % du PIB fixé par le Pacte de convergence. Il s'est réduit depuis 2022, mais seul le Mali respecte le critère en 2024. Les recettes fiscales progressent sans approcher l'objectif de 20 % du PIB.",
+    "en": "Since 2020, the Union's fiscal deficit has exceeded the 3% of GDP threshold set by the Convergence Pact. It has narrowed since 2022, but only Mali meets the criterion in 2024. Tax revenue is rising without approaching the 20% of GDP target."
+  },
+  "question": {
+    "fr": "Où en sont les soldes budgétaires, les recettes fiscales et la dette des pays de l'Union par rapport aux critères de convergence ?",
+    "en": "Where do the fiscal balances, tax revenue and debt of the Union's countries stand against the convergence criteria?"
+  },
+  "indicateurs": [
+    "solde_budgetaire_pib",
+    "pression_fiscale",
+    "dette_pib"
+  ],
+  "zones": [
+    "uemoa",
+    "senegal",
+    "mali",
+    "benin",
+    "burkina",
+    "cote_ivoire",
+    "guinee_bissau",
+    "niger",
+    "togo"
+  ],
+  "blocs": [
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Contexte",
+        "en": "Context"
+      },
+      "contenu": {
+        "fr": [
+          "Le Pacte de convergence de l'UEMOA retient trois critères de finances publiques mesurables avec les séries de la BCEAO : un solde budgétaire global, dons compris, d'au moins −3 % du PIB ; une pression fiscale d'au moins 20 % du PIB ; un encours de la dette publique d'au plus 70 % du PIB.",
+          "Entre 2015 et 2019, le déficit de l'Union se situe autour du seuil, entre 2,9 % et 3,5 % du PIB. En 2019, cinq pays respectent le critère de solde : le Bénin, le Burkina Faso, la Côte d'Ivoire, le Mali et le Togo."
+        ],
+        "en": [
+          "The WAEMU Convergence Pact sets three public finance criteria that can be measured with BCEAO series: an overall fiscal balance, including grants, of at least −3% of GDP; a tax burden of at least 20% of GDP; and outstanding public debt of at most 70% of GDP.",
+          "Between 2015 and 2019, the Union's deficit hovers around the threshold, between 2.9% and 3.5% of GDP. In 2019, five countries meet the balance criterion: Benin, Burkina Faso, Côte d'Ivoire, Mali and Togo."
+        ]
+      }
+    },
+    {
+      "type": "graphique",
+      "indicateur": "solde_budgetaire_pib",
+      "zones": [
+        "uemoa",
+        "senegal",
+        "mali"
+      ],
+      "debut": 2015,
+      "fin": 2024,
+      "titre": {
+        "fr": "Solde budgétaire global, dons compris, 2015–2024 (% du PIB)",
+        "en": "Overall fiscal balance including grants, 2015–2024 (% of GDP)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Les soldes : aucun pays dans le critère de 2020 à 2023",
+        "en": "Balances: no country within the criterion from 2020 to 2023"
+      },
+      "contenu": {
+        "fr": [
+          "À partir de 2020, aucun pays ne respecte le critère de solde, et ce pendant quatre années consécutives. Le déficit de l'Union atteint 6,3 % du PIB en 2020, puis 7,7 % en 2022, son niveau le plus élevé depuis le début de la série en 2001.",
+          "Il se réduit ensuite à 6,2 % en 2023 et 5,1 % en 2024. En 2024, le Mali repasse sous le seuil (−2,3 %) ; le Bénin s'en approche (−3,7 %). Le Sénégal reste au-delà de 10 % du PIB chaque année de 2020 à 2024, avec −11,1 % en 2024."
+        ],
+        "en": [
+          "From 2020, no country meets the balance criterion, for four consecutive years. The Union's deficit reaches 6.3% of GDP in 2020, then 7.7% in 2022, its highest level since the series began in 2001.",
+          "It then narrows to 6.2% in 2023 and 5.1% in 2024. In 2024, Mali returns within the threshold (−2.3%) and Benin comes close (−3.7%). Senegal stays beyond 10% of GDP every year from 2020 to 2024, at −11.1% in 2024."
+        ]
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "solde_budgetaire_pib",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2019,
+        2020,
+        2022,
+        2024
+      ],
+      "titre": {
+        "fr": "Solde budgétaire par pays (% du PIB)",
+        "en": "Fiscal balance by country (% of GDP)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "Les recettes : en hausse, loin de 20 % du PIB",
+        "en": "Revenue: rising, far from 20% of GDP"
+      },
+      "contenu": {
+        "fr": [
+          "La pression fiscale de l'Union passe de 12,4 % du PIB en 2015 à 14,6 % en 2024. Au Bénin, au Burkina Faso, en Côte d'Ivoire et au Togo, elle atteint en 2024 son plus haut niveau depuis 2001.",
+          "Aucun pays n'atteint pour autant 20 % du PIB. Les plus proches sont le Burkina Faso (18,6 %), le Togo (18,3 %) et le Sénégal (17,5 %). À l'inverse, la pression fiscale du Niger recule de 12,0 % en 2015 à 7,1 % en 2024, et celle de la Guinée-Bissau est de 8,8 % en 2024, contre 9,1 % en 2015."
+        ],
+        "en": [
+          "The Union's tax burden rises from 12.4% of GDP in 2015 to 14.6% in 2024. In Benin, Burkina Faso, Côte d'Ivoire and Togo, it reaches its highest level since 2001 in 2024.",
+          "Yet no country reaches 20% of GDP. The closest are Burkina Faso (18.6%), Togo (18.3%) and Senegal (17.5%). Conversely, Niger's tax burden falls from 12.0% in 2015 to 7.1% in 2024, and Guinea-Bissau's stands at 8.8% in 2024, against 9.1% in 2015."
+        ]
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "pression_fiscale",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2015,
+        2019,
+        2024
+      ],
+      "titre": {
+        "fr": "Pression fiscale par pays (% du PIB)",
+        "en": "Tax burden by country (% of GDP)"
+      }
+    },
+    {
+      "type": "texte",
+      "titre": {
+        "fr": "La dette : comparable seulement depuis 2022",
+        "en": "Debt: comparable only since 2022"
+      },
+      "contenu": {
+        "fr": [
+          "La série de dette de la BCEAO change de périmètre en 2022 : avant cette date, elle correspond à l'ordre de grandeur de la dette extérieure, et après, à celui de la dette totale. Seules les années 2022 à 2024 sont donc comparables entre elles (voir la méthodologie).",
+          "Sur cette période, la dette de l'Union passe de 59,6 % à 62,4 % du PIB. Deux pays dépassent le seuil de 70 % : le Sénégal, de 87,1 % à 103,0 %, et la Guinée-Bissau, de 77,1 % à 81,4 %. Les six autres restent en dessous, le Togo s'en rapprochant (68,2 % en 2024)."
+        ],
+        "en": [
+          "The BCEAO debt series changes coverage in 2022: before that date it matches the order of magnitude of external debt, and afterwards that of total debt. Only 2022 to 2024 are therefore comparable (see the methodology).",
+          "Over this period, the Union's debt rises from 59.6% to 62.4% of GDP. Two countries exceed the 70% threshold: Senegal, from 87.1% to 103.0%, and Guinea-Bissau, from 77.1% to 81.4%. The other six stay below, with Togo getting closer (68.2% in 2024)."
+        ]
+      }
+    },
+    {
+      "type": "tableau",
+      "indicateur": "dette_pib",
+      "zones": [
+        "uemoa",
+        "benin",
+        "burkina",
+        "cote_ivoire",
+        "guinee_bissau",
+        "mali",
+        "niger",
+        "senegal",
+        "togo"
+      ],
+      "annees": [
+        2022,
+        2023,
+        2024
+      ],
+      "titre": {
+        "fr": "Encours de la dette publique, 2022–2024 (% du PIB)",
+        "en": "Outstanding public debt, 2022–2024 (% of GDP)"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "fr": "Aucun pays n'a respecté le critère de solde budgétaire de 2020 à 2023 ; en 2024, seul le Mali le respecte.",
+      "en": "No country met the fiscal balance criterion from 2020 to 2023; in 2024, only Mali does."
+    },
+    {
+      "fr": "Le déficit de l'Union s'est réduit de 7,7 % du PIB en 2022 à 5,1 % en 2024, sans revenir sous 3 %.",
+      "en": "The Union's deficit narrowed from 7.7% of GDP in 2022 to 5.1% in 2024, without returning below 3%."
+    },
+    {
+      "fr": "La pression fiscale progresse entre 2015 et 2024 dans cinq pays sur huit, mais aucun n'atteint 20 % du PIB.",
+      "en": "The tax burden rose between 2015 and 2024 in five of the eight countries, but none reaches 20% of GDP."
+    },
+    {
+      "fr": "Depuis 2022, seuls le Sénégal et la Guinée-Bissau dépassent le plafond de dette de 70 % du PIB.",
+      "en": "Since 2022, only Senegal and Guinea-Bissau exceed the 70% of GDP debt ceiling."
+    }
+  ],
+  "limites": [
+    {
+      "fr": "Le solde est mesuré dons compris et en base engagement, tel que publié par la BCEAO ; d'autres définitions (hors dons, solde primaire) donneraient des niveaux différents.",
+      "en": "The balance is measured including grants and on a commitment basis, as published by the BCEAO; other definitions (excluding grants, primary balance) would give different levels."
+    },
+    {
+      "fr": "Les valeurs de dette antérieures à 2022 ne sont pas comparables aux suivantes : aucune tendance n'est tirée à travers cette rupture.",
+      "en": "Debt values before 2022 are not comparable with later ones: no trend is drawn across this break."
+    },
+    {
+      "fr": "Les données de 2024 peuvent être révisées par la BCEAO.",
+      "en": "2024 data may be revised by the BCEAO."
+    }
+  ],
+  "sources": [
+    {
+      "titre": "BCEAO, principaux indicateurs macroéconomiques (IMECO), via DBnomics",
+      "url": "https://db.nomics.world/BCEAO/IMECO"
+    },
+    {
+      "titre": "UEMOA, Acte additionnel n° 01/2015/CCEG/UEMOA (Pacte de convergence)"
+    },
+    {
+      "titre": "BCEAO, Rapport sur la politique monétaire dans l'UMOA, mars 2023 (dette publique totale 2021)",
+      "url": "https://www.bceao.int/sites/default/files/2023-05/BCEAO%20-%20Rapport%20sur%20la%20politique%20mone%CC%81taire_Umoa_Mars_2023.pdf"
+    }
+  ],
+  "publications": [
+    "bceao-rapport-annuel-2023",
+    "bceao-rpm-2023-03"
+  ]
+}

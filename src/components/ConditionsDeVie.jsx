@@ -12,12 +12,14 @@ const fmt = (id, v) => {
   return fmtNombre(v, 1, true);
 };
 
-export default function ConditionsDeVie({ zone }) {
+/** groupe : « conditions » (population, conditions de vie) ou « financement » (financement extérieur). */
+export default function ConditionsDeVie({ zone, groupe = "conditions" }) {
   const { t } = useTranslation();
+  const indicateurs = INDICATEURS_BM.filter((i) => (i.groupe || "conditions") === groupe);
   return (
     <>
       <div className="defilant">
-        <table className="tableau tableau-bm">
+        <table className="tableau tableau-bm tableau-cdv">
           <thead>
             <tr>
               <th scope="col">{t("col_indicateur")}</th>
@@ -27,7 +29,7 @@ export default function ConditionsDeVie({ zone }) {
             </tr>
           </thead>
           <tbody>
-            {INDICATEURS_BM.map((i) => {
+            {indicateurs.map((i) => {
               const s = serieBM(i.id, zone);
               const der = s.at(-1);
               const ref = s.find((p) => p.annee === 2010);
