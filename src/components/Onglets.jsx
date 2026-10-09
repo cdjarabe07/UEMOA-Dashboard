@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import Fondu from "./Fondu.jsx";
 
 /**
  * Onglets : un seul contenu affiché à la fois.
@@ -26,7 +27,7 @@ export default function Onglets({ onglets, label, initial }) {
         ))}
       </div>
       <div className="onglets-panneau" role="tabpanel" id={`${base}-panneau`} aria-labelledby={`${base}-${courant.id}`}>
-        {courant.contenu}
+        <Fondu cle={courant.id}>{courant.contenu}</Fondu>
       </div>
     </div>
   );

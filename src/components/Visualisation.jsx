@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Fondu from "./Fondu.jsx";
 
 /**
  * Bloc de visualisation : bascule Graphique / Tableau, puis notes de lecture.
@@ -29,7 +30,7 @@ export default function Visualisation({ titre, sousTitre, graphique, tableau, no
           )}
         </div>
       </div>
-      <div className="visu-corps">{vue === "graphique" || !tableau ? graphique : tableau}</div>
+      <Fondu cle={vue} className="visu-corps">{vue === "graphique" || !tableau ? graphique : tableau}</Fondu>
       {(notes.lecture || notes.champ || notes.source) && (
         <dl className="visu-notes">
           {notes.lecture && (

@@ -564,3 +564,17 @@ body {
 .tableau-cdv th:nth-child(1) { width: 46%; }
 .tableau-cdv th:nth-child(2) { width: 12%; }
 .tableau-cdv th:nth-child(3) { width: 20%; }
+
+/* ---------- Barre de progression entre les pages ---------- */
+
+.barre-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: 3px;
+  background: linear-gradient(90deg, var(--indigo) 0%, var(--ocre) 100%);
+  transform-origin: left center;
+  pointer-events: none;
+}

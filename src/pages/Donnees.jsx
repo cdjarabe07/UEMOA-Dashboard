@@ -30,6 +30,7 @@ import { GraphiqueSeries, BarresPays } from "../components/Graphiques.jsx";
 import Bandeau from "../components/Bandeau.jsx";
 import Apercu from "../components/Apercu.jsx";
 import Introuvable from "./Introuvable.jsx";
+import Fondu from "../components/Fondu.jsx";
 
 const estPourcentage = (unite) => unite === "%" || unite === "% du PIB" || unite === "points de %";
 // Les niveaux en milliards de FCFA ne se comparent pas à l'agrégat de l'Union.
@@ -480,7 +481,7 @@ export function FicheSerie() {
       )}
 
       <section className="section section--compacte">
-        <div className="conteneur serie-tete" key={zone}>
+        <Fondu cle={zone} className="conteneur serie-tete">
           <div className="serie-valeur">
             <p className="serie-valeur-lib">{t("serie_derniere", { zone: nomZone(zone), annee: dernier.annee })}</p>
             <p className="serie-valeur-chiffre nombre">{fmtValeur(dernier.valeur, unite)}</p>
@@ -500,7 +501,7 @@ export function FicheSerie() {
               </li>
             )}
           </ul>
-        </div>
+        </Fondu>
       </section>
 
       <section className="section section--compacte">
@@ -521,7 +522,7 @@ export function FicheSerie() {
                 </div>
               </div>
             </div>
-            <div className="visu-corps">
+            <Fondu cle={`${zone}-${periodeId}`} className="visu-corps">
               <GraphiqueSeries series={series} unite={unite} noms={noms} hauteur={340} zero={pct} seuil={seuil} animer={!reduit} rupture={anRupture} />
               <p className="legende">
                 <span><i style={{ background: "#263a7a" }} /> {nomZone(zone)}</span>
@@ -529,7 +530,7 @@ export function FicheSerie() {
                 {seuil && <span><i className="pointille pointille--seuil" /> {seuil.libelle}</span>}
                 {anRupture && <span><i className="trait-rupture" /> {t("rupture_graph", { annee: anRupture })}</span>}
               </p>
-            </div>
+            </Fondu>
             <dl className="visu-notes">
               <div>
                 <dt>{t("note_lecture")}</dt>

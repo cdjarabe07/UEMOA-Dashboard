@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { PAYS } from "../data/portail.js";
 import { PROJECTIONS, ANNEES_PROJECTION, projection } from "../data/fmi.js";
 import { fmtCourt, fmtMois, libelleUnite } from "../lib/format.js";
+import Fondu from "./Fondu.jsx";
 
 /** zones = liste de pays (tous par défaut) ; compact = 3 premières années seulement. */
 export default function ProjectionsFMI({ zones = null, compact = false }) {
@@ -60,8 +61,8 @@ export default function ProjectionsFMI({ zones = null, compact = false }) {
           </div>
         </div>
       </div>
-      <div className="visu-corps defilant">
-        <table className="tableau" key={ind}>
+      <Fondu cle={ind} className="visu-corps defilant">
+        <table className="tableau">
           <thead>
             <tr>
               <th scope="col">{t("col_pays")}</th>
@@ -77,7 +78,7 @@ export default function ProjectionsFMI({ zones = null, compact = false }) {
             ))}
           </tbody>
         </table>
-      </div>
+      </Fondu>
       <dl className="visu-notes">
         <div>
           <dt>{t("note_lecture")}</dt>

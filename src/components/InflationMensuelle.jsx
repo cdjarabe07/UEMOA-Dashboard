@@ -8,6 +8,7 @@ import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, ReferenceL
 import { INFLATION_MENSUELLE, glissement } from "../data/fmi.js";
 import { fmtMois, fmtValeur } from "../lib/format.js";
 import { useMouvementReduit } from "../lib/mouvement.js";
+import Fondu from "./Fondu.jsx";
 
 const AXE = { fontFamily: "Source Sans 3", fontSize: 11, fill: "#7a6f66" };
 const SEUIL = 3;
@@ -131,7 +132,9 @@ export default function InflationMensuelle({ zone = null, depuis = "2019-01" }) 
         )}
         <div>
           {!zone && <p className="im-legende">{t("im_courbe", { pays: t(`zone_${actif}`) })} · <Link to={`/pays/${actif}`}>{t("im_profil")}</Link></p>}
-          <Courbe zone={actif} depuis={depuis} />
+          <Fondu cle={actif}>
+            <Courbe zone={actif} depuis={depuis} />
+          </Fondu>
         </div>
       </div>
       <Notes zones={zone ? [zone] : zones} />

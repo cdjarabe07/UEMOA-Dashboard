@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "motion/react";
 import Entete from "./components/Entete.jsx";
+import { BarreNavigation } from "./components/Fondu.jsx";
 import Pied from "./components/Pied.jsx";
 import Recherche from "./components/Recherche.jsx";
 import Accueil from "./pages/Accueil.jsx";
@@ -58,6 +59,7 @@ export default function App() {
   const reduit = useReducedMotion();
   return (
     <MotionConfig reducedMotion="user">
+      <BarreNavigation />
       <Entete />
       <Recherche />
       <main>
