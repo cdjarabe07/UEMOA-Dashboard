@@ -183,6 +183,7 @@ export default function Entete() {
             {DATE_GENERATION && <span className="entete-utile-maj"> · {t("util_maj", { date: fmtDate(DATE_GENERATION) })}</span>}
           </p>
           <div className="entete-utile-liens">
+            <Link to="/agenda">{t("agenda_titre")}</Link>
             <Link to="/methodologie#sources">{t("util_sources")}</Link>
             <Link to="/donnees">{t("util_telecharger")}</Link>
             <div className="langue" role="group" aria-label={t("langue")}>

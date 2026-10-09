@@ -16,6 +16,8 @@ import Apercu from "../components/Apercu.jsx";
 import Journal from "../components/Journal.jsx";
 import BandeauChiffres from "../components/BandeauChiffres.jsx";
 import HerosPhotos from "../components/HerosPhotos.jsx";
+import { evenementsAVenir } from "../data/agenda.js";
+import { periode, useIntitule } from "../components/Agenda.jsx";
 import { LigneAnalyse, ListeDossiers, ListePublications } from "../components/ListesContenu.jsx";
 
 // Indicateurs de la conjoncture de l'Union, dans l'ordre de lecture.
@@ -150,6 +152,8 @@ export default function Accueil() {
   const fin = Math.max(...INDICATEURS.map((i) => i.periode[1]));
   const analyses = ANALYSES.filter((a) => a.statut === "publiee").slice(0, 3);
   const popUnion = populationUnion();
+  const prochain = evenementsAVenir()[0] || null;
+  const intitule = useIntitule();
 
   const lancerRecherche = (e) => {
     e.preventDefault();
@@ -181,8 +185,17 @@ export default function Accueil() {
           </div>
           <aside className="heros-une" aria-labelledby="heros-une-titre">
             <h2 id="heros-une-titre" className="heros-une-titre">{t("une_titre")}</h2>
+            {prochain && (
+              <>
+                <p className="heros-une-rubrique">{t("une_prochain")}</p>
+                <Link to="/agenda" className="heros-une-publication">
+                  <b>{intitule(prochain)}</b>
+                  <span className="nombre">{periode(prochain)}</span>
+                </Link>
+              </>
+            )}
             <p className="heros-une-rubrique">{t("une_journal")}</p>
-            <Journal limite={3} />
+            <Journal limite={prochain ? 2 : 3} />
             {PUBLICATIONS[0] && (
               <>
                 <p className="heros-une-rubrique">{t("une_publication")}</p>

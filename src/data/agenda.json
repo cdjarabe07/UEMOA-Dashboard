@@ -1,0 +1,155 @@
+{
+ "generated_at": "2026-10-09T17:47:38Z",
+ "sources": [
+  {
+   "institution": "BCEAO",
+   "titre": "BCEAO, Événements",
+   "url": "https://www.bceao.int/fr/evenements"
+  },
+  {
+   "institution": "FMI · Banque mondiale",
+   "titre": "Annonces officielles, vérifiées à la main",
+   "url": null
+  }
+ ],
+ "evenements": [
+  {
+   "id": "fmi-weo-2026-10",
+   "date": "2026-10-13",
+   "institution": "FMI",
+   "type": "publication",
+   "titre": {
+    "fr": "FMI, Perspectives de l'économie mondiale, octobre 2026",
+    "en": "IMF, World Economic Outlook, October 2026"
+   },
+   "url": "https://www.imf.org/en/publications/weo/issues/2026/10/13/world-economic-outlook-october-2026",
+   "verifie_le": "2026-10-09"
+  },
+  {
+   "id": "fmi-bm-assemblees-annuelles-2026",
+   "date": "2026-10-12",
+   "date_fin": "2026-10-18",
+   "institution": "FMI · Banque mondiale",
+   "type": "reunion",
+   "titre": {
+    "fr": "Assemblées annuelles du FMI et du Groupe de la Banque mondiale, Bangkok",
+    "en": "Annual Meetings of the IMF and the World Bank Group, Bangkok"
+   },
+   "url": "https://www.worldbank.org/en/meetings/splash/annual",
+   "verifie_le": "2026-10-09"
+  },
+  {
+   "id": "bceao-reunion-du-comite-de-politique-monetaire-de-la-bceao-1",
+   "date": "2026-09-09",
+   "institution": "BCEAO",
+   "type": "cpm",
+   "titre": {
+    "fr": "Réunion du Comité de Politique Monétaire de la BCEAO"
+   },
+   "description": {
+    "fr": "Réunion du Comité de Politique Monétaire de la BCEAO"
+   },
+   "url": "https://www.bceao.int/fr/evenement/reunion-du-comite-de-politique-monetaire-de-la-bceao-1"
+  },
+  {
+   "id": "bceao-ceremonie-de-presentation-du-rapport-annuel-2025-de-la-bceao",
+   "date": "2026-07-22",
+   "institution": "BCEAO",
+   "type": "rapport_annuel",
+   "titre": {
+    "fr": "Cérémonie de présentation du Rapport annuel 2025 de la BCEAO"
+   },
+   "description": null,
+   "url": "https://www.bceao.int/fr/evenement/ceremonie-de-presentation-du-rapport-annuel-2025-de-la-bceao"
+  },
+  {
+   "id": "bceao-seminaire-des-journalistes-economiques-de-lumoa",
+   "date": "2026-07-20",
+   "institution": "BCEAO",
+   "type": "autre",
+   "titre": {
+    "fr": "Séminaire des Journalistes économiques de l'UMOA"
+   },
+   "description": null,
+   "url": "https://www.bceao.int/fr/evenement/seminaire-des-journalistes-economiques-de-lumoa"
+  },
+  {
+   "id": "bceao-conference-internationale-sur-les-crypto-actifs-et-innovations-numeriques",
+   "date": "2026-05-08",
+   "institution": "BCEAO",
+   "type": "autre",
+   "titre": {
+    "fr": "Conférence internationale sur les crypto-actifs et innovations numériques : Opportunités et défis pour la stabilité monétaire et financière"
+   },
+   "description": {
+    "fr": "Organisée par la Banque Centrale des États de l’Afrique de l’Ouest, la Conférence internationale sur les crypto-actifs et les innovations numériques se tiendra le 8 mai 2026 à l’Hôtel Terrou-Bi, sous…"
+   },
+   "url": "https://www.bceao.int/fr/evenement/conference-internationale-sur-les-crypto-actifs-et-innovations-numeriques"
+  },
+  {
+   "id": "bceao-conseil-des-ministres-de-lunion-2",
+   "date": "2026-03-27",
+   "institution": "BCEAO",
+   "type": "conseil_ministres",
+   "titre": {
+    "fr": "Conseil des Ministres de l'Union"
+   },
+   "description": {
+    "fr": "Session ordinaire du Conseil des Ministres de l'Union prévue le vendredi 27 mars 2026 à 9h"
+   },
+   "url": "https://www.bceao.int/fr/evenement/conseil-des-ministres-de-lunion-2"
+  },
+  {
+   "id": "bceao-reunion-du-comite-de-politique-monetaire-de-la-bceao-0",
+   "date": "2026-03-04",
+   "institution": "BCEAO",
+   "type": "cpm",
+   "titre": {
+    "fr": "Réunion du Comité de Politique Monétaire de la BCEAO"
+   },
+   "description": {
+    "fr": "Réunion ordinaire du Comité de Politique Monétaire de la BCEAO"
+   },
+   "url": "https://www.bceao.int/fr/evenement/reunion-du-comite-de-politique-monetaire-de-la-bceao-0"
+  },
+  {
+   "id": "bceao-atelier-regional-sur-loperationnalisation-du-laboratoire-dinnovation-financiere-de-la",
+   "date": "2025-12-10",
+   "institution": "BCEAO",
+   "type": "autre",
+   "titre": {
+    "fr": "Atelier régional sur l’opérationnalisation du laboratoire d’innovation financière de la BCEAO (LIF-BCEAO)"
+   },
+   "description": {
+    "fr": "Atelier régional sur l’opérationnalisation du laboratoire d’innovation financière de la BCEAO (LIF-BCEAO) le mercredi 10 décembre 2025, à partir de 9h"
+   },
+   "url": "https://www.bceao.int/fr/evenement/atelier-regional-sur-loperationnalisation-du-laboratoire-dinnovation-financiere-de-la"
+  },
+  {
+   "id": "bceao-lancement-officiel-de-la-plateforme-interoperable-du-systeme-de-paiement-instantane-pi",
+   "date": "2025-09-30",
+   "institution": "BCEAO",
+   "type": "autre",
+   "titre": {
+    "fr": "Lancement officiel de la Plateforme Interopérable du Système de Paiement Instantané (PI-SPI)"
+   },
+   "description": {
+    "fr": "Cérémonie de lancement officiel de la Plateforme Interopérable du Système de Paiement Instantané (PI-SPI)"
+   },
+   "url": "https://www.bceao.int/fr/evenement/lancement-officiel-de-la-plateforme-interoperable-du-systeme-de-paiement-instantane-pi"
+  },
+  {
+   "id": "bceao-reunion-ordinaire-du-comite-de-politique-monetaire-de-la-bceao-dakar-le-17-septembre-2025",
+   "date": "2025-09-17",
+   "institution": "BCEAO",
+   "type": "cpm",
+   "titre": {
+    "fr": "Réunion ordinaire du Comité de Politique Monétaire de la BCEAO - Dakar, le 17 septembre 2025"
+   },
+   "description": {
+    "fr": "Réunion ordinaire du Comité de Politique Monétaire de la BCEAO - Dakar, le 17 septembre 2025"
+   },
+   "url": "https://www.bceao.int/fr/evenement/reunion-ordinaire-du-comite-de-politique-monetaire-de-la-bceao-dakar-le-17-septembre-2025"
+  }
+ ]
+}

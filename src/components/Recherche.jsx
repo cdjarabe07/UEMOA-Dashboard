@@ -30,6 +30,7 @@ const PAGES = [
   ["/pays", "nav_pays"],
   ["/donnees", "explo_titre"],
   ["/publications", "nav_publications"],
+  ["/agenda", "agenda_titre"],
   ["/methodologie", "nav_methodologie"],
   ["/methodologie#ruptures", "meth_ruptures_titre"],
 ];

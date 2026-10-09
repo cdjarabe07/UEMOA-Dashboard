@@ -27,6 +27,7 @@ export default function Pied() {
           <Link to="/analyses">{t("nav_analyses")}</Link>
           <Link to="/donnees">{t("nav_donnees")}</Link>
           <Link to="/publications">{t("nav_publications")}</Link>
+          <Link to="/agenda">{t("agenda_titre")}</Link>
         </div>
         <div>
           <p className="pied-titre">{t("nav_pays")}</p>

@@ -17,6 +17,7 @@ const Analyses = lazy(() => import("./pages/Analyses.jsx"));
 const Analyse = lazy(() => import("./pages/Analyses.jsx").then((m) => ({ default: m.Analyse })));
 const Dossier = lazy(() => import("./pages/Analyses.jsx").then((m) => ({ default: m.Dossier })));
 const Publications = lazy(() => import("./pages/Publications.jsx"));
+const AgendaPage = lazy(() => import("./pages/AgendaPage.jsx"));
 const Previsions = lazy(() => import("./pages/Previsions.jsx"));
 const Convergence = lazy(() => import("./pages/Convergence.jsx"));
 const Methodologie = lazy(() => import("./pages/Methodologie.jsx"));
@@ -84,6 +85,7 @@ export default function App() {
                   <Route path="/analyses/dossiers/:id" element={<Dossier />} />
                   <Route path="/analyses/:id" element={<Analyse />} />
                   <Route path="/publications" element={<Publications />} />
+                  <Route path="/agenda" element={<AgendaPage />} />
                   <Route path="/donnees" element={<Explorateur />} />
                   <Route path="/donnees/:id" element={<FicheSerie />} />
                   <Route path="/indicateurs" element={<Navigate to="/donnees" replace />} />
