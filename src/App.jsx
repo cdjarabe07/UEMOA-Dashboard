@@ -5,7 +5,6 @@ import Entete from "./components/Entete.jsx";
 import Pied from "./components/Pied.jsx";
 import Recherche from "./components/Recherche.jsx";
 import Accueil from "./pages/Accueil.jsx";
-import { useRevelation } from "./lib/revelation.js";
 
 // Pages chargées à la demande : l'accueil s'ouvre sans attendre le reste du site.
 const ListePays = lazy(() => import("./pages/Pays.jsx").then((m) => ({ default: m.ListePays })));
@@ -31,11 +30,10 @@ function VersFicheSerie() {
 
 /**
  * Page affichée : remonte en haut (ou vers l'ancre visée, une fois la page chargée)
- * à l'arrivée, et révèle les sections au défilement.
+ * à l'arrivée.
  */
 function Page({ children }) {
   const { hash } = useLocation();
-  useRevelation();
   useEffect(() => {
     if (!hash) {
       window.scrollTo(0, 0);
@@ -66,10 +64,10 @@ export default function App() {
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={location.pathname}
-            initial={{ opacity: 0, y: reduit ? 0 : 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: reduit ? 0 : -6 }}
-            transition={{ duration: reduit ? 0 : 0.22, ease: [0.2, 0.7, 0.2, 1] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduit ? 0 : 0.16, ease: "easeOut" }}
           >
             <Suspense fallback={<div className="chargement" aria-busy="true" />}>
               <Page>

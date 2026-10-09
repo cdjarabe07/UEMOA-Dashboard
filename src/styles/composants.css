@@ -55,7 +55,7 @@
 .entete-lien {
   white-space: nowrap;
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: 3px;
   color: var(--encre-2);
   font-weight: 500;
   text-decoration: none;
@@ -81,7 +81,7 @@
 .langue {
   display: flex;
   border: 1px solid var(--ligne);
-  border-radius: 999px;
+  border-radius: 3px;
   padding: 2px;
 }
 
@@ -89,7 +89,7 @@
   border: none;
   background: none;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 3px;
   font-size: 12px;
   font-weight: 600;
   color: var(--gris);
@@ -220,7 +220,7 @@
   padding: 10px 12px;
   background: var(--sable-clair);
   border: 1px solid var(--ligne);
-  border-radius: 8px;
+  border-radius: 3px;
   box-shadow: 0 6px 18px rgba(31, 26, 23, 0.1);
   font-size: 12px;
 }

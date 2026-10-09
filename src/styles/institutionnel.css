@@ -1,0 +1,500 @@
+/* ==========================================================================
+   Registre institutionnel : couche finale sur le thème « Afrique de l'Ouest ».
+   Titres en Source Serif, texte en Source Sans, coins presque droits, pas
+   d'ombres ni de soulèvement, indigo dominant et terracotta en accent rare.
+   La frise textile est conservée en filet fin.
+   ========================================================================== */
+
+/* ---------- Typographie ---------- */
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+body {
+  font-size: 16px;
+}
+
+.section-tete h2 {
+  font-size: clamp(24px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.acc-tete h2 {
+  font-size: clamp(23px, 2.2vw, 27px);
+  font-weight: 600;
+}
+
+.page-tete h1,
+.bandeau h1 {
+  font-size: clamp(30px, 3.4vw, 42px);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+/* Petits titres : plus de capitales espacées en couleur, sauf au pied de page. */
+.surtitre,
+.bandeau-surtitre,
+.mega-titre {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--gris);
+}
+
+.bandeau-surtitre {
+  color: #c9cfe6;
+}
+
+.journal-type {
+  font-size: 12.5px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--gris);
+}
+
+/* ---------- Boutons et commandes ---------- */
+
+.bouton {
+  padding: 10px 18px;
+  border-radius: 2px;
+  border-width: 1px;
+}
+
+.bouton--petit {
+  padding: 6px 12px;
+}
+
+.bouton--plein {
+  background: var(--indigo);
+  border-color: var(--indigo);
+}
+
+.bouton--plein:hover {
+  background: var(--indigo-fonce);
+  border-color: var(--indigo-fonce);
+}
+
+.heros .bouton--plein {
+  background: var(--ocre);
+  border-color: var(--ocre);
+  color: var(--indigo-fonce);
+}
+
+.heros .bouton--plein:hover {
+  background: #e3b14a;
+  border-color: #e3b14a;
+  color: var(--indigo-fonce);
+}
+
+.lien-fleche:hover {
+  color: var(--indigo-fonce);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Frise réduite à un filet ---------- */
+
+.motif--filet {
+  height: 4px;
+  background-size: auto 4px;
+}
+
+.heros::after {
+  height: 4px;
+  background-size: auto 4px;
+}
+
+/* ---------- En-tête ---------- */
+
+.entete-utile {
+  background: var(--indigo-fonce);
+  color: #c9cfe6;
+  font-size: 13px;
+}
+
+.entete-utile-barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 34px;
+}
+
+.entete-utile-union {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.entete-utile-maj {
+  color: #9aa3c4;
+}
+
+.entete-utile-liens {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: none;
+}
+
+.entete-utile-liens a {
+  color: #dfe3f1;
+  text-decoration: none;
+}
+
+.entete-utile-liens a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.entete-utile .langue {
+  border-color: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+}
+
+.entete-utile .langue button {
+  padding: 2px 8px;
+  border-radius: 1px;
+  color: #c9cfe6;
+}
+
+.entete-utile .langue button[aria-pressed="true"] {
+  background: #fff;
+  color: var(--indigo-fonce);
+}
+
+.entete {
+  background: var(--sable-clair);
+}
+
+.entete-barre {
+  min-height: 68px;
+}
+
+.marque-texte b {
+  font-weight: 600;
+}
+
+/* Rubriques : soulignement de la rubrique active, pas de pastille. */
+.entete-lien,
+.mega-declencheur {
+  border-radius: 0;
+  padding: 8px 12px;
+  color: var(--encre);
+  font-weight: 500;
+  box-shadow: inset 0 -3px 0 transparent;
+  transition: box-shadow var(--t-court) var(--ease-out), color var(--t-court) var(--ease-out);
+}
+
+.entete-lien:hover,
+.mega-declencheur[data-state="open"] {
+  background: none;
+  color: var(--indigo);
+  box-shadow: inset 0 -3px 0 var(--ligne);
+}
+
+.entete-lien.active,
+.mega-declencheur.active,
+.mega-declencheur.active[data-state="open"] {
+  background: none;
+  color: var(--indigo);
+  box-shadow: inset 0 -3px 0 var(--indigo);
+}
+
+.mega-chevron {
+  color: var(--gris);
+}
+
+.entete-recherche {
+  border-radius: 2px;
+  background: #fff;
+}
+
+.entete-recherche-texte {
+  display: inline;
+}
+
+@media (max-width: 1600px) {
+  .entete-recherche-texte {
+    display: inline;
+  }
+  .entete-recherche {
+    padding: 7px 12px;
+  }
+}
+
+@media (max-width: 1360px) {
+  .entete-recherche-texte {
+    display: none;
+  }
+  .entete-recherche {
+    padding: 8px;
+  }
+}
+
+/* Panneau du méga-menu : filet indigo, ombre légère, liens soulignés au survol. */
+.mega-fenetre {
+  border-radius: 2px;
+  border-top: 3px solid var(--indigo);
+  box-shadow: 0 8px 24px rgba(24, 37, 79, 0.1);
+}
+
+.mega-lien:hover,
+.mega-lien:focus-visible {
+  background: none;
+  transform: none;
+}
+
+.mega-lien:hover b,
+.mega-lien:focus-visible b {
+  color: var(--indigo);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 1180px) {
+  .entete-utile-union {
+    display: none;
+  }
+  .entete-utile-barre {
+    justify-content: flex-end;
+  }
+  .entete-lien {
+    box-shadow: none;
+  }
+  .entete-lien.active {
+    box-shadow: inset 3px 0 0 var(--indigo);
+  }
+}
+
+@media (max-width: 520px) {
+  .entete-utile-liens {
+    gap: 14px;
+    font-size: 12.5px;
+  }
+}
+
+/* ---------- Accueil : grand visuel et « À la une » ---------- */
+
+.heros {
+  min-height: 0;
+  padding: 56px 0 92px;
+}
+
+.heros-grille {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
+  gap: 48px;
+  align-items: center;
+}
+
+.heros-contenu > * {
+  max-width: 560px;
+}
+
+.heros h1 {
+  font-size: clamp(32px, 3.6vw, 46px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+  max-width: 17ch;
+}
+
+.heros-phrase {
+  font-size: 17.5px;
+  margin-top: 18px;
+}
+
+.heros-actions {
+  margin-top: 28px;
+}
+
+.heros-une {
+  padding: 22px 24px 20px;
+  background: var(--sable-clair);
+  border-top: 3px solid var(--ocre);
+  color: var(--encre);
+}
+
+.heros-une-titre {
+  margin: 0 0 6px;
+  font-size: 21px;
+  color: var(--encre);
+}
+
+.heros-une-rubrique {
+  margin: 14px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gris);
+}
+
+.heros-une .journal {
+  margin: 6px 0 0;
+  border-top: 1px solid var(--encre);
+}
+
+.heros-une .journal li {
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 9px 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+.heros-une .journal time {
+  font-size: 12.5px;
+}
+
+.heros-une .journal-type {
+  display: none;
+}
+
+.heros-une-publication {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 6px;
+  padding: 9px 0;
+  border-top: 1px solid var(--encre);
+  border-bottom: 1px solid var(--ligne);
+  color: var(--encre);
+  font-size: 14.5px;
+  text-decoration: none;
+}
+
+.heros-une-publication b {
+  font-weight: 600;
+}
+
+.heros-une-publication span {
+  font-size: 12.5px;
+  color: var(--gris);
+}
+
+.heros-une-publication:hover b {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.heros-une-lien {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.heros-legende p,
+.heros-pause {
+  border-radius: 2px;
+}
+
+@media (max-width: 980px) {
+  .heros-grille {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .heros-contenu > *,
+  .heros-une {
+    max-width: none;
+  }
+}
+
+/* ---------- Fiche série : citation ---------- */
+
+.citer {
+  margin-top: 24px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--indigo);
+  background: var(--sable-clair);
+}
+
+.citer-titre {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.citer-texte {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--encre-2);
+  overflow-wrap: anywhere;
+}
+
+.citer .retour {
+  margin-left: 10px;
+  font-size: 13px;
+  color: var(--sahel);
+}
+
+/* ---------- Pied de page ---------- */
+
+.pied-grille {
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  padding-top: 48px;
+  padding-bottom: 40px;
+}
+
+.pied-marque b {
+  font-weight: 600;
+}
+
+.pied-titre {
+  color: #fff;
+  letter-spacing: 0.08em;
+}
+
+.pied-bas {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12.5px;
+}
+
+.pied-bas-grille {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+  padding-top: 16px;
+  padding-bottom: 20px;
+}
+
+.pied .pied-bas span {
+  margin: 0;
+  color: #9aa3c4;
+}
+
+@media (max-width: 860px) {
+  .pied-grille {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Toutes les frises en filet ; une entrée longue du journal tient sur trois lignes. */
+.motif,
+.motif--fin {
+  height: 5px;
+  background-size: auto 5px;
+}
+
+.heros-une .journal li > span {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 980px) {
+  .heros {
+    padding-bottom: 140px;
+  }
+}

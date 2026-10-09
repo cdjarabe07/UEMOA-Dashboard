@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { motion } from "motion/react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +7,7 @@ import { PAYS, UNION, INDICATEURS, FAMILLES, getIndicateur, serie, valeur, derni
 import { CRITERES, respecte } from "../lib/convergence.js";
 import { pointsAttention } from "../lib/attention.js";
 import { DATE_GENERATION } from "../lib/meta.js";
-import { fmtCourt, fmtDate, fmtNombre, fmtPeriode, fmtValeur, libelleUnite } from "../lib/format.js";
+import { fmtCourt, fmtDate, fmtMois, fmtNombre, fmtPeriode, fmtValeur, libelleUnite } from "../lib/format.js";
 import { populationUnion } from "../data/banque_mondiale.js";
 import { exporterCSV } from "../lib/export.js";
 import { ANALYSES, PUBLICATIONS } from "../contenu/index.js";
@@ -18,12 +17,6 @@ import Journal from "../components/Journal.jsx";
 import BandeauChiffres from "../components/BandeauChiffres.jsx";
 import HerosPhotos from "../components/HerosPhotos.jsx";
 import { LigneAnalyse, ListeDossiers, ListePublications } from "../components/ListesContenu.jsx";
-
-// Entrée du grand visuel : surtitre, titre, phrase et boutons en cascade.
-const HEROS = {
-  cache: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.2, 0.7, 0.2, 1] } },
-};
 
 // Indicateurs de la conjoncture de l'Union, dans l'ordre de lecture.
 const CLES = ["croissance_reelle", "inflation", "solde_budgetaire_pib", "dette_pib", "pression_fiscale", "balance_courante_pib"];
@@ -170,27 +163,38 @@ export default function Accueil() {
 
   return (
     <>
-      {/* Grand visuel */}
+      {/* Grand visuel : présentation à gauche, actualité datée à droite. */}
       <section className="heros">
         <HerosPhotos />
-        <motion.div
-          className="conteneur heros-contenu"
-          initial="cache"
-          animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
-        >
-          <motion.p className="heros-surtitre" variants={HEROS}>{t("acc_surtitre")}</motion.p>
-          <motion.h1 variants={HEROS}>{t("acc_titre")}</motion.h1>
-          <motion.p className="heros-phrase" variants={HEROS}>{t("mission")}</motion.p>
-          <motion.div className="heros-actions" variants={HEROS}>
-            <Link to="/donnees" className="bouton bouton--plein">
-              {t("acc_cta_donnees")} <ArrowRight size={16} />
-            </Link>
-            <Link to="/pays" className="bouton bouton--clair">
-              {t("acc_cta_pays")}
-            </Link>
-          </motion.div>
-        </motion.div>
+        <div className="conteneur heros-grille">
+          <div className="heros-contenu">
+            <h1>{t("acc_titre")}</h1>
+            <p className="heros-phrase">{t("mission")}</p>
+            <div className="heros-actions">
+              <Link to="/donnees" className="bouton bouton--plein">
+                {t("acc_cta_donnees")} <ArrowRight size={16} />
+              </Link>
+              <Link to="/pays" className="bouton bouton--clair">
+                {t("acc_cta_pays")}
+              </Link>
+            </div>
+          </div>
+          <aside className="heros-une" aria-labelledby="heros-une-titre">
+            <h2 id="heros-une-titre" className="heros-une-titre">{t("une_titre")}</h2>
+            <p className="heros-une-rubrique">{t("une_journal")}</p>
+            <Journal limite={3} />
+            {PUBLICATIONS[0] && (
+              <>
+                <p className="heros-une-rubrique">{t("une_publication")}</p>
+                <a className="heros-une-publication" href={PUBLICATIONS[0].url} target="_blank" rel="noreferrer">
+                  <b>{PUBLICATIONS[0].institution} · {PUBLICATIONS[0].titre}</b>
+                  <span className="nombre">{PUBLICATIONS[0].format} · {fmtMois(PUBLICATIONS[0].mise_en_ligne)}</span>
+                </a>
+              </>
+            )}
+            <a href="#journal" className="lien-fleche heros-une-lien">{t("une_tout")} <span className="fleche">→</span></a>
+          </aside>
+        </div>
       </section>
 
       <BandeauChiffres />
@@ -420,7 +424,7 @@ export default function Accueil() {
       </section>
 
       {/* E. Données et mises à jour */}
-      <section className="acc-section">
+      <section className="acc-section" id="journal">
         <div className="conteneur">
           <div className="acc-tete">
             <div>

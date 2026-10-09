@@ -340,6 +340,34 @@ const PERIODES = [
   { id: "tout", ans: null },
 ];
 
+/** Citation complète de la série affichée, avec bouton de copie. */
+function Citation({ ind, zone }) {
+  const { t } = useTranslation();
+  const [copie, setCopie] = useState(false);
+  const texte = t("citer_texte", {
+    source: "BCEAO via DBnomics",
+    serie: t(ind.libelle),
+    zone: t(`zone_${zone}`),
+    code: codeSerie(ind, zone),
+    date: fmtDate(DATE_GENERATION),
+    url: typeof window !== "undefined" ? window.location.href : "",
+  });
+  const copier = () => {
+    navigator.clipboard?.writeText(texte).then(() => {
+      setCopie(true);
+      setTimeout(() => setCopie(false), 2500);
+    }, () => {});
+  };
+  return (
+    <div className="citer">
+      <h3 className="citer-titre">{t("citer_titre")}</h3>
+      <p className="citer-texte">{texte}</p>
+      <button type="button" className="bouton bouton--petit" onClick={copier}>{t("citer_copier")}</button>
+      <span className="retour" role="status" aria-live="polite">{copie ? t("citer_copie") : ""}</span>
+    </div>
+  );
+}
+
 export function FicheSerie() {
   const { id } = useParams();
   const { t } = useTranslation();
@@ -629,7 +657,7 @@ export function FicheSerie() {
               )}
             </div>
             <p className="retour" role="status" aria-live="polite">{retour}</p>
-            {DATE_GENERATION && <p className="note">{t("serie_citer", { date: fmtDate(DATE_GENERATION) })}</p>}
+            {DATE_GENERATION && <Citation ind={ind} zone={zone} />}
           </div>
           <div>
             <h2 className="serie-h2">{t("serie_voir_aussi")}</h2>

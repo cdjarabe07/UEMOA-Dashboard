@@ -7,6 +7,8 @@ import { PAYS, FAMILLES, INDICATEURS } from "../data/portail.js";
 import { DOSSIERS } from "../contenu/index.js";
 import { PHOTOS } from "../contenu/photos.js";
 import { OUVRIR_RECHERCHE } from "./Recherche.jsx";
+import { DATE_GENERATION } from "../lib/meta.js";
+import { fmtDate } from "../lib/format.js";
 
 const LIENS = [
   { to: "/conjoncture", cle: "nav_conjoncture" },
@@ -44,8 +46,12 @@ function Rubrique({ cle, to, actif, children }) {
   const { t } = useTranslation();
   return (
     <NavigationMenu.Item value={to}>
-      <NavigationMenu.Trigger className={`entete-lien mega-declencheur${actif ? " active" : ""}`}>
-        {t(cle)} <span className="mega-chevron" aria-hidden="true">▾</span>
+      {/* Le déclencheur est un vrai lien : un clic ouvre la page de la rubrique,
+          le survol ouvre le panneau. */}
+      <NavigationMenu.Trigger asChild>
+        <Link to={to} className={`entete-lien mega-declencheur${actif ? " active" : ""}`}>
+          {t(cle)} <span className="mega-chevron" aria-hidden="true">▾</span>
+        </Link>
       </NavigationMenu.Trigger>
       <NavigationMenu.Content className="mega-contenu">{children}</NavigationMenu.Content>
     </NavigationMenu.Item>
@@ -57,9 +63,12 @@ function MegaMenu() {
   const { pathname } = useLocation();
   const actif = (to) => pathname === to || pathname.startsWith(`${to}/`);
   const capitale = (zone) => PHOTOS.find((p) => p.zone === zone)?.ville;
+  // Panneau piloté : il se referme à chaque changement de page.
+  const [ouvert, setOuvert] = useState("");
+  useEffect(() => setOuvert(""), [pathname]);
 
   return (
-    <NavigationMenu.Root className="entete-mega" aria-label={t("nav_label")} delayDuration={120}>
+    <NavigationMenu.Root className="entete-mega" aria-label={t("nav_label")} delayDuration={120} value={ouvert} onValueChange={setOuvert}>
       <NavigationMenu.List className="mega-liste">
         <Rubrique cle="nav_conjoncture" to="/conjoncture" actif={actif("/conjoncture")}>
           <div className="mega-colonnes">
@@ -165,6 +174,26 @@ export default function Entete() {
 
   return (
     <header className="entete">
+      {/* Barre utilitaire : date des données, accès directs, langue. */}
+      <div className="entete-utile">
+        <div className="conteneur entete-utile-barre">
+          <p className="entete-utile-union">
+            {t("util_union")}
+            {DATE_GENERATION && <span className="entete-utile-maj"> · {t("util_maj", { date: fmtDate(DATE_GENERATION) })}</span>}
+          </p>
+          <div className="entete-utile-liens">
+            <Link to="/methodologie#sources">{t("util_sources")}</Link>
+            <Link to="/donnees">{t("util_telecharger")}</Link>
+            <div className="langue" role="group" aria-label={t("langue")}>
+              {["fr", "en"].map((l) => (
+                <button key={l} type="button" aria-pressed={langue === l} onClick={() => i18n.changeLanguage(l)}>
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="conteneur entete-barre">
         <Link to="/" className="marque" aria-label={t("marque")}>
           <Logo />
@@ -189,20 +218,7 @@ export default function Entete() {
           <button type="button" className="entete-recherche" onClick={() => window.dispatchEvent(new Event(OUVRIR_RECHERCHE))} aria-label={t("rech_titre")}>
             <Search size={16} aria-hidden="true" />
             <span className="entete-recherche-texte">{t("rech_bouton")}</span>
-            <kbd>Ctrl K</kbd>
           </button>
-          <div className="langue" role="group" aria-label={t("langue")}>
-            {["fr", "en"].map((l) => (
-              <button
-                key={l}
-                type="button"
-                aria-pressed={langue === l}
-                onClick={() => i18n.changeLanguage(l)}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
           <button
             type="button"
             className="entete-burger"
@@ -214,7 +230,7 @@ export default function Entete() {
           </button>
         </div>
       </div>
-      <div className="motif motif--fin" />
+      <div className="motif motif--filet" />
     </header>
   );
 }

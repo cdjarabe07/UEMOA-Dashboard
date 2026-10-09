@@ -1,7 +1,7 @@
 /* ==========================================================================
    Observatoire économique de l'UEMOA — thème « Afrique de l'Ouest »
-   Sable, indigo, terracotta, ocre, vert sahel. Titres Bricolage Grotesque,
-   texte Inter. Signature : motif géométrique inspiré des textiles.
+   Sable, indigo, terracotta, ocre, vert sahel. Titres Source Serif, texte
+   Source Sans. Signature : motif géométrique inspiré des textiles (filet fin).
    ========================================================================== */
 
 :root {
@@ -23,10 +23,10 @@
   --ok: #4f7a2e;
   --ko: #b8502a;
 
-  --f-titre: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-texte: "Inter", "Segoe UI", system-ui, sans-serif;
+  --f-titre: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-texte: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 
-  --rayon: 10px;
+  --rayon: 3px;
   --largeur: 1200px;
   --marge: 28px;
 
@@ -164,7 +164,7 @@ img {
   align-items: center;
   gap: 8px;
   padding: 12px 22px;
-  border-radius: 999px;
+  border-radius: 3px;
   border: 1.5px solid var(--encre);
   background: transparent;
   color: var(--encre);
@@ -230,7 +230,7 @@ img {
 
 .puce {
   padding: 7px 14px;
-  border-radius: 999px;
+  border-radius: 3px;
   border: 1px solid var(--ligne);
   background: var(--sable-clair);
   color: var(--encre-2);

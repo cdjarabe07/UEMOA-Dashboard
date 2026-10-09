@@ -30,7 +30,7 @@ export const COULEUR_ZONE = {
   uemoa: "#1f1a17",
 };
 
-const AXE = { fontFamily: "Inter", fontSize: 11, fill: "#7a6f66" };
+const AXE = { fontFamily: "Source Sans 3", fontSize: 11, fill: "#7a6f66" };
 const GRILLE = "#e6dccb";
 
 function Infobulle({ active, payload, label, unite, noms }) {
@@ -90,7 +90,7 @@ export function GraphiqueSeries({ series, unite, noms, hauteur = 340, zero = fal
             x={rupture - 0.5}
             stroke="#b8502a"
             strokeDasharray="4 3"
-            label={{ value: t("rupture_graph", { annee: rupture }), position: "top", fill: "#b8502a", fontSize: 12, fontFamily: "Inter" }}
+            label={{ value: t("rupture_graph", { annee: rupture }), position: "top", fill: "#b8502a", fontSize: 12, fontFamily: "Source Sans 3" }}
           />
         )}
         <Tooltip content={<Infobulle unite={unite} noms={noms} />} cursor={{ stroke: "#b9ab95" }} />
@@ -228,7 +228,7 @@ export function BarresPays({ donnees, unite, union, libelleUnion, seuil, couleur
         dy="0.35em"
         textAnchor={negatif ? "end" : "start"}
         fontSize={12}
-        fontFamily="Inter"
+        fontFamily="Source Sans 3"
         fill="#1f1a17"
       >
         {fmtValeur(value, unite, undefined, true)}

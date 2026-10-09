@@ -8,7 +8,7 @@ import { useMouvementReduit } from "../lib/mouvement.js";
 
 export { fmtMois };
 
-const AXE = { fontFamily: "Inter", fontSize: 10, fill: "#7a6f66" };
+const AXE = { fontFamily: "Source Sans 3", fontSize: 10, fill: "#7a6f66" };
 
 function Infobulle({ active, payload, unite }) {
   if (!active || !payload?.length) return null;
