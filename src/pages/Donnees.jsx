@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Download, Search, SlidersHorizontal, X } from "lucide-react";
@@ -38,7 +39,7 @@ const comparableUnion = (ind) => ind.unite !== "Mds FCFA";
 const normaliser = (s) =>
   s
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
 // Toutes les zones d'un indicateur, une colonne par zone (exports).
@@ -120,6 +121,7 @@ export function Explorateur() {
   const { t } = useTranslation();
   const [params, setParams] = useSearchParams();
   const [filtresOuverts, setFiltresOuverts] = useState(false);
+  const [listeAnimee] = useAutoAnimate({ duration: 260 });
   const [retour, setRetour] = useRetour();
 
   const q = params.get("q") || "";
@@ -284,7 +286,7 @@ export function Explorateur() {
                   <button type="button" className="bouton bouton--petit" onClick={effacer}>{t("explo_effacer")}</button>
                 </div>
               ) : (
-                <ul className="explo-liste" key={params.toString()}>
+                <ul className="explo-liste" ref={listeAnimee}>
                   {resultats.map((ind) => {
                     const zoneApercu = pays && couvre(ind, pays) ? pays : "uemoa";
                     const points = serie(ind.id, zoneApercu).slice(-20);

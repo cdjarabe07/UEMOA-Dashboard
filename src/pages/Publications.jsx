@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PUBLICATIONS } from "../contenu/index.js";
 import Bandeau from "../components/Bandeau.jsx";
-import { ListePublications } from "./Analyses.jsx";
+import { ListePublications } from "../components/ListesContenu.jsx";
 
 /** /publications : documents réels des institutions, avec lien officiel. */
 export default function Publications() {

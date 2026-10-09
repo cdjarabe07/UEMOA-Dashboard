@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { motion } from "motion/react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +17,13 @@ import Apercu from "../components/Apercu.jsx";
 import Journal from "../components/Journal.jsx";
 import BandeauChiffres from "../components/BandeauChiffres.jsx";
 import HerosPhotos from "../components/HerosPhotos.jsx";
-import { LigneAnalyse, ListeDossiers, ListePublications } from "./Analyses.jsx";
+import { LigneAnalyse, ListeDossiers, ListePublications } from "../components/ListesContenu.jsx";
+
+// Entrée du grand visuel : surtitre, titre, phrase et boutons en cascade.
+const HEROS = {
+  cache: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.2, 0.7, 0.2, 1] } },
+};
 
 // Indicateurs de la conjoncture de l'Union, dans l'ordre de lecture.
 const CLES = ["croissance_reelle", "inflation", "solde_budgetaire_pib", "dette_pib", "pression_fiscale", "balance_courante_pib"];
@@ -135,6 +143,7 @@ export default function Accueil() {
   const [survol, setSurvol] = useState(null);
   const [recherche, setRecherche] = useState("");
   const [retour, setRetour] = useState("");
+  const [classementAnime] = useAutoAnimate({ duration: 320 });
 
   const annee = Math.min(...CLES.map(derniereAnnee));
   const ind = getIndicateur(indCarte);
@@ -164,19 +173,24 @@ export default function Accueil() {
       {/* Grand visuel */}
       <section className="heros">
         <HerosPhotos />
-        <div className="conteneur heros-contenu">
-          <p className="heros-surtitre">{t("acc_surtitre")}</p>
-          <h1>{t("acc_titre")}</h1>
-          <p className="heros-phrase">{t("mission")}</p>
-          <div className="heros-actions">
+        <motion.div
+          className="conteneur heros-contenu"
+          initial="cache"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
+        >
+          <motion.p className="heros-surtitre" variants={HEROS}>{t("acc_surtitre")}</motion.p>
+          <motion.h1 variants={HEROS}>{t("acc_titre")}</motion.h1>
+          <motion.p className="heros-phrase" variants={HEROS}>{t("mission")}</motion.p>
+          <motion.div className="heros-actions" variants={HEROS}>
             <Link to="/donnees" className="bouton bouton--plein">
               {t("acc_cta_donnees")} <ArrowRight size={16} />
             </Link>
             <Link to="/pays" className="bouton bouton--clair">
               {t("acc_cta_pays")}
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <BandeauChiffres />
@@ -308,7 +322,7 @@ export default function Accueil() {
               </figcaption>
             </figure>
             <div>
-              <ol className="classement" key={indCarte}>
+              <ol className="classement" ref={classementAnime}>
                 {classement.map((x, n) => (
                   <li key={x.id}>
                     <Link

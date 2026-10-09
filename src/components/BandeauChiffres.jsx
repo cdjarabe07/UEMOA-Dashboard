@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UNION, valeur, derniereAnnee, serie } from "../data/portail.js";
 import { getProduit, resumePrix } from "../data/fmi.js";
-import { fmtNombre, fmtValeur } from "../lib/format.js";
-import { fmtMois } from "./MatieresPremieres.jsx";
+import { fmtMois, fmtNombre, fmtValeur } from "../lib/format.js";
 
 function elements(t) {
   const union = (id) => {

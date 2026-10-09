@@ -1,6 +1,4 @@
 // Exports de données (CSV, JSON, PDF) — uniquement des données affichées.
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
 function telecharger(contenu, type, nomFichier) {
   const url = URL.createObjectURL(new Blob([contenu], { type }));
@@ -27,7 +25,9 @@ export function exporterJSON(nom, donnees) {
   telecharger(JSON.stringify(donnees, null, 2), "application/json", `${nom}.json`);
 }
 
-export function exporterPDF(nom, titre, sousTitre, colonnes, lignes) {
+// jsPDF n'est chargé qu'au premier export PDF (il pèse plusieurs centaines de Ko).
+export async function exporterPDF(nom, titre, sousTitre, colonnes, lignes) {
+  const [{ default: jsPDF }, { default: autoTable }] = await Promise.all([import("jspdf"), import("jspdf-autotable")]);
   const doc = new jsPDF({ orientation: colonnes.length > 6 ? "landscape" : "portrait" });
   doc.setFontSize(14);
   doc.text(titre, 14, 16);

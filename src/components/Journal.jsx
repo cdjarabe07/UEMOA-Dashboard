@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import journal from "../data/journal.json";
 import { getIndicateur } from "../data/portail.js";
-import { fmtDate, fmtNombre } from "../lib/format.js";
-import { fmtMois } from "./MatieresPremieres.jsx";
+import { fmtDate, fmtMois, fmtNombre } from "../lib/format.js";
 
 export const JOURNAL = Array.isArray(journal) ? journal : [];
 

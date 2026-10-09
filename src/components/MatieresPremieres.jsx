@@ -3,13 +3,12 @@
 import { useTranslation } from "react-i18next";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 import { PRODUITS, MATIERES, resumePrix } from "../data/fmi.js";
-import { fmtNombre, fmtVariation, locale } from "../lib/format.js";
+import { fmtMois, fmtNombre, fmtVariation } from "../lib/format.js";
 import { useMouvementReduit } from "../lib/mouvement.js";
 
-const AXE = { fontFamily: "Inter", fontSize: 10, fill: "#7a6f66" };
+export { fmtMois };
 
-export const fmtMois = (mois) =>
-  new Date(`${mois}-01T00:00:00Z`).toLocaleDateString(locale(), { month: "long", year: "numeric", timeZone: "UTC" });
+const AXE = { fontFamily: "Inter", fontSize: 10, fill: "#7a6f66" };
 
 function Infobulle({ active, payload, unite }) {
   if (!active || !payload?.length) return null;

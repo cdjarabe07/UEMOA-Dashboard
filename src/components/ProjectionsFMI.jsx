@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PAYS } from "../data/portail.js";
 import { PROJECTIONS, ANNEES_PROJECTION, projection } from "../data/fmi.js";
-import { fmtCourt, libelleUnite } from "../lib/format.js";
-import { fmtMois } from "./MatieresPremieres.jsx";
+import { fmtCourt, fmtMois, libelleUnite } from "../lib/format.js";
 
 /** zones = liste de pays (tous par défaut) ; compact = 3 premières années seulement. */
 export default function ProjectionsFMI({ zones = null, compact = false }) {

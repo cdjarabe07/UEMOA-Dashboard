@@ -57,3 +57,7 @@ export const fmtPeriode = (p) => (!p ? "—" : p[0] === p[1] ? `${p[0]}` : `${p[
 // Date courte : "20/09/2026" (FR) / "09/20/2026" (EN).
 export const fmtDate = (d) =>
   d ? d.toLocaleDateString(locale(), { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC" }) : "—";
+
+// Mois « juin 2025 » / « June 2025 » à partir de « 2025-06 ».
+export const fmtMois = (mois) =>
+  new Date(`${mois}-01T00:00:00Z`).toLocaleDateString(locale(), { month: "long", year: "numeric", timeZone: "UTC" });
